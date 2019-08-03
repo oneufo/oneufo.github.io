@@ -4,7 +4,7 @@ layout: post
 date: '2019-08-03 15:56:18'
 ---
 
-![](https://cdn.pixabay.com/photo/2016/11/19/14/00/code-1839406_960_720.jpg)
+![](https://raw.githubusercontent.com/oneufo/oneufo.github.io/master/img/code-1839406_960_720.jpg)
 
 **使用 git --version 测试是否安装**
 
