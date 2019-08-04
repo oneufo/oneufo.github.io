@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title></title>
-    <link>/</link>
+    <link>http://www.oneufo.com/</link>
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sun, 04 Aug 2019 22:42:00 +0800</lastBuildDate>
     
-        <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://www.oneufo.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Ubuntu系统安装后的设置</title>
-      <link>/post/ubuntu/</link>
+      <link>http://www.oneufo.com/post/ubuntu/</link>
       <pubDate>Sun, 04 Aug 2019 22:42:00 +0800</pubDate>
       
-      <guid>/post/ubuntu/</guid>
+      <guid>http://www.oneufo.com/post/ubuntu/</guid>
       
         <description>&lt;p&gt;&lt;img src=&#34;https://oneufo.github.io/img/laptop-3190194_960_720.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
@@ -64,10 +64,10 @@
     
     <item>
       <title>Ubuntu使用Git上传项目到Github中</title>
-      <link>/post/ubuntu-git-github/</link>
+      <link>http://www.oneufo.com/post/ubuntu-git-github/</link>
       <pubDate>Sun, 04 Aug 2019 21:52:51 +0800</pubDate>
       
-      <guid>/post/ubuntu-git-github/</guid>
+      <guid>http://www.oneufo.com/post/ubuntu-git-github/</guid>
       
         <description>&lt;p&gt;&lt;img src=&#34;https://oneufo.github.io/img/code-1839406_960_720.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 

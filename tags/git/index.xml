@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>git on </title>
-    <link>/tags/git/</link>
+    <link>http://www.oneufo.com/tags/git/</link>
     <description>Recent content in git on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sun, 04 Aug 2019 21:52:51 +0800</lastBuildDate>
     
-	<atom:link href="/tags/git/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.oneufo.com/tags/git/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Ubuntu使用Git上传项目到Github中</title>
-      <link>/post/ubuntu-git-github/</link>
+      <link>http://www.oneufo.com/post/ubuntu-git-github/</link>
       <pubDate>Sun, 04 Aug 2019 21:52:51 +0800</pubDate>
       
-      <guid>/post/ubuntu-git-github/</guid>
+      <guid>http://www.oneufo.com/post/ubuntu-git-github/</guid>
       <description>使用 git –version 测试是否安装 如果没有安装，安装git命令： sudo apt-get install git 设置Git的user name和email: git config --global user.name &amp;quot;oneufo&amp;quot; git config --global user.email &amp;quot;oneufo.com@hotmail.com&amp;quot; 查看是</description>
     </item>
     
