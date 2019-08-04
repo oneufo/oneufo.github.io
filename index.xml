@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <link>/</link>
+    <description>Recent content on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 04 Aug 2019 22:42:00 +0800</lastBuildDate>
+    
+        <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ubuntu系统安装后的设置</title>
+      <link>/post/ubuntu/</link>
+      <pubDate>Sun, 04 Aug 2019 22:42:00 +0800</pubDate>
+      
+      <guid>/post/ubuntu/</guid>
+      
+        <description>&lt;p&gt;&lt;img src=&#34;https://oneufo.github.io/img/laptop-3190194_960_720.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;安装 adobe flash player插件&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;更新源列表，使用如下命令：
+&lt;code&gt;sudo apt-get update&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;然后更新flashplayer，输入命令：
+&lt;code&gt;sudo apt-get install flashplugin-installer&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;安装Google浏览器&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;1.下载deb包
+64位版本可以使用如下链接下载：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;2.安装deb包
+&lt;code&gt;sudo dpkg -i google-chrome-stable_current_amd64.deb&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;3.要是依赖出现问题（修复依赖关系）
+&lt;code&gt;sudo apt-get -f install&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;安装谷歌拼音输入法&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;sudo apt-get install fcitx-googlepinyin&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;im-config&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Click through and select fcitx. Click through.&lt;/p&gt;
+
+&lt;p&gt;Restart your computer. Click the keyboard in the top right corner. Press Configure Current Input Method. Press + to add a new language. De-select “Only show current language”. Type in Google-Pinyin. Press OK. To switch between keyboards press Ctrl+Space&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ubuntu系统优化&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;sudo apt install gnome-tweak-tool&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ubuntu软件卸载&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;sudo apt-get purge  {soft name}&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>Ubuntu使用Git上传项目到Github中</title>
+      <link>/post/ubuntu-git-github/</link>
+      <pubDate>Sun, 04 Aug 2019 21:52:51 +0800</pubDate>
+      
+      <guid>/post/ubuntu-git-github/</guid>
+      
+        <description>&lt;p&gt;&lt;img src=&#34;https://oneufo.github.io/img/code-1839406_960_720.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;使用 git –version 测试是否安装&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;如果没有安装，安装git命令：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;sudo apt-get install git&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;设置Git的user name和email:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;git config --global user.name &amp;quot;oneufo&amp;quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;git config --global user.email &amp;quot;oneufo.com@hotmail.com&amp;quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;生成ssh密钥文件：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;ssh-keygen -t rsa -C &amp;quot;oneufo.com@hotmail.com&amp;quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;按3个回车，密码为空。 最后得到了两个文件：id_rsa和id_rsa.pub&lt;/p&gt;
+
+&lt;p&gt;在github上添加ssh密钥，这要添加的是“id_rsa.pub”里面的公钥。&lt;/p&gt;
+
+&lt;p&gt;打开&lt;a href=&#34;https://github.com&#34;&gt;https://github.com&lt;/a&gt; 在设置中添加密钥&lt;/p&gt;
+
+&lt;p&gt;测试：&lt;code&gt;ssh git@github.com&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Hi oneufo! You’ve successfully authenticated, but GitHub does not provide shell access. Connection to github.com closed.&lt;/p&gt;
+
+&lt;p&gt;测试成功就可以push code了.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;git clone git@github.com:oneufo/oneufo.github.io.git&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Git 更新 Github.com文件&lt;/p&gt;
+
+&lt;p&gt;one@ufo:~/oneufo.github.io$ &lt;code&gt;git init&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;重新初始化已存在的 Git 仓库于 /home/one/oneufo.github.io/.git/&lt;/p&gt;
+
+&lt;p&gt;one@ufo:~/oneufo.github.io$ &lt;code&gt;git add .&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;one@ufo:~/oneufo.github.io$ &lt;code&gt;git commit -m &amp;quot;first commit&amp;quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;[master 9614853] first commit 1 file changed, 24 insertions(+) create mode 100644 404.html&lt;/p&gt;
+
+&lt;p&gt;one@ufo:~/oneufo.github.io$
+&lt;code&gt;git remote add origin https://github.com/oneufo/oneufo.github.io.git&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;fatal: 远程 origin 已经存在。&lt;/p&gt;
+
+&lt;p&gt;one@ufo:~/oneufo.github.io$ &lt;code&gt;git push -u origin master&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;枚举对象: 4, 完成. 对象计数中: 100% (&lt;sup&gt;4&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt;), 完成. 使用 4 个线程进行压缩 压缩对象中: 100% (&lt;sup&gt;3&lt;/sup&gt;&amp;frasl;&lt;sub&gt;3&lt;/sub&gt;), 完成. 写入对象中: 100% (&lt;sup&gt;3&lt;/sup&gt;&amp;frasl;&lt;sub&gt;3&lt;/sub&gt;), 555 bytes | 555.00 KiB/s, 完成. 总共 3 （差异 0），复用 0 （差异 0） To github.com:oneufo/oneufo.github.io.git 436b5bf..9614853 master -&amp;gt; master 分支 ‘master’ 设置为跟踪来自 ‘origin’ 的远程分支 ‘master’。&lt;/p&gt;
+
+&lt;p&gt;Git 设置和取消代理&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;git config --global http.proxy &#39;socks5://127.0.0.1:1080&#39;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;git config --global https.proxy &#39;socks5://127.0.0.1:1080&#39;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;git config --global --unset http.proxy&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;git config --global --unset https.proxy&lt;/code&gt;&lt;/p&gt;
+</description>
+      
+    </item>
+    
+  </channel>
+</rss>
