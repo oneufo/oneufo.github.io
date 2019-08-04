@@ -1,9 +1,9 @@
 ---
-title: Ubuntu系统安装后的设置
-layout: post
-date: '2019-08-03 00:00:00'
+title: "Ubuntu系统安装后的设置"
+date: 2019-08-04T22:42:00+08:00
+draft: flase
+tags: ["ubuntu"]
 ---
-
 ![](https://oneufo.github.io/img/laptop-3190194_960_720.jpg)
 
 **安装 adobe flash player插件**
