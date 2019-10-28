@@ -9,20 +9,20 @@
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 <meta name="generator" content="Hugo 0.57.2" />
 
-<link rel="canonical" href="/post/">
-<meta property="og:title" content="Posts" />
+<link rel="canonical" href="/tags/ubutnu/">
+<meta property="og:title" content="ubutnu" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="/post/" />
+<meta property="og:url" content="/tags/ubutnu/" />
 
 <meta property="og:updated_time" content="2019-10-28T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Posts"/>
+<meta name="twitter:title" content="ubutnu"/>
 <meta name="twitter:description" content=""/>
 
 
-<meta itemprop="name" content="Posts">
+<meta itemprop="name" content="ubutnu">
 <meta itemprop="description" content="">
 
 
@@ -38,7 +38,7 @@
 <title>
 
 
-     Posts 
+     ubutnu 
 
 </title>
 
@@ -58,7 +58,7 @@
 
     
     
-    <a class="nav-item active" href="/post/"><div class="nav-item-title">文章</div></a>
+    <a class="nav-item" href="/post/"><div class="nav-item-title">文章</div></a>
     
     <a class="nav-item" href="/tags/"><div class="nav-item-title">标签</div></a>
     
@@ -89,19 +89,19 @@
 </header>
 
 
-<h2 class="content-list-title">
-    <a href="/post/" class="linktopost">Posts</a>
+<h2 class="term-list-title">
+    <a href="/tags/ubutnu/" class="linktopost">tag: ubutnu</a>
 </h2>
 
-<div class="content-list">
 
-  
-  <div class="content-item">
+    <article class="post-preview">
 
-    <a href="/post/ubuntu-git-github/">
-      <div class="post-list"> <h3 class="title"> Ubuntu使用Git上传项目到Github中 </h3> </div>
-    </a>
+  <header>
+    <h2 class="title"> <a href='/post/ubuntu-git-github/'> Ubuntu使用Git上传项目到Github中</a> </h2>
     <div class="meta">
+      <div class="date">
+      28 Oct, 2019 - 1 minutes
+      </div>
       
 <div class="tags">
     
@@ -119,31 +119,33 @@
     
 </div>
 
-      <div class="date"> 28 Oct, 2019 </div>
     </div>
-</div>
 
-  
-  <div class="content-item">
+  </header>
 
-    <a href="/post/firefox-private-network/">
-      <div class="post-list"> <h3 class="title"> Firefox Private Network </h3> </div>
-    </a>
-    <div class="meta">
-      
-<div class="tags">
-    
-      <div class="tag">
-        <a href="/tags/firefox">#Firefox</a>
-      </div>
-    
-</div>
+  <div class="summary">
+    使用 git version 测试是否安装
+如果没有安装，安装git命令：
+sudo apt-get install git  设置Git的user name和email:
+git config --global user.name &quot;oneufo&quot; git config --global user.email &quot;oneufo.com@hotmail.com&quot;  查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除
+生成ssh密钥文件：
+ssh-keygen -t rsa -C &quot;oneufo.com@hotmail.com&quot;  按3个回车，密码为空。 最后得到了两个文件：id_rsa和id_rsa.pub
+在github上添加ssh密钥，这要添加的是“id_rsa.pub”里面的公钥。
+打开https://github.com 在设置中添加密钥
+测试：
+ssh git@github.com  Hi oneufo! You’ve successfully authenticated, but GitHub does not provide shell access. Connection to github.com closed.
+测试成功就可以push code了.
+git clone git@github.com:oneufo/oneufo.github.io.git  Git 更新 Github.com文件
+one@ufo:~/oneufo.github.io$
+git init  重新初始化已存在的 Git 仓库于 /home/one/oneufo.
+  </div>
 
-      <div class="date"> 28 Oct, 2019 </div>
-    </div>
-</div>
+  <div class="rmore">
+    <a href='/post/ubuntu-git-github/' class="rmore">Read more</a>
+  </div>
 
-  
+
+</article>
 
 
 
