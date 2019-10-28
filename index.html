@@ -163,17 +163,13 @@ https://private-network.firefox.com/dist/secure-proxy.xpi
   <div class="summary">
     使用 git version 测试是否安装
 如果没有安装，安装git命令：
-sudo apt-get install git  设置Git的user name和email:
-git config --global user.name &quot;oneufo&quot; git config --global user.email &quot;oneufo.com@hotmail.com&quot;  查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除
-生成ssh密钥文件：
-ssh-keygen -t rsa -C &quot;oneufo.com@hotmail.com&quot;  按3个回车，密码为空。 最后得到了两个文件：id_rsa和id_rsa.pub
+sudo apt-get install git  设置Git的user name和email: git config --global user.name &quot;oneufo&quot; git config --global user.email &quot;oneufo.com@hotmail.com&quot;  查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除
+生成ssh密钥文件： ssh-keygen -t rsa -C &quot;oneufo.com@hotmail.com&quot;  按3个回车，密码为空。 最后得到了两个文件：id_rsa和id_rsa.pub
 在github上添加ssh密钥，这要添加的是“id_rsa.pub”里面的公钥。
 打开https://github.com 在设置中添加密钥
-测试：
-ssh git@github.com  Hi oneufo! You’ve successfully authenticated, but GitHub does not provide shell access. Connection to github.com closed.
+测试： ssh git@github.com  Hi oneufo! You’ve successfully authenticated, but GitHub does not provide shell access. Connection to github.com closed.
 测试成功就可以push code了.
-git clone git@github.com:oneufo/oneufo.github.io.git  Git 更新 Github.com文件
-one@ufo:~/oneufo.github.io$
+git clone git@github.com:oneufo/oneufo.github.io.git  Git 更新 Github.com文件 one@ufo:~/oneufo.github.io$
 git init  重新初始化已存在的 Git 仓库于 /home/one/oneufo.
   </div>
 
