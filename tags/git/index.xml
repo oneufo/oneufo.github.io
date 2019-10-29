@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>git on OneUFO</title>
+    <title>Git on OneUFO</title>
     <link>/tags/git/</link>
-    <description>Recent content in git on OneUFO</description>
+    <description>Recent content in Git on OneUFO</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright © 2019 Oneufo.com. All rights reserved.</copyright>
