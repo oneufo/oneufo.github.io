@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on OneUFO</title>
+    <link>/tags/windows/</link>
+    <description>Recent content in Windows on OneUFO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2019 Oneufo.com. All rights reserved.</copyright>
+    <lastBuildDate>Mon, 18 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Windows系统和常用软件的安装</title>
+      <link>/post/windows-soft-install/</link>
+      <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/windows-soft-install/</guid>
+      <description>&lt;h3 id=&#34;win10系统msdn下载&#34;&gt;Win10系统MSDN下载：&lt;/h3&gt;
+
+&lt;p&gt;Windows 10 Enterprise LTSC 2019 (x64) - DVD (Chinese-Simplified) 详细信息&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;文件名    cn_windows_10_enterprise_ltsc_2019_x64_dvd_9c09ff24.iso
+SHA1    24b59706d5eded392423936c82ba5a83596b50cc
+文件大小    4.17GB
+发布时间    2019-03-15 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;ed2k://|file|cn_windows_10_enterprise_ltsc_2019_x64_dvd_9c09ff24.iso|4478906368|E7C526499308841A4A6D116C857DB669|/
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
