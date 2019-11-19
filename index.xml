@@ -23,6 +23,29 @@ Github Github.com/OneUFO</description>
     </item>
     
     <item>
+      <title>Ubuntu系统和常用软件的安装</title>
+      <link>/post/ubuntu-soft-install/</link>
+      <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/ubuntu-soft-install/</guid>
+      <description>&lt;h3 id=&#34;ubuntu系统下载&#34;&gt;Ubuntu系统下载：&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://ubuntu.com/download/desktop&#34;&gt;https://ubuntu.com/download/desktop&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;ubuntu系统安装后的设置&#34;&gt;Ubuntu系统安装后的设置：&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Ubuntu系统优化工具&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt install gnome-tweak-tool
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Ubuntu安装H.264解码器&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install gstreamer1.0-libav  
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
       <title>Windows系统和常用软件的安装</title>
       <link>/post/windows-soft-install/</link>
       <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>

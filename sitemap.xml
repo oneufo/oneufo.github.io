@@ -23,6 +23,16 @@
   </url>
   
   <url>
+    <loc>/tags/ubuntu/</loc>
+    <lastmod>2019-11-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/ubuntu-soft-install/</loc>
+    <lastmod>2019-11-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/windows/</loc>
     <lastmod>2019-11-18T00:00:00+00:00</lastmod>
   </url>
@@ -74,11 +84,6 @@
   
   <url>
     <loc>/post/ubuntu-git-github/</loc>
-    <lastmod>2019-10-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/ubutnu/</loc>
     <lastmod>2019-10-28T00:00:00+00:00</lastmod>
   </url>
   
