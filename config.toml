@@ -1,0 +1,51 @@
+baseurl = "/"
+title = "OneUFO"
+copyright = "Copyright © 2019 Oneufo.com. All rights reserved."
+languageCode = "en-US"
+canonifyurls = true
+paginate = 5
+theme = "hugo-dusk"
+themesDir = "./themes"
+enableRobotsTXT = true
+
+googleAnalytics = ""
+disqusShortname = ""
+
+SectionPagesMenu = "main"
+
+# use Chroma for syntax highlight
+pygmentsStyle = "native" # other dark style options: vim, fruity, monokai
+# enable syntax highlight for code blocks
+pygmentsCodeFences = true
+
+[[menu.main]]
+  name = "文章"
+  weight = -120
+  identifier = "post"
+  url = "/post/"
+
+[[menu.main]]
+  name = "标签"
+  weight = -110
+  identifier = "tag"
+  url = "/tags/"
+
+[taxonomies]
+  category = "categories"
+  group = "groups"
+  series = "series"
+  tag = "tags"
+
+[author]
+  name = ""
+
+[params.meta]
+  keywords = "OneUFO"
+  description = "OneUFO"
+
+[params]
+  
+  theme_colors = "default-dark"
+
+
+
