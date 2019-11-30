@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kaspersky on OneUFO</title>
+    <link>/tags/kaspersky/</link>
+    <description>Recent content in Kaspersky on OneUFO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2019 Oneufo.com. All rights reserved.</copyright>
+    <lastBuildDate>Tue, 29 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/kaspersky/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>卡巴斯基全球网络威胁地图</title>
+      <link>/post/kaspersky-cyberthreat-real-time-map/</link>
+      <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/kaspersky-cyberthreat-real-time-map/</guid>
+      <description>&lt;p&gt;卡巴斯基实验室发布了一款可以呈现出全球实时网络安全事件的交互式网络威胁地图。这些网络威胁包括经实时扫描和手动扫描检测出的恶意对象、电子邮件和网页病毒、经漏洞和入侵检测组件发现的对象。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
