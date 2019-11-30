@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on OneUFO</title>
+    <link>/tags/</link>
+    <description>Recent content in Tags on OneUFO</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2019 Oneufo.com. All rights reserved.</copyright>
+    <lastBuildDate>Sat, 23 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>飞鸟集 </title>
+      <link>/tags/%E9%A3%9E%E9%B8%9F%E9%9B%86/</link>
+      <pubDate>Sat, 23 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E9%A3%9E%E9%B8%9F%E9%9B%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ubuntu</title>
+      <link>/tags/ubuntu/</link>
+      <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ubuntu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>/tags/windows/</link>
+      <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Blockchain</title>
+      <link>/tags/blockchain/</link>
+      <pubDate>Wed, 30 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/blockchain/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kaspersky</title>
+      <link>/tags/kaspersky/</link>
+      <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/kaspersky/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Firefox</title>
+      <link>/tags/firefox/</link>
+      <pubDate>Mon, 28 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/firefox/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>/tags/git/</link>
+      <pubDate>Mon, 28 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>github</title>
+      <link>/tags/github/</link>
+      <pubDate>Mon, 28 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/github/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
