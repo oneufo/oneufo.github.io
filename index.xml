@@ -124,5 +124,23 @@ git config --global user.email &amp;quot;oneufo.com@hotmail.com&amp;quot;
 &lt;p&gt;查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除&lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>h5ai目录列表程序安装使用教程</title>
+      <link>/post/h5ai/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/post/h5ai/</guid>
+      <description>&lt;p&gt;出现错误：Warning: putenv() has been disabled for security reasons in…&lt;/p&gt;
+
+&lt;p&gt;解决方法：
+lnmp环境中编辑PHP配置文件：&lt;/p&gt;
+
+&lt;p&gt;vi /usr/local/php/etc/php.ini进入编辑状态&lt;/p&gt;
+
+&lt;p&gt;输入/，进入搜索模式，找到disable_functions&lt;/p&gt;
+
+&lt;p&gt;寻找disable_functions字符串，将后面的putenv删除&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>
