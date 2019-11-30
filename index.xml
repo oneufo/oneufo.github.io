@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>Copyright © 2019 Oneufo.com. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 23 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 30 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -20,6 +20,27 @@
       <guid>/about/</guid>
       <description>Email: OneUFO.com@Hotmail.com
 Github Github.com/OneUFO</description>
+    </item>
+    
+    <item>
+      <title>h5ai目录列表程序安装使用教程</title>
+      <link>/post/h5ai/</link>
+      <pubDate>Sat, 30 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/h5ai/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;出现错误：Warning: putenv() has been disabled for security reasons in…&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;解决方法：
+lnmp环境中编辑PHP配置文件：
+
+vi /usr/local/php/etc/php.ini进入编辑状态
+
+输入/，进入搜索模式，找到disable_functions
+
+寻找disable_functions字符串，将后面的putenv删除
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -122,24 +143,6 @@ git config --global user.email &amp;quot;oneufo.com@hotmail.com&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>h5ai目录列表程序安装使用教程</title>
-      <link>/post/h5ai/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/post/h5ai/</guid>
-      <description>&lt;p&gt;出现错误：Warning: putenv() has been disabled for security reasons in…&lt;/p&gt;
-
-&lt;p&gt;解决方法：
-lnmp环境中编辑PHP配置文件：&lt;/p&gt;
-
-&lt;p&gt;vi /usr/local/php/etc/php.ini进入编辑状态&lt;/p&gt;
-
-&lt;p&gt;输入/，进入搜索模式，找到disable_functions&lt;/p&gt;
-
-&lt;p&gt;寻找disable_functions字符串，将后面的putenv删除&lt;/p&gt;</description>
     </item>
     
   </channel>
