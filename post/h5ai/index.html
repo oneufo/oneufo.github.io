@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="" />
+<meta name="description" content="OneUFO" />
+<meta name="keywords" content="OneUFO" />
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.59.1" />
+
+<link rel="canonical" href="/post/h5ai/">
+<meta property="og:title" content="h5ai目录列表程序安装使用教程" />
+<meta property="og:description" content="出现错误：Warning: putenv() has been disabled for security reasons in…
+
+解决方法：
+lnmp环境中编辑PHP配置文件：
+
+vi /usr/local/php/etc/php.ini进入编辑状态
+
+输入/，进入搜索模式，找到disable_functions
+
+寻找disable_functions字符串，将后面的putenv删除" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/h5ai/" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="h5ai目录列表程序安装使用教程"/>
+<meta name="twitter:description" content="出现错误：Warning: putenv() has been disabled for security reasons in…
+
+解决方法：
+lnmp环境中编辑PHP配置文件：
+
+vi /usr/local/php/etc/php.ini进入编辑状态
+
+输入/，进入搜索模式，找到disable_functions
+
+寻找disable_functions字符串，将后面的putenv删除"/>
+
+
+<meta itemprop="name" content="h5ai目录列表程序安装使用教程">
+<meta itemprop="description" content="出现错误：Warning: putenv() has been disabled for security reasons in…
+
+解决方法：
+lnmp环境中编辑PHP配置文件：
+
+vi /usr/local/php/etc/php.ini进入编辑状态
+
+输入/，进入搜索模式，找到disable_functions
+
+寻找disable_functions字符串，将后面的putenv删除">
+
+
+
+<meta itemprop="wordCount" content="65">
+
+
+
+<meta itemprop="keywords" content="h5ai,,," />
+
+
+<link rel="stylesheet" href="/css/layout.css" />
+
+
+<link rel="stylesheet" href="/css/default-dark.css" />
+
+
+
+
+<title>
+
+
+     h5ai目录列表程序安装使用教程 
+
+</title>
+
+</head>
+
+
+<body>
+<div class="main">
+<header>
+
+<div class="header-bar">
+
+  <nav>
+    <div class="siteTitle">
+      <a href="/">OneUFO</a>
+    </div> 
+
+    
+    
+    <a class="nav-item active" href="/post/"><div class="nav-item-title">文章</div></a>
+    
+    <a class="nav-item" href="/tags/"><div class="nav-item-title">标签</div></a>
+    
+    <a class="nav-item" href="/about/"><div class="nav-item-title">关于</div></a>
+    
+
+  </nav>
+
+  
+<div class="social-links-header">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</div>
+
+
+</div>
+
+
+</header>
+
+
+<article class="post">
+    <h1 class="title"> h5ai目录列表程序安装使用教程 </h1>
+    <div class="content"> <p>出现错误：Warning: putenv() has been disabled for security reasons in…</p>
+
+<p>解决方法：
+lnmp环境中编辑PHP配置文件：</p>
+
+<p>vi /usr/local/php/etc/php.ini进入编辑状态</p>
+
+<p>输入/，进入搜索模式，找到disable_functions</p>
+
+<p>寻找disable_functions字符串，将后面的putenv删除</p>
+
+<ul>
+<li><p>将 _h5ai 中，private 与 public 文件夹中的 cache 目录设置权限为 755。</p></li>
+
+<li><p>Use EXIF thumbs
+安装php的exif模块即可。
+把需要的exif模块编译进去，然后重启lnmp即可。</p></li>
+
+<li><p>PDF thumbs
+选择安装convert，直接yum -y install ImageMagick即可。</p></li>
+
+<li><p>Shell tar，Shell zip和Shell du
+这三项，根据h5ai官网，在php.ini被禁用函数中去掉exec和passthru即可，是否有危险不知道，自己掂量，禁用好像也不影响一些功能。
+另外顺便把scandir函数去掉禁用，不然会出现无非显示目录中文件的情况。</p></li>
+
+<li><p>CentOS 安装 FFmpeg</p></li>
+</ul>
+
+<p>注意：请转至 <a href="http://www.ffmpeg.org/releases/">http://www.ffmpeg.org/releases/</a> 查看最新的 FFmpeg 版本。</p>
+
+<p>编译安装。</p>
+
+<pre><code>  wget http://www.ffmpeg.org/releases/ffmpeg-*.*.tar.gz
+  tar -zxvf ffmpeg-*.*.tar.gz
+  cd ffmpeg-*.*
+  ./configure
+  make
+  make install
+</code></pre>
+
+<p>错误原因为汇编工具没有安装，安装yasm即可：</p>
+
+<pre><code>  yum install yasm 
+</code></pre> </div>
+    <footer class="post-footer">
+
+  <div class="post-footer-data">
+    
+<div class="tags">
+    
+      <div class="tag">
+        <a href="/tags/h5ai">#h5ai</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/">#</a>
+      </div>
+    
+      <div class="tag">
+        <a href="/tags/">#</a>
+      </div>
+    
+</div>
+
+    <div class="date"> 1 Jan 0001 </div>
+  </div>
+
+</footer>
+
+
+  
+
+
+</article>
+
+  <footer>
+
+  <div class="social-links-footer">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <div class="social-link">
+  <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+
+</div>
+
+
+  <div class="copyright"> Copyright © 2019 Oneufo.com. All rights reserved. </div>
+
+  <div class="poweredby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>.
+  </div>
+
+  </footer>
+
+</div> 
+
+</body>
+</html>
+
