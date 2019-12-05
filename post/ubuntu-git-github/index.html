@@ -1,33 +1,54 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=author content><meta name=description content="OneUFO"><meta name=keywords content="OneUFO"><meta name=viewport content="width=device-width,minimum-scale=1,initial-scale=1"><meta name=generator content="Hugo 0.60.1"><link rel=canonical href=/post/ubuntu-git-github/><meta property="og:title" content="Ubuntu使用Git上传项目到Github中"><meta property="og:description" content="使用 git version 测试是否安装
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=author content><meta name=description content="OneUFO"><meta name=keywords content="OneUFO1"><meta name=viewport content="width=device-width,minimum-scale=1,initial-scale=1"><meta name=generator content="Hugo 0.59.1"><link rel=canonical href=/post/ubuntu-git-github/><meta property="og:title" content="Ubuntu使用Git上传项目到Github中"><meta property="og:description" content="使用 git version 测试是否安装
+
 如果没有安装，安装git命令：
+
 sudo apt-get install git
+
+
 设置Git的user name和email:
+
 git config --global user.name &#34;oneufo&#34;
 git config --global user.email &#34;oneufo.com@hotmail.com&#34;
+
+
 查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除"><meta property="og:type" content="article"><meta property="og:url" content="/post/ubuntu-git-github/"><meta property="article:published_time" content="2019-10-28T00:00:00+00:00"><meta property="article:modified_time" content="2019-10-28T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Ubuntu使用Git上传项目到Github中"><meta name=twitter:description content="使用 git version 测试是否安装
+
 如果没有安装，安装git命令：
+
 sudo apt-get install git
+
+
 设置Git的user name和email:
+
 git config --global user.name &#34;oneufo&#34;
 git config --global user.email &#34;oneufo.com@hotmail.com&#34;
+
+
 查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除"><meta itemprop=name content="Ubuntu使用Git上传项目到Github中"><meta itemprop=description content="使用 git version 测试是否安装
+
 如果没有安装，安装git命令：
+
 sudo apt-get install git
+
+
 设置Git的user name和email:
+
 git config --global user.name &#34;oneufo&#34;
 git config --global user.email &#34;oneufo.com@hotmail.com&#34;
-查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除"><meta itemprop=datePublished content="2019-10-28T00:00:00+00:00"><meta itemprop=dateModified content="2019-10-28T00:00:00+00:00"><meta itemprop=wordCount content="172"><meta itemprop=keywords content="Ubuntu,Git,github,"><link rel=stylesheet href=/css/layout.css><link rel=stylesheet href=/css/default-dark.css><title>Ubuntu使用Git上传项目到Github中</title></head><body><div class=main><header><div class=header-bar><nav><div class=siteTitle><a href=/>OneUFO</a></div><a class="nav-item active" href=/post/><div class=nav-item-title>文章</div></a><a class=nav-item href=/tags/><div class=nav-item-title>标签</div></a><a class=nav-item href=/about/><div class=nav-item-title>关于</div></a></nav><div class=social-links-header></div></div></header><article class=post><h1 class=title>Ubuntu使用Git上传项目到Github中</h1><div class=content><p><strong>使用 git version 测试是否安装</strong></p><p>如果没有安装，安装git命令：</p><pre><code>sudo apt-get install git
-</code></pre><h3 id=gituser-nameemail><strong>设置Git的user name和email:</strong></h3><pre><code>git config --global user.name &quot;oneufo&quot;
+
+
+查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除"><meta itemprop=datePublished content="2019-10-28T00:00:00&#43;00:00"><meta itemprop=dateModified content="2019-10-28T00:00:00&#43;00:00"><meta itemprop=wordCount content="172"><meta itemprop=keywords content="Ubuntu,Git,github,"><link rel=stylesheet href=/css/layout.css><link rel=stylesheet href=/css/default-dark.css><title>Ubuntu使用Git上传项目到Github中</title></head><body><div class=main><header><div class=header-bar><nav><div class=siteTitle><a href=/>OneUFO</a></div><a class="nav-item active" href=/post/><div class=nav-item-title>文章</div></a><a class=nav-item href=/tags/><div class=nav-item-title>标签</div></a><a class=nav-item href=/about/><div class=nav-item-title>关于</div></a></nav><div class=social-links-header></div></div></header><article class=post><h1 class=title>Ubuntu使用Git上传项目到Github中</h1><div class=content><p><strong>使用 git version 测试是否安装</strong></p><p>如果没有安装，安装git命令：</p><pre><code>sudo apt-get install git
+</code></pre><h3 id=设置git的user-name和email><strong>设置Git的user name和email:</strong></h3><pre><code>git config --global user.name &quot;oneufo&quot;
 git config --global user.email &quot;oneufo.com@hotmail.com&quot;
-</code></pre><p>查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除</p><h3 id=ssh><strong>生成ssh密钥文件：</strong></h3><pre><code>ssh-keygen -t rsa -C &quot;oneufo.com@hotmail.com&quot;
-</code></pre><p>按3个回车，密码为空。 最后得到了两个文件：id_rsa和id_rsa.pub</p><p>在github上添加ssh密钥，这要添加的是“id_rsa.pub”里面的公钥。</p><p>打开https://github.com 在设置中添加密钥</p><h3 id=heading><strong>测试：</strong></h3><pre><code>ssh git@github.com
+</code></pre><p>查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除</p><h3 id=生成ssh密钥文件><strong>生成ssh密钥文件：</strong></h3><pre><code>ssh-keygen -t rsa -C &quot;oneufo.com@hotmail.com&quot;
+</code></pre><p>按3个回车，密码为空。 最后得到了两个文件：id_rsa和id_rsa.pub</p><p>在github上添加ssh密钥，这要添加的是“id_rsa.pub”里面的公钥。</p><p>打开<a href=https://github.com>https://github.com</a> 在设置中添加密钥</p><h3 id=测试><strong>测试：</strong></h3><pre><code>ssh git@github.com
 </code></pre><p>Hi oneufo! You’ve successfully authenticated, but GitHub does not provide shell access. Connection to github.com closed.</p><p>测试成功就可以push code了.</p><pre><code>git clone git@github.com:oneufo/oneufo.github.io.git
-</code></pre><h3 id=git--githubcom><strong>Git 更新 Github.com文件</strong></h3><p>one@ufo:~/oneufo.github.io$</p><pre><code>git init
+</code></pre><h3 id=git-更新-github-com文件><strong>Git 更新 Github.com文件</strong></h3><p>one@ufo:~/oneufo.github.io$</p><pre><code>git init
 </code></pre><p>重新初始化已存在的 Git 仓库于 /home/one/oneufo.github.io/.git/</p><p>one@ufo:~/oneufo.github.io$</p><pre><code>git add .
 </code></pre><p>one@ufo:~/oneufo.github.io$</p><pre><code>git commit -m &quot;first commit&quot;
 </code></pre><p>[master 9614853] first commit 1 file changed, 24 insertions(+) create mode 100644 404.html</p><p>one@ufo:~/oneufo.github.io$</p><pre><code>git remote add origin https://github.com/oneufo/oneufo.github.io.git
 </code></pre><p>fatal: 远程 origin 已经存在。</p><p>one@ufo:~/oneufo.github.io$</p><pre><code>git push -u origin master
-</code></pre><p>枚举对象: 4, 完成. 对象计数中: 100% (4⁄4), 完成. 使用 4 个线程进行压缩 压缩对象中: 100% (3⁄3), 完成. 写入对象中: 100% (3⁄3), 555 bytes | 555.00 KiB/s, 完成. 总共 3 （差异 0），复用 0 （差异 0） To github.com:oneufo/oneufo.github.io.git 436b5bf..9614853 master -> master 分支 ‘master’ 设置为跟踪来自 ‘origin’ 的远程分支 ‘master’。</p><h3 id=git-><strong>Git 设置和取消代理</strong></h3><pre><code>git config --global http.proxy 'socks5://127.0.0.1:1080'
+</code></pre><p>枚举对象: 4, 完成. 对象计数中: 100% (<sup>4</sup>&frasl;<sub>4</sub>), 完成. 使用 4 个线程进行压缩 压缩对象中: 100% (<sup>3</sup>&frasl;<sub>3</sub>), 完成. 写入对象中: 100% (<sup>3</sup>&frasl;<sub>3</sub>), 555 bytes | 555.00 KiB/s, 完成. 总共 3 （差异 0），复用 0 （差异 0） To github.com:oneufo/oneufo.github.io.git 436b5bf..9614853 master -&gt; master 分支 ‘master’ 设置为跟踪来自 ‘origin’ 的远程分支 ‘master’。</p><h3 id=git-设置和取消代理><strong>Git 设置和取消代理</strong></h3><pre><code>git config --global http.proxy 'socks5://127.0.0.1:1080'
 git config --global https.proxy 'socks5://127.0.0.1:1080'
 git config --global --unset http.proxy
 git config --global --unset https.proxy
