@@ -31,4 +31,4 @@ SHA1 24b59706d5eded392423936c82ba5a83596b50cc
 &lt;pre&gt;&lt;code&gt;git config --global user.name &amp;quot;oneufo&amp;quot;
 git config --global user.email &amp;quot;oneufo.com@hotmail.com&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除&lt;/p&gt;</description></item><item><title/><link>/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/readme/</guid><description> # oneufo.github.io</description></item></channel></rss>
