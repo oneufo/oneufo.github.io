@@ -1,37 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>h5ai on OneUFO</title>
-    <link>/tags/h5ai/</link>
-    <description>Recent content in h5ai on OneUFO</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <copyright>Copyright © 2019 Oneufo.com. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 30 Nov 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/h5ai/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>h5ai目录列表程序安装使用教程</title>
-      <link>/post/h5ai/</link>
-      <pubDate>Sat, 30 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/h5ai/</guid>
-      <description>&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;出现错误：Warning: putenv() has been disabled for security reasons in…&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;解决方法：
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>h5ai on OneUFO</title><link>https://oneufo.github.io/tags/h5ai/</link><description>Recent content in h5ai on OneUFO</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><copyright>Copyright © 2019 Oneufo.com. All rights reserved.</copyright><lastBuildDate>Sat, 30 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://oneufo.github.io/tags/h5ai/index.xml" rel="self" type="application/rss+xml"/><item><title>h5ai目录列表程序安装使用教程</title><link>https://oneufo.github.io/post/h5ai/</link><pubDate>Sat, 30 Nov 2019 00:00:00 +0000</pubDate><guid>https://oneufo.github.io/post/h5ai/</guid><description>&lt;ul>
+&lt;li>出现错误：Warning: putenv() has been disabled for security reasons in…&lt;/li>
+&lt;/ul>
+&lt;pre>&lt;code>解决方法：
 lnmp环境中编辑PHP配置文件：
-
 vi /usr/local/php/etc/php.ini进入编辑状态
-
 输入/，进入搜索模式，找到disable_functions
-
 寻找disable_functions字符串，将后面的putenv删除
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+&lt;/code>&lt;/pre></description></item></channel></rss>

@@ -1,29 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Blockchain on OneUFO</title>
-    <link>/tags/blockchain/</link>
-    <description>Recent content in Blockchain on OneUFO</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <copyright>Copyright © 2019 Oneufo.com. All rights reserved.</copyright>
-    <lastBuildDate>Wed, 30 Oct 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/blockchain/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>区块链技术(Blockchain)的解读</title>
-      <link>/post/blockchain/</link>
-      <pubDate>Wed, 30 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/blockchain/</guid>
-      <description>&lt;h3 id=&#34;什么是区块链&#34;&gt;&lt;strong&gt;什么是区块链？&lt;/strong&gt;&lt;/h3&gt;
-
-&lt;p&gt;　　举个例子来说：区块链就好比是一个特殊的谷歌电子表格，它被世界上每台计算机共享，并连接到因特网上。每次发生事务时，它都会被记录到这张电子表格的一行中。&lt;/p&gt;
-
-&lt;p&gt;　　任何拥有移动设备或计算机的人都可以通过互联网连接并访问这张电子表格。任何人都可以查看并将事务添加到此电子表格中，但不允许任何人编辑已经存在电子表格里的信息。&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blockchain on OneUFO</title><link>https://oneufo.github.io/tags/blockchain/</link><description>Recent content in Blockchain on OneUFO</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><copyright>Copyright © 2019 Oneufo.com. All rights reserved.</copyright><lastBuildDate>Wed, 30 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://oneufo.github.io/tags/blockchain/index.xml" rel="self" type="application/rss+xml"/><item><title>区块链技术(Blockchain)的解读</title><link>https://oneufo.github.io/post/blockchain/</link><pubDate>Wed, 30 Oct 2019 00:00:00 +0000</pubDate><guid>https://oneufo.github.io/post/blockchain/</guid><description>&lt;h3 id="heading">&lt;strong>什么是区块链？&lt;/strong>&lt;/h3>
+&lt;p>　　举个例子来说：区块链就好比是一个特殊的谷歌电子表格，它被世界上每台计算机共享，并连接到因特网上。每次发生事务时，它都会被记录到这张电子表格的一行中。&lt;/p>
+&lt;p>　　任何拥有移动设备或计算机的人都可以通过互联网连接并访问这张电子表格。任何人都可以查看并将事务添加到此电子表格中，但不允许任何人编辑已经存在电子表格里的信息。&lt;/p></description></item></channel></rss>
