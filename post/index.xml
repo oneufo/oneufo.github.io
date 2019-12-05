@@ -9,7 +9,7 @@ vi /usr/local/php/etc/php.ini进入编辑状态
 &lt;/ul&gt;</description></item><item><title> 飞鸟集 Stray Birds</title><link>/post/stray-birds/</link><pubDate>Sat, 23 Nov 2019 00:00:00 +0000</pubDate><guid>/post/stray-birds/</guid><description>&lt;p&gt;当你为错过太阳而哭泣的时候，你也要再错过群星了。&lt;/p&gt;
 &lt;p&gt;　　When you shed tears when you miss the sun, you also miss the stars.&lt;/p&gt;
 &lt;p&gt;纵然伤心，也不要愁眉不展，因为你不知是谁会爱上你的笑容。&lt;/p&gt;
-&lt;p&gt;　　Never frown, even when you are sad, because you never know who is falling in love with your smile.&lt;/p&gt;</description></item><item><title>Ubuntu系统软件的安装设置</title><link>/post/ubuntu-soft-install/</link><pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate><guid>/post/ubuntu-soft-install/</guid><description>&lt;p&gt;&lt;strong&gt;Ubuntu系统优化工具&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;　　Never frown, even when you are sad, because you never know who is falling in love with your smile.&lt;/p&gt;</description></item><item><title>Hello world!</title><link>/post/hello/</link><pubDate>Sat, 23 Nov 2019 00:00:00 +0000</pubDate><guid>/post/hello/</guid><description>Hello World!</description></item><item><title>Ubuntu系统软件的安装设置</title><link>/post/ubuntu-soft-install/</link><pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate><guid>/post/ubuntu-soft-install/</guid><description>&lt;p&gt;&lt;strong&gt;Ubuntu系统优化工具&lt;/strong&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;sudo apt install gnome-tweak-tool
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;Ubuntu安装H.264解码器&lt;/strong&gt;&lt;/p&gt;
@@ -30,4 +30,4 @@ SHA1 24b59706d5eded392423936c82ba5a83596b50cc
 &lt;pre&gt;&lt;code&gt;git config --global user.name &amp;quot;oneufo&amp;quot;
 git config --global user.email &amp;quot;oneufo.com@hotmail.com&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除&lt;/p&gt;</description></item><item><title>Hello world!</title><link>/post/hello/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/post/hello/</guid><description>Hello World!</description></item></channel></rss>
+&lt;p&gt;查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除&lt;/p&gt;</description></item></channel></rss>
