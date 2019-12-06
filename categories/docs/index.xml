@@ -14,7 +14,7 @@ macOS Catalina Official Wallpaper (High resolution)</description></item><item><t
 ssh-keygen -t rsa -b 4096 -C &amp;quot;$(git config user.email)&amp;quot; -f gh-pages -N &amp;quot;&amp;quot; # You will get 2 files: # gh-pages.pub (public key) # gh-pages (private key) 假设 开发项目为 tianhui.xin 部署的项目为 tianhui.github.io
 打开tianhui.xin仓库的settings，再点击Secrets，然后添加刚刚生成的私钥，name为ACTIONS_DEPLOY_KEY
 同理，打开tianhui.github.io，点击Deploy keys，添加公钥，Allow write access一定要勾上，否则会无法提交
-然后，可以提交代码了，push成功后，打开仓库actions，至此部署成功，大功告成！
+然后，可以提交代码了，push成功后，打开仓库actions，至此部署成功。
 name: CI #自动化的名称 on: push: # push的时候触发 branches: # 那些分支需要触发 - master jobs: build: runs-on: ubuntu-latest # 镜像市场 steps: - name: checkout # 步骤的名称 uses: actions/checkout@v1 #软件市场的名称 with: # 参数 submodules: true - name: Setup Hugo uses: peaceiris/actions-hugo@v2.</description></item><item><title>Ubuntu使用Git上传项目到Github</title><link>/post/ubuntu-git-github/</link><pubDate>Tue, 03 Dec 2019 00:00:00 +0000</pubDate><guid>/post/ubuntu-git-github/</guid><description>使用 git version 测试是否安装
 如果没有安装，安装git命令：
 sudo apt-get install git 设置Git的user name和email:
