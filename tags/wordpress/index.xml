@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WordPress on OneUFO</title><link>/tags/wordpress/</link><description>Recent content in WordPress on OneUFO</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 10 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/wordpress/index.xml" rel="self" type="application/rss+xml"/><item><title>WordPress修改标签云大小颜色</title><link>/post/wordpress-tags-colour/</link><pubDate>Tue, 10 Dec 2019 00:00:00 +0000</pubDate><guid>/post/wordpress-tags-colour/</guid><description>1.修改WordPress标签字体大小 依次打开「wp-includes」→「category-template.php」，找到下面的代码
-function wp_tag_cloud( $args = &#39;&#39; ) { $defaults = array( &#39;smallest&#39; =&amp;gt; 8, &#39;largest&#39; =&amp;gt; 22, &#39;unit&#39; =&amp;gt; &#39;pt&#39;, &#39;number&#39; =&amp;gt; 45, &#39;format&#39; =&amp;gt; &#39;flat&#39;, &#39;separator&#39; =&amp;gt; &amp;quot;\n&amp;quot;, &#39;orderby&#39; =&amp;gt; &#39;name&#39;, &#39;order&#39; =&amp;gt; &#39;ASC&#39;, &#39;exclude&#39; =&amp;gt; &#39;&#39;, &#39;include&#39; =&amp;gt; &#39;&#39;, &#39;link&#39; =&amp;gt; &#39;view&#39;, &#39;taxonomy&#39; =&amp;gt; &#39;post_tag&#39;, &#39;echo&#39; =&amp;gt; true ); $args = wp_parse_args( $args, $defaults ); 其中：
-smallest：标签字体最小字号，默认是「8」；
-largest：标签字体最大字号，默认是「22」；
-unit：标签字体大小单位，默认是「pt」；
-number：标签云中显示标签的数量，默认是「45」；
-format ：「Flat」怎么个显示法没搞懂；
-separator：标签之间的分隔符，默认是空格；
-orderby：标签顺序，默认是以名称排序；</description></item></channel></rss>
