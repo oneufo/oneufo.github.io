@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hugo on OneUFO</title><link>/tags/hugo/</link><description>Recent content in Hugo on OneUFO</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 05 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo Github Action</title><link>/post/hugo-github-action/</link><pubDate>Thu, 05 Dec 2019 00:00:00 +0000</pubDate><guid>/post/hugo-github-action/</guid><description>准备部署
+我们开发的项目及github pages实际是分开的，所以有两个仓库。部署到github pages步骤：
+生成提交代码用的ssh key
+ssh-keygen -t rsa -b 4096 -C &amp;quot;$(git config user.email)&amp;quot; -f gh-pages -N &amp;quot;&amp;quot; # You will get 2 files: # gh-pages.pub (public key) # gh-pages (private key) 假设 开发项目为 tianhui.xin 部署的项目为 tianhui.github.io
+打开tianhui.xin仓库的settings，再点击Secrets，然后添加刚刚生成的私钥，name为ACTIONS_DEPLOY_KEY
+同理，打开tianhui.github.io，点击Deploy keys，添加公钥，Allow write access一定要勾上，否则会无法提交
+然后，可以提交代码了，push成功后，打开仓库actions，至此部署成功。
+name: CI #自动化的名称 on: push: # push的时候触发 branches: # 那些分支需要触发 - master jobs: build: runs-on: ubuntu-latest # 镜像市场 steps: - name: checkout # 步骤的名称 uses: actions/checkout@v1 #软件市场的名称 with: # 参数 submodules: true - name: Setup Hugo uses: peaceiris/actions-hugo@v2.</description></item><item><title> Install Hugo on Window Linux</title><link>/post/install-hugo-on-windows-macos-ubuntu/</link><pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate><guid>/post/install-hugo-on-windows-macos-ubuntu/</guid><description>Install Hugo on macOS, Windows, Linux, OpenBSD, FreeBSD, and on any machine where the Go compiler tool chain can run.
+Windows
+The following aims to be a complete guide to installing Hugo on your Windows PC.
+Assumptions You will use C:\Hugo\Sites as the starting point for your new project. You will use C:\Hugo\bin to store executable files. Set up Your Directories You&amp;rsquo;ll need a place to store the Hugo executable, your content, and the generated Hugo website:</description></item></channel></rss>

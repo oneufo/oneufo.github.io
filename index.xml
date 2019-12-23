@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>OneUFO</title><link>/</link><description>Recent content on OneUFO</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 18 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>MacOS Catalina 10.15 install PC</title><link>/post/macos-catalina-10.15-install-pc/</link><pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate><guid>/post/macos-catalina-10.15-install-pc/</guid><description>安装MacOS Catalina需要的工具和系统下载：
+Tools：
+Etcher：https://www.balena.io/etcher
+DiskGenius：http://www.diskgenius.cn
+Clover Configurator
+https://pan.baidu.com/s/1d0SJiqy-oCIP2WDuI5lsOw
+选择适合自己电脑硬件的EFI MacOS Catalina 10.15.2正式版：
+https://pan.baidu.com/s/10ynUM1joi9fvc5h44L7J9A
+笔记本触摸板驱动：
+ApplePS2SmartTouchPad_ 4.6.8.kext
+https://pan.baidu.com/s/1RBR2UPjTSLgxOLO-PY-icQ
+无线网卡驱动：
+https://www.tp-link.com/en/support/download/tl-wn725n/v3/#Driver</description></item><item><title>Kali Linux New Desktop Environment</title><link>/post/kali-linux/</link><pubDate>Fri, 06 Dec 2019 00:00:00 +0000</pubDate><guid>/post/kali-linux/</guid><description>New Desktop Environment and GTK3 Theme The solution we’ve committed to is lightweight and can run on all levels of Kali installs. It is functional in that it handles the various needs of the average user with no changes. It is approachable where it uses standard UI concepts we are all familiar with to ensure there is no learning curve. And it looks great with modern UI elements that make efficient use of screen space.</description></item><item><title>Hugo Github Action</title><link>/post/hugo-github-action/</link><pubDate>Thu, 05 Dec 2019 00:00:00 +0000</pubDate><guid>/post/hugo-github-action/</guid><description>准备部署
+我们开发的项目及github pages实际是分开的，所以有两个仓库。部署到github pages步骤：
+生成提交代码用的ssh key
+ssh-keygen -t rsa -b 4096 -C &amp;quot;$(git config user.email)&amp;quot; -f gh-pages -N &amp;quot;&amp;quot; # You will get 2 files: # gh-pages.pub (public key) # gh-pages (private key) 假设 开发项目为 tianhui.xin 部署的项目为 tianhui.github.io
+打开tianhui.xin仓库的settings，再点击Secrets，然后添加刚刚生成的私钥，name为ACTIONS_DEPLOY_KEY
+同理，打开tianhui.github.io，点击Deploy keys，添加公钥，Allow write access一定要勾上，否则会无法提交
+然后，可以提交代码了，push成功后，打开仓库actions，至此部署成功。
+name: CI #自动化的名称 on: push: # push的时候触发 branches: # 那些分支需要触发 - master jobs: build: runs-on: ubuntu-latest # 镜像市场 steps: - name: checkout # 步骤的名称 uses: actions/checkout@v1 #软件市场的名称 with: # 参数 submodules: true - name: Setup Hugo uses: peaceiris/actions-hugo@v2.</description></item><item><title>Ubuntu使用Git上传项目到Github</title><link>/post/ubuntu-git-github/</link><pubDate>Tue, 03 Dec 2019 00:00:00 +0000</pubDate><guid>/post/ubuntu-git-github/</guid><description>使用 git version 测试是否安装
+如果没有安装，安装git命令：
+sudo apt-get install git 设置Git的user name和email:
+git config --global user.name &amp;quot;oneufo&amp;quot; git config --global user.email &amp;quot;oneufo.com@hotmail.com&amp;quot; 查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除 生成ssh密钥文件：
+ssh-keygen -t rsa -C &amp;quot;oneufo.com@hotmail.com&amp;quot; 按3个回车，密码为空。 最后得到了两个文件：id_rsa和id_rsa.pub
+在github上添加ssh密钥，这要添加的是“id_rsa.pub”里面的公钥。
+打开https://github.com 在设置中添加密钥
+测试：
+ssh git@github.com Hi oneufo! You’ve successfully authenticated, but GitHub does not provide shell access. Connection to github.com closed.
+测试成功就可以push code了.
+git clone https://github.com/username/username.github.io Git 更新 Github文件
+one@ufo:~/oneufo.github.io$
+git add --all git commit -m &amp;quot;Initial commit&amp;quot; git push -u origin master Git代理设置：</description></item><item><title>H5ai 文件服务器安装配置</title><link>/post/h5ai-install-error/</link><pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate><guid>/post/h5ai-install-error/</guid><description>简介 H5ai是一款功能强大的php文件目录列表程序，它提供多种文件目录列表呈现方式，支持Apache httpd, lighttpd, nginx 等多种web服务器，支持多国语言（如英语，简体中文等），你可以在线预览txt，图片，音频，视频等文件格式。
+h5ai官网：https://larsjung.de/h5ai
+安装 要求：PHP 5.5+
+1、搭建php网站环境
+可使用lnmp、lamp一键包或者amh、vestacp、宝塔等面板程序搭建。
+2、上传h5ai文件到网站根目录
+出现错误：Warning: putenv() has been disabled for security reasons in…
+解决方法： lnmp环境中编辑PHP配置文件： vi /usr/local/php/etc/php.ini进入编辑状态 输入/，进入搜索模式，找到disable_functions 寻找disable_functions字符串，将后面的putenv删除 将 _h5ai 中，private 与 public 文件夹中的 cache 目录设置权限为 755。
+Use EXIF thumbs 安装php的exif模块即可。 把需要的exif模块编译进去，然后重启lnmp即可。
+PDF thumbs 选择安装convert，直接yum -y install ImageMagick即可。
+Shell tar，Shell zip和Shell du 这三项，根据h5ai官网，在php.ini被禁用函数中去掉exec和passthru即可，是否有危险不知道，自己掂量，禁用好像也不影响一些功能。 另外顺便把scandir函数去掉禁用，不然会出现无非显示目录中文件的情况。
+CentOS 安装 FFmpeg
+注意：请转至 http://www.ffmpeg.org/releases/ 查看最新的 FFmpeg 版本。</description></item><item><title> Install Hugo on Window Linux</title><link>/post/install-hugo-on-windows-macos-ubuntu/</link><pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate><guid>/post/install-hugo-on-windows-macos-ubuntu/</guid><description>Install Hugo on macOS, Windows, Linux, OpenBSD, FreeBSD, and on any machine where the Go compiler tool chain can run.
+Windows
+The following aims to be a complete guide to installing Hugo on your Windows PC.
+Assumptions You will use C:\Hugo\Sites as the starting point for your new project. You will use C:\Hugo\bin to store executable files. Set up Your Directories You&amp;rsquo;ll need a place to store the Hugo executable, your content, and the generated Hugo website:</description></item><item><title>Archive</title><link>/archive/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/archive/</guid><description/></item></channel></rss>
