@@ -17,7 +17,7 @@ git add --all git commit -m &amp;quot;Initial commit&amp;quot; git push -u origi
 git config --global user.email &quot;oneufo.com@hotmail.com&quot;
 </code></pre><p>查看是否已经有了ssh密钥：<code>cd ~/.ssh</code> 如果没有密钥则不会有此文件夹，有则备份删除
 生成ssh密钥文件：</p><pre><code>ssh-keygen -t rsa -C &quot;oneufo.com@hotmail.com&quot;
-</code></pre><p>按3个回车，密码为空。 最后得到了两个文件：id_rsa和id_rsa.pub</p><p>在github上添加ssh密钥，这要添加的是“id_rsa.pub”里面的公钥。</p><p>打开<a href=https://github.com><a href=https://github.com>https://github.com</a></a> 在设置中添加密钥</p><p>测试：</p><pre><code>ssh git@github.com
+</code></pre><p>按3个回车，密码为空。 最后得到了两个文件：id_rsa和id_rsa.pub</p><p>在github上添加ssh密钥，这要添加的是“id_rsa.pub”里面的公钥。</p><p>打开<a href=https://github.com>https://github.com</a> 在设置中添加密钥</p><p>测试：</p><pre><code>ssh git@github.com
 </code></pre><p>Hi oneufo! You’ve successfully authenticated, but GitHub does not provide shell access. Connection to github.com closed.</p><p>测试成功就可以push code了.</p><pre><code>git clone https://github.com/username/username.github.io
 </code></pre><p>Git 更新 Github文件</p><p>one@ufo:~/oneufo.github.io$</p><pre><code>git add --all
 git commit -m &quot;Initial commit&quot;
