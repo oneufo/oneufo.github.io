@@ -44,4 +44,4 @@ CentOS 安装 FFmpeg
 注意：请转至 http://www.ffmpeg.org/releases/ 查看最新的 FFmpeg 版本。</description></item><item><title> Install Hugo on Window Linux</title><link>/post/install-hugo-on-windows-macos-ubuntu/</link><pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate><guid>/post/install-hugo-on-windows-macos-ubuntu/</guid><description>Install Hugo on macOS, Windows, Linux, OpenBSD, FreeBSD, and on any machine where the Go compiler tool chain can run.
 Windows
 The following aims to be a complete guide to installing Hugo on your Windows PC.
-Assumptions You will use C:\Hugo\Sites as the starting point for your new project. You will use C:\Hugo\bin to store executable files. Set up Your Directories You'll need a place to store the Hugo executable, your content, and the generated Hugo website:</description></item></channel></rss>
+Assumptions You will use C:\Hugo\Sites as the starting point for your new project. You will use C:\Hugo\bin to store executable files. Set up Your Directories You&amp;rsquo;ll need a place to store the Hugo executable, your content, and the generated Hugo website:</description></item></channel></rss>
