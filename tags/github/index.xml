@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Github on One UFO</title><link>/tags/github/</link><description>Recent content in Github on One UFO</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 05 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/github/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu使用Git上传项目到Github</title><link>/post/ubuntu-git-github/</link><pubDate>Tue, 03 Dec 2019 00:00:00 +0000</pubDate><guid>/post/ubuntu-git-github/</guid><description>使用 git version 测试是否安装
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Github on One UFO</title><link>/tags/github/</link><description>Recent content in Github on One UFO</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 05 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/github/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo Github Action</title><link>/post/hugo-github-action/</link><pubDate>Thu, 05 Dec 2019 00:00:00 +0000</pubDate><guid>/post/hugo-github-action/</guid><description>准备部署
+我们开发的项目及github pages实际是分开的，所以有两个仓库。部署到github pages步骤：
+生成提交代码用的ssh key
+ssh-keygen -t rsa -b 4096 -C &amp;quot;$(git config user.email)&amp;quot; -f gh-pages -N &amp;quot;&amp;quot; # You will get 2 files: # gh-pages.pub (public key) # gh-pages (private key) 假设 开发项目为 tianhui.xin 部署的项目为 tianhui.github.io
+打开tianhui.xin仓库的settings，再点击Secrets，然后添加刚刚生成的私钥，name为ACTIONS_DEPLOY_KEY
+同理，打开tianhui.github.io，点击Deploy keys，添加公钥，Allow write access一定要勾上，否则会无法提交
+然后，可以提交代码了，push成功后，打开仓库actions，至此部署成功。
+name: CI #自动化的名称 on: push: # push的时候触发 branches: # 那些分支需要触发 - master jobs: build: runs-on: ubuntu-latest # 镜像市场 steps: - name: checkout # 步骤的名称 uses: actions/checkout@v1 #软件市场的名称 with: # 参数 submodules: true - name: Setup Hugo uses: peaceiris/actions-hugo@v2.</description></item><item><title>Ubuntu使用Git上传项目到Github</title><link>/post/ubuntu-git-github/</link><pubDate>Tue, 03 Dec 2019 00:00:00 +0000</pubDate><guid>/post/ubuntu-git-github/</guid><description>使用 git version 测试是否安装
 如果没有安装，安装git命令：
 sudo apt-get install git 设置Git的user name和email:
 git config --global user.name &amp;quot;oneufo&amp;quot; git config --global user.email &amp;quot;oneufo.com@hotmail.com&amp;quot; 查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除 生成ssh密钥文件：
@@ -10,11 +17,4 @@ ssh git@github.com Hi oneufo! You’ve successfully authenticated, but GitHub do
 测试成功就可以push code了.
 git clone https://github.com/username/username.github.io Git 更新 Github文件
 one@ufo:~/oneufo.github.io$
-git add --all git commit -m &amp;quot;Initial commit&amp;quot; git push -u origin master Git代理设置：</description></item><item><title>Hugo Github Action</title><link>/post/hugo-github-action/</link><pubDate>Thu, 05 Dec 2019 00:00:00 +0000</pubDate><guid>/post/hugo-github-action/</guid><description>准备部署
-我们开发的项目及github pages实际是分开的，所以有两个仓库。部署到github pages步骤：
-生成提交代码用的ssh key
-ssh-keygen -t rsa -b 4096 -C &amp;quot;$(git config user.email)&amp;quot; -f gh-pages -N &amp;quot;&amp;quot; # You will get 2 files: # gh-pages.pub (public key) # gh-pages (private key) 假设 开发项目为 tianhui.xin 部署的项目为 tianhui.github.io
-打开tianhui.xin仓库的settings，再点击Secrets，然后添加刚刚生成的私钥，name为ACTIONS_DEPLOY_KEY
-同理，打开tianhui.github.io，点击Deploy keys，添加公钥，Allow write access一定要勾上，否则会无法提交
-然后，可以提交代码了，push成功后，打开仓库actions，至此部署成功。
-name: CI #自动化的名称 on: push: # push的时候触发 branches: # 那些分支需要触发 - master jobs: build: runs-on: ubuntu-latest # 镜像市场 steps: - name: checkout # 步骤的名称 uses: actions/checkout@v1 #软件市场的名称 with: # 参数 submodules: true - name: Setup Hugo uses: peaceiris/actions-hugo@v2.</description></item></channel></rss>
+git add --all git commit -m &amp;quot;Initial commit&amp;quot; git push -u origin master Git代理设置：</description></item></channel></rss>
