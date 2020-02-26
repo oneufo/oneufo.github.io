@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on One UFO</title><link>/post/</link><description>Recent content in Posts on One UFO</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 18 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml"/><item><title>MacOS Catalina 10.15 install PC</title><link>/post/macos-catalina-10.15-install-pc/</link><pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate><guid>/post/macos-catalina-10.15-install-pc/</guid><description>安装MacOS Catalina需要的工具和系统下载：
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on One UFO</title><link>/post/</link><description>Recent content in Posts on One UFO</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 18 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu使用Git上传项目到Github</title><link>/post/ubuntu-git-github/</link><pubDate>Tue, 03 Dec 2019 00:00:00 +0000</pubDate><guid>/post/ubuntu-git-github/</guid><description>使用 git version 测试是否安装
+如果没有安装，安装git命令：
+sudo apt-get install git 设置Git的user name和email:
+git config --global user.name &amp;quot;oneufo&amp;quot; git config --global user.email &amp;quot;oneufo.com@hotmail.com&amp;quot; 查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除 生成ssh密钥文件：
+ssh-keygen -t rsa -C &amp;quot;oneufo.com@hotmail.com&amp;quot; 按3个回车，密码为空。 最后得到了两个文件：id_rsa和id_rsa.pub
+在github上添加ssh密钥，这要添加的是“id_rsa.pub”里面的公钥。
+打开https://github.com 在设置中添加密钥
+测试：
+ssh git@github.com Hi oneufo! You’ve successfully authenticated, but GitHub does not provide shell access. Connection to github.com closed.
+测试成功就可以push code了.
+git clone https://github.com/username/username.github.io Git 更新 Github文件
+one@ufo:~/oneufo.github.io$
+git add --all git commit -m &amp;quot;Initial commit&amp;quot; git push -u origin master Git代理设置：</description></item><item><title>MacOS Catalina 10.15 install PC</title><link>/post/macos-catalina-10.15-install-pc/</link><pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate><guid>/post/macos-catalina-10.15-install-pc/</guid><description>安装MacOS Catalina需要的工具和系统下载：
 Tools：
 Etcher：https://www.balena.io/etcher
 DiskGenius：http://www.diskgenius.cn
@@ -17,19 +29,7 @@ ssh-keygen -t rsa -b 4096 -C &amp;quot;$(git config user.email)&amp;quot; -f gh-
 打开tianhui.xin仓库的settings，再点击Secrets，然后添加刚刚生成的私钥，name为ACTIONS_DEPLOY_KEY
 同理，打开tianhui.github.io，点击Deploy keys，添加公钥，Allow write access一定要勾上，否则会无法提交
 然后，可以提交代码了，push成功后，打开仓库actions，至此部署成功。
-name: CI #自动化的名称 on: push: # push的时候触发 branches: # 那些分支需要触发 - master jobs: build: runs-on: ubuntu-latest # 镜像市场 steps: - name: checkout # 步骤的名称 uses: actions/checkout@v1 #软件市场的名称 with: # 参数 submodules: true - name: Setup Hugo uses: peaceiris/actions-hugo@v2.</description></item><item><title>Ubuntu使用Git上传项目到Github</title><link>/post/ubuntu-git-github/</link><pubDate>Tue, 03 Dec 2019 00:00:00 +0000</pubDate><guid>/post/ubuntu-git-github/</guid><description>使用 git version 测试是否安装
-如果没有安装，安装git命令：
-sudo apt-get install git 设置Git的user name和email:
-git config --global user.name &amp;quot;oneufo&amp;quot; git config --global user.email &amp;quot;oneufo.com@hotmail.com&amp;quot; 查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除 生成ssh密钥文件：
-ssh-keygen -t rsa -C &amp;quot;oneufo.com@hotmail.com&amp;quot; 按3个回车，密码为空。 最后得到了两个文件：id_rsa和id_rsa.pub
-在github上添加ssh密钥，这要添加的是“id_rsa.pub”里面的公钥。
-打开https://github.com 在设置中添加密钥
-测试：
-ssh git@github.com Hi oneufo! You’ve successfully authenticated, but GitHub does not provide shell access. Connection to github.com closed.
-测试成功就可以push code了.
-git clone https://github.com/username/username.github.io Git 更新 Github文件
-one@ufo:~/oneufo.github.io$
-git add --all git commit -m &amp;quot;Initial commit&amp;quot; git push -u origin master Git代理设置：</description></item><item><title>H5ai 文件服务器安装配置</title><link>/post/h5ai-install-error/</link><pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate><guid>/post/h5ai-install-error/</guid><description>简介 H5ai是一款功能强大的php文件目录列表程序，它提供多种文件目录列表呈现方式，支持Apache httpd, lighttpd, nginx 等多种web服务器，支持多国语言（如英语，简体中文等），你可以在线预览txt，图片，音频，视频等文件格式。
+name: CI #自动化的名称 on: push: # push的时候触发 branches: # 那些分支需要触发 - master jobs: build: runs-on: ubuntu-latest # 镜像市场 steps: - name: checkout # 步骤的名称 uses: actions/checkout@v1 #软件市场的名称 with: # 参数 submodules: true - name: Setup Hugo uses: peaceiris/actions-hugo@v2.</description></item><item><title>H5ai 文件服务器安装配置</title><link>/post/h5ai-install-error/</link><pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate><guid>/post/h5ai-install-error/</guid><description>简介 H5ai是一款功能强大的php文件目录列表程序，它提供多种文件目录列表呈现方式，支持Apache httpd, lighttpd, nginx 等多种web服务器，支持多国语言（如英语，简体中文等），你可以在线预览txt，图片，音频，视频等文件格式。
 h5ai官网：https://larsjung.de/h5ai
 安装 要求：PHP 5.5+
 1、搭建php网站环境
