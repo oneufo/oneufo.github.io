@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docs on One UFO</title><link>/categories/docs/</link><description>Recent content in Docs on One UFO</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 18 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="/categories/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu使用Git上传项目到Github</title><link>/post/ubuntu-git-github/</link><pubDate>Tue, 03 Dec 2019 00:00:00 +0000</pubDate><guid>/post/ubuntu-git-github/</guid><description>使用 git version 测试是否安装
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docs on One UFO</title><link>/categories/docs/</link><description>Recent content in Docs on One UFO</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 01 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="/categories/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu使用Git上传项目到Github</title><link>/post/ubuntu-git-github/</link><pubDate>Tue, 03 Dec 2019 00:00:00 +0000</pubDate><guid>/post/ubuntu-git-github/</guid><description>使用 git version 测试是否安装
 如果没有安装，安装git命令：
 sudo apt-get install git 设置Git的user name和email:
 git config --global user.name &amp;quot;oneufo&amp;quot; git config --global user.email &amp;quot;oneufo.com@hotmail.com&amp;quot; 查看是否已经有了ssh密钥：cd ~/.ssh 如果没有密钥则不会有此文件夹，有则备份删除 生成ssh密钥文件：
@@ -10,7 +10,15 @@ ssh git@github.com Hi oneufo! You’ve successfully authenticated, but GitHub do
 测试成功就可以push code了.
 git clone https://github.com/username/username.github.io Git 更新 Github文件
 one@ufo:~/oneufo.github.io$
-git add --all git commit -m &amp;quot;Initial commit&amp;quot; git push -u origin master Git代理设置：</description></item><item><title>MacOS Catalina 10.15 install PC</title><link>/post/macos-catalina-10.15-install-pc/</link><pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate><guid>/post/macos-catalina-10.15-install-pc/</guid><description>安装MacOS Catalina需要的工具和系统下载：
+git add --all git commit -m &amp;quot;Initial commit&amp;quot; git push -u origin master Git代理设置：</description></item><item><title>利用jsDelivr搭建GitHub免费图床</title><link>/post/github-jsdelivr-picgo/</link><pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate><guid>/post/github-jsdelivr-picgo/</guid><description>jsDelivr是国外的一家优秀的公共 CDN 服务提供商，该平台是首个「打通中国大陆与海外的免费CDN服务」，无须担心中国防火墙问题而影响使用。官网：http://www.jsdelivr.com/
+Github图床打造 新建GitHub仓库，注意仓库要设置成公开
+参照 官方文档 生成一个token密钥
+在 这里 下载PicGo，安装完成后打开，图床设置 选 GitHub图床，并填写相应的信息
+仓库名：前面新建的仓库，格式：&amp;lt;用户名&amp;gt;/&amp;lt;仓库名&amp;gt;
+分支名：填写主分支master即可
+Token：前面生成的token密钥
+存储路径：按你自己的需求填写
+自定义域名：图片上传后，PicGo 会按照 自定义域名+上传的图片名 的方式生成访问链接，此处我们填写jsDelivr的CDN加速地址，格式：https://cdn.jsdelivr.net/gh/&amp;lt;用户名&amp;gt;/&amp;lt;仓库名&amp;gt;</description></item><item><title>MacOS Catalina 10.15 install PC</title><link>/post/macos-catalina-10.15-install-pc/</link><pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate><guid>/post/macos-catalina-10.15-install-pc/</guid><description>安装MacOS Catalina需要的工具和系统下载：
 Tools：
 Etcher：https://www.balena.io/etcher
 DiskGenius：http://www.diskgenius.cn
