@@ -6,7 +6,7 @@ Github图床打造 新建GitHub仓库，注意仓库要设置成公开
 分支名：填写主分支master即可
 Token：前面生成的token密钥
 存储路径：按你自己的需求填写
-自定义域名：图片上传后，PicGo 会按照 自定义域名+上传的图片名 的方式生成访问链接，此处我们填写jsDelivr的CDN加速地址，格式：https://cdn.jsdelivr.net/gh/&amp;lt;用户名&amp;gt;/&amp;lt;仓库名&amp;gt;</description></item><item><title>MacOS Catalina 10.15 install PC</title><link>/post/macos-catalina-10.15-install-pc/</link><pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate><guid>/post/macos-catalina-10.15-install-pc/</guid><description>安装MacOS Catalina需要的工具和系统下载：
+自定义域名：图片上传后，PicGo 会按照 自定义域名+上传的图片名 的方式生成访问链接，此处我们填写jsDelivr的CDN加速地址，格式：https://cdn.jsdelivr.net/gh/&amp;lt;用户名&amp;gt;/&amp;lt;仓库名&amp;gt;</description></item><item><title>MacOS Catalina 10.15 install on PC</title><link>/post/macos-catalina-10.15-install-on-pc/</link><pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate><guid>/post/macos-catalina-10.15-install-on-pc/</guid><description>安装MacOS Catalina需要的工具和系统下载：
 Tools：
 Etcher：https://www.balena.io/etcher
 DiskGenius：http://www.diskgenius.cn
@@ -43,13 +43,14 @@ h5ai官网：https://larsjung.de/h5ai
 1、搭建php网站环境
 可使用lnmp、lamp一键包或者amh、vestacp、宝塔等面板程序搭建。
 2、上传h5ai文件到网站根目录
+设置默认访问页面：_h5ai/public/index.php
+需要注意的是，在虚拟主机根目录下，如果有 index.html 的话（一些面板可能会放置一个默认的 index.html 文件），请将其删除，否则不显示虚拟主机下的任何目录及文件。
 出现错误：Warning: putenv() has been disabled for security reasons in…
 解决方法： lnmp环境中编辑PHP配置文件： vi /usr/local/php/etc/php.ini进入编辑状态 输入/，进入搜索模式，找到disable_functions 寻找disable_functions字符串，将后面的putenv删除 将 _h5ai 中，private 与 public 文件夹中的 cache 目录设置权限为 755。
 Use EXIF thumbs 安装php的exif模块即可。 把需要的exif模块编译进去，然后重启lnmp即可。
 PDF thumbs 选择安装convert，直接yum -y install ImageMagick即可。
 Shell tar，Shell zip和Shell du 这三项，根据h5ai官网，在php.ini被禁用函数中去掉exec和passthru即可，是否有危险不知道，自己掂量，禁用好像也不影响一些功能。 另外顺便把scandir函数去掉禁用，不然会出现无非显示目录中文件的情况。
-CentOS 安装 FFmpeg
-注意：请转至 http://www.ffmpeg.org/releases/ 查看最新的 FFmpeg 版本。</description></item><item><title> Install Hugo on Window Linux</title><link>/post/install-hugo-on-windows-macos-ubuntu/</link><pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate><guid>/post/install-hugo-on-windows-macos-ubuntu/</guid><description>Install Hugo on macOS, Windows, Linux, OpenBSD, FreeBSD, and on any machine where the Go compiler tool chain can run.
+CentOS 安装 FFmpeg</description></item><item><title> Install Hugo on Window Linux</title><link>/post/install-hugo-on-windows-macos-ubuntu/</link><pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate><guid>/post/install-hugo-on-windows-macos-ubuntu/</guid><description>Install Hugo on macOS, Windows, Linux, OpenBSD, FreeBSD, and on any machine where the Go compiler tool chain can run.
 Windows
 The following aims to be a complete guide to installing Hugo on your Windows PC.
 Assumptions You will use C:\Hugo\Sites as the starting point for your new project. You will use C:\Hugo\bin to store executable files. Set up Your Directories You&amp;rsquo;ll need a place to store the Hugo executable, your content, and the generated Hugo website:</description></item><item><title>About</title><link>/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/about/</guid><description>oneufo.com@hotmail.com</description></item><item><title>Archive</title><link>/archive/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/archive/</guid><description/></item></channel></rss>
