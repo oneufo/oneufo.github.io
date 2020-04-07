@@ -50,7 +50,4 @@ h5ai官网：https://larsjung.de/h5ai
 Use EXIF thumbs 安装php的exif模块即可。 把需要的exif模块编译进去，然后重启lnmp即可。
 PDF thumbs 选择安装convert，直接yum -y install ImageMagick即可。
 Shell tar，Shell zip和Shell du 这三项，根据h5ai官网，在php.ini被禁用函数中去掉exec和passthru即可，是否有危险不知道，自己掂量，禁用好像也不影响一些功能。 另外顺便把scandir函数去掉禁用，不然会出现无非显示目录中文件的情况。
-CentOS 安装 FFmpeg</description></item><item><title> Install Hugo on Window Linux</title><link>/post/install-hugo-on-windows-macos-ubuntu/</link><pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate><guid>/post/install-hugo-on-windows-macos-ubuntu/</guid><description>Install Hugo on macOS, Windows, Linux, OpenBSD, FreeBSD, and on any machine where the Go compiler tool chain can run.
-Windows
-The following aims to be a complete guide to installing Hugo on your Windows PC.
-Assumptions You will use C:\Hugo\Sites as the starting point for your new project. You will use C:\Hugo\bin to store executable files. Set up Your Directories You&amp;rsquo;ll need a place to store the Hugo executable, your content, and the generated Hugo website:</description></item></channel></rss>
+CentOS 安装 FFmpeg</description></item></channel></rss>
