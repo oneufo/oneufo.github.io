@@ -21,7 +21,7 @@ https://pan.baidu.com/s/1RBR2UPjTSLgxOLO-PY-icQ
 https://www.tp-link.com/en/support/download/tl-wn725n/v3/#Driver</description></item><item><title>Showcase</title><link>/showcase/</link><pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate><guid>/showcase/</guid><description>Header 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec interdum metus. Aenean rutrum ligula sodales ex auctor, sed tempus dui mollis. Curabitur ipsum dui, aliquet nec commodo at, tristique eget ante. Donec quis dolor nec nunc mollis interdum vel in purus. Sed vitae leo scelerisque, sollicitudin elit sed, congue ante. In augue nisl, vestibulum commodo est a, tristique porttitor est. Proin laoreet iaculis ornare. Nullam ut neque quam.</description></item><item><title>Hugo Github Action</title><link>/post/hugo-github-action/</link><pubDate>Thu, 05 Dec 2019 00:00:00 +0000</pubDate><guid>/post/hugo-github-action/</guid><description>准备部署
 我们开发的项目及github pages实际是分开的，所以有两个仓库。部署到github pages步骤：
 生成提交代码用的ssh key
-ssh-keygen -t rsa -b 4096 -C &amp;quot;$(git config user.email)&amp;quot; -f gh-pages -N &amp;quot;&amp;quot; # You will get 2 files: # gh-pages.pub (public key) # gh-pages (private key) 假设 开发项目为 tianhui.xin 部署的项目为 tianhui.github.io
+ssh-keygen -t rsa -b 4096 -C &amp;quot;$(git config user.email&amp;quot;oneufo.com@hotmail.com&amp;quot;)&amp;quot; -f gh-pages -N &amp;quot;&amp;quot; # You will get 2 files: # gh-pages.pub (public key) # gh-pages (private key) 假设 开发项目为 tianhui.xin 部署的项目为 tianhui.github.io
 打开tianhui.xin仓库的settings，再点击Secrets，然后添加刚刚生成的私钥，name为ACTIONS_DEPLOY_KEY
 同理，打开tianhui.github.io，点击Deploy keys，添加公钥，Allow write access一定要勾上，否则会无法提交
 然后，可以提交代码了，push成功后，打开仓库actions，至此部署成功。
