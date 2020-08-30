@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>jsDelivr on One UFO</title><link>/tags/jsdelivr/</link><description>Recent content in jsDelivr on One UFO</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 01 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="/tags/jsdelivr/index.xml" rel="self" type="application/rss+xml"/><item><title>利用jsDelivr搭建GitHub免费图床</title><link>/post/github-jsdelivr-picgo/</link><pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate><guid>/post/github-jsdelivr-picgo/</guid><description>jsDelivr是国外的一家优秀的公共 CDN 服务提供商，该平台是首个「打通中国大陆与海外的免费CDN服务」，无须担心中国防火墙问题而影响使用。官网：http://www.jsdelivr.com
+Github图床打造 新建GitHub仓库，注意仓库要设置成公开
+参照 官方文档 生成一个token密钥
+在 这里 下载PicGo，安装完成后打开，图床设置 选 GitHub图床，并填写相应的信息
+仓库名：前面新建的仓库，格式：&amp;lt;用户名&amp;gt;/&amp;lt;仓库名&amp;gt;
+分支名：填写主分支master即可
+Token：前面生成的token密钥
+存储路径：按你自己的需求填写
+自定义域名：图片上传后，PicGo 会按照 自定义域名+上传的图片名 的方式生成访问链接，此处我们填写jsDelivr的CDN加速地址，格式：https://cdn.jsdelivr.net/gh/&amp;lt;用户名&amp;gt;/&amp;lt;仓库名&amp;gt;</description></item></channel></rss>
