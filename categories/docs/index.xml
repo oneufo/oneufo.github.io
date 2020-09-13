@@ -1,4 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docs on One UFO</title><link>/categories/docs/</link><description>Recent content in Docs on One UFO</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 01 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="/categories/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>利用jsDelivr搭建GitHub免费图床</title><link>/post/github-jsdelivr-picgo/</link><pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate><guid>/post/github-jsdelivr-picgo/</guid><description>jsDelivr是国外的一家优秀的公共 CDN 服务提供商，该平台是首个「打通中国大陆与海外的免费CDN服务」，无须担心中国防火墙问题而影响使用。官网：http://www.jsdelivr.com
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docs on One UFO</title><link>/categories/docs/</link><description>Recent content in Docs on One UFO</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 13 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="/categories/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Manjaro系统添加国内源和安装常用软件</title><link>/post/manjaro/</link><pubDate>Sun, 13 Sep 2020 00:00:00 +0000</pubDate><guid>/post/manjaro/</guid><description>添加中科大源 #打开配置文件
+sudo nano /etc/pacman.conf
+在文件末尾添加
+[archlinuxcn] SigLevel = Optional TrustedOnly Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+#导入GPG Key
+sudo pacman -Syy &amp;amp;&amp;amp; sudo pacman -S archlinuxcn-keyring
+安装软件chrome 和shadowsocks-qt5 #安装chrome
+sudo pacman -S google-chrome
+sudo pacman -S shadowsocks-qt5
+sudo pacman -S typora
+——————————————————————————————— 解决双系统时间不同步问题 timedatectl set-local-rtc true
+Manjaro安装googlepinyin
+sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin
+在用户根目录创建一个新文件:
+nano ~/.xprofile
+内容写:
+export LC_ALL=zh_CN.UTF-8 export GTK_IM_MODULE=fcitx export QT_IM_MODULE=fcitx export XMODIFIERS=“@im=fcitx”
+保存，注销再登录，在输入法里面选择 Configure Current Input Method 即可配置快捷键了。</description></item><item><title>利用jsDelivr搭建GitHub免费图床</title><link>/post/github-jsdelivr-picgo/</link><pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate><guid>/post/github-jsdelivr-picgo/</guid><description>jsDelivr是国外的一家优秀的公共 CDN 服务提供商，该平台是首个「打通中国大陆与海外的免费CDN服务」，无须担心中国防火墙问题而影响使用。官网：http://www.jsdelivr.com
 Github图床打造 新建GitHub仓库，注意仓库要设置成公开
 参照 官方文档 生成一个token密钥
 在 这里 下载PicGo，安装完成后打开，图床设置 选 GitHub图床，并填写相应的信息
