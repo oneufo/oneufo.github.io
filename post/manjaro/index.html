@@ -3,7 +3,7 @@ sudo nano /etc/pacman.conf 在文件末尾添加
 [archlinuxcn] SigLevel = Optional TrustedOnly Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch #导入GPG Key
 sudo pacman -Syy &amp;amp;&amp;amp; sudo pacman -S archlinuxcn-keyring
  安装软件chrome 和shadowsocks-qt5 #安装chrome
-sudo pacman -S google-chrome sudo pacman -S shadowsocks-qt5 sudo pacman -S typora ——————————————————————————————— 解决双系统时间不同步问题
+sudo pacman -S google-chrome sudo pacman -S shadowsocks-qt5 sudo pacman -S typora  解决双系统时间不同步问题
 timedatectl set-local-rtc true  Manjaro安装googlepinyin
 sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin 在用户根目录创建一个新文件:
 nano ~/.xprofile 内容写:
@@ -20,8 +20,7 @@ Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 sudo pacman -S shadowsocks-qt5
 
 sudo pacman -S typora
-</code></pre><p>———————————————————————————————
-解决双系统时间不同步问题</p><pre><code>timedatectl set-local-rtc true
+</code></pre><hr><p>解决双系统时间不同步问题</p><pre><code>timedatectl set-local-rtc true
 </code></pre><hr><p>Manjaro安装googlepinyin</p><pre><code>sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin
 </code></pre><p>在用户根目录创建一个新文件:</p><pre><code>nano ~/.xprofile
 </code></pre><p>内容写:</p><pre><code>export LC_ALL=zh_CN.UTF-8
