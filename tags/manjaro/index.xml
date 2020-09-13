@@ -1,18 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Manjaro on One UFO</title><link>/tags/manjaro/</link><description>Recent content in Manjaro on One UFO</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 13 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="/tags/manjaro/index.xml" rel="self" type="application/rss+xml"/><item><title>Manjaro系统添加国内源和安装常用软件</title><link>/post/manjaro/</link><pubDate>Sun, 13 Sep 2020 00:00:00 +0000</pubDate><guid>/post/manjaro/</guid><description>添加中科大源 #打开配置文件
-sudo nano /etc/pacman.conf
-在文件末尾添加
-[archlinuxcn] SigLevel = Optional TrustedOnly Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
-#导入GPG Key
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Manjaro on One UFO</title><link>/tags/manjaro/</link><description>Recent content in Manjaro on One UFO</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 12 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="/tags/manjaro/index.xml" rel="self" type="application/rss+xml"/><item><title>Manjaro系统添加国内源和安装常用软件</title><link>/post/manjaro/</link><pubDate>Sat, 12 Sep 2020 00:00:00 +0000</pubDate><guid>/post/manjaro/</guid><description>添加中科大源 #打开配置文件
+sudo nano /etc/pacman.conf 在文件末尾添加
+[archlinuxcn] SigLevel = Optional TrustedOnly Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch #导入GPG Key
 sudo pacman -Syy &amp;amp;&amp;amp; sudo pacman -S archlinuxcn-keyring
 安装软件chrome 和shadowsocks-qt5 #安装chrome
-sudo pacman -S google-chrome
-sudo pacman -S shadowsocks-qt5
-sudo pacman -S typora
-——————————————————————————————— 解决双系统时间不同步问题 timedatectl set-local-rtc true
-Manjaro安装googlepinyin
-sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin
-在用户根目录创建一个新文件:
-nano ~/.xprofile
-内容写:
-export LC_ALL=zh_CN.UTF-8 export GTK_IM_MODULE=fcitx export QT_IM_MODULE=fcitx export XMODIFIERS=“@im=fcitx”
-保存，注销再登录，在输入法里面选择 Configure Current Input Method 即可配置快捷键了。</description></item></channel></rss>
+sudo pacman -S google-chrome sudo pacman -S shadowsocks-qt5 sudo pacman -S typora ——————————————————————————————— 解决双系统时间不同步问题
+timedatectl set-local-rtc true Manjaro安装googlepinyin
+sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin 在用户根目录创建一个新文件:
+nano ~/.xprofile 内容写:
+export LC_ALL=zh_CN.UTF-8 export GTK_IM_MODULE=fcitx export QT_IM_MODULE=fcitx export XMODIFIERS=“@im=fcitx” 保存，注销再登录，在输入法里面选择 Configure Current Input Method 即可配置快捷键了。</description></item></channel></rss>
