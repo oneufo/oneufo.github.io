@@ -59,6 +59,5 @@ h5ai官网：https://larsjung.de/h5ai
 Use EXIF thumbs 安装php的exif模块即可。 把需要的exif模块编译进去，然后重启lnmp即可。
 PDF thumbs 选择安装convert，直接yum -y install ImageMagick即可。
 Shell tar，Shell zip和Shell du 这三项，根据h5ai官网，在php.ini被禁用函数中去掉exec和passthru即可，是否有危险不知道，自己掂量，禁用好像也不影响一些功能。 另外顺便把scandir函数去掉禁用，不然会出现无非显示目录中文件的情况。
-CentOS 安装 FFmpeg</description></item><item><title>About</title><link>/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/about/</guid><description>VIP视频云解析：vip.oneufo.com
-Email:
+CentOS 安装 FFmpeg</description></item><item><title>About</title><link>/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/about/</guid><description>Email:
 oneufo.com@hotmail.com</description></item><item><title>Archive</title><link>/archive/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/archive/</guid><description/></item><item><title>BookMarks</title><link>/website/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/website/</guid><description>名 称 链 接 说 明 Visual Studio Code https://code.visualstudio.com 代码编辑器 Typora http://typora.io Markdown格式编辑 MSDN https://msdn.itellyou.cn windows系统下载 Kms-activate https://github.com/jm33-m0/kms-activate Windows激活KMS服务器 Outline https://getoutline.org 全平台代理设置工具 Shadowsocks https://github.com/shadowsocks 代理设置工具 CocoCut https://cococut.net 网站在线视频下载 VIP解析 http://www.jspoo.com/vip.html VIP视频解析 美剧 http://xijing.tv 美剧翻译在线下载 Balena Etcher https://www.balena.io/etcher 系统镜像制作工具 Fossbytes https://fossbytes.com 国外科技资讯 OMG!</description></item></channel></rss>
