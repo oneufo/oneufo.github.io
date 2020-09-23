@@ -4,7 +4,7 @@
 伪静态规则：
 if (!-e $request_filename) { rewrite ^/index.php(.*)$ /index.php?s=$1 last; rewrite ^/api.php(.*)$ /api.php?s=$1 last; rewrite ^/admin.php(.*)$ /admin.php?s=$1 last; rewrite ^(.*)$ /index.php?s=$1 last; break; } 二、MacCMS后台设置路由伪静态规则以及开启伪静态 1.设置苹果后台路由伪静态：苹果后台–系统–URL地址配置–路由伪静态设置–路由规则–粘贴规则代码–保存
 路由伪静态规则：
-map =&amp;gt; map/index rss =&amp;gt; rss/index index-&amp;lt;page?&amp;gt; =&amp;gt; index/index gbook-&amp;lt;page?&amp;gt; =&amp;gt; gbook/index gbook$ =&amp;gt; gbook/index topic-&amp;lt;page?&amp;gt; =&amp;gt; topic/index topic$ =&amp;gt; topic/index topicdetail-&amp;lt;id&amp;gt; =&amp;gt; topic/detail actor-&amp;lt;page?&amp;gt; =&amp;gt; actor/index actor$ =&amp;gt; actor/index actordetail-&amp;lt;id&amp;gt; =&amp;gt; actor/detail actorshow/&amp;lt;area?&amp;gt;-&amp;lt;blood?&amp;gt;-&amp;lt;by?&amp;gt;-&amp;lt;letter?&amp;gt;-&amp;lt;level?&amp;gt;-&amp;lt;order?&amp;gt;-&amp;lt;page?&amp;gt;-&amp;lt;sex?&amp;gt;-&amp;lt;starsign?&amp;gt; =&amp;gt; actor/show role-&amp;lt;page?&amp;gt; =&amp;gt; role/index role$ =&amp;gt; role/index roledetail-&amp;lt;id&amp;gt; =&amp;gt; role/detail roleshow/&amp;lt;by?</description></item><item><title>Manjaro系统添加国内源和安装常用软件</title><link>/post/manjaro/</link><pubDate>Sat, 12 Sep 2020 00:00:00 +0000</pubDate><guid>/post/manjaro/</guid><description>添加中科大源 #打开配置文件
+map =&amp;gt; map/index rss =&amp;gt; rss/index index-&amp;lt;page?&amp;gt; =&amp;gt; index/index gbook-&amp;lt;page?&amp;gt; =&amp;gt; gbook/index gbook$ =&amp;gt; gbook/index topic-&amp;lt;page?&amp;gt; =&amp;gt; topic/index topic$ =&amp;gt; topic/index topicdetail-&amp;lt;id&amp;gt; =&amp;gt; topic/detail actor-&amp;lt;page?&amp;gt; =&amp;gt; actor/index actor$ =&amp;gt; actor/index actordetail-&amp;lt;id&amp;gt; =&amp;gt; actor/detail actorshow/&amp;lt;area?&amp;gt;-&amp;lt;blood?&amp;gt;-&amp;lt;by?&amp;gt;-&amp;lt;letter?&amp;gt;-&amp;lt;level?&amp;gt;-&amp;lt;order?&amp;gt;-&amp;lt;page?&amp;gt;-&amp;lt;sex?&amp;gt;-&amp;lt;starsign?&amp;gt; =&amp;gt; actor/show role-&amp;lt;page?&amp;gt; =&amp;gt; role/index role$ =&amp;gt; role/index roledetail-&amp;lt;id&amp;gt; =&amp;gt; role/detail roleshow/&amp;lt;by?</description></item><item><title>Manjaro系统添加源和安装常用软件</title><link>/post/manjaro-linux/</link><pubDate>Sat, 12 Sep 2020 00:00:00 +0000</pubDate><guid>/post/manjaro-linux/</guid><description>添加中科大源 #打开配置文件
 sudo nano /etc/pacman.conf 在文件末尾添加
 [archlinuxcn] SigLevel = Optional TrustedOnly Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch #导入GPG Key
 sudo pacman -Syy &amp;amp;&amp;amp; sudo pacman -S archlinuxcn-keyring 安装软件chrome 和shadowsocks-qt5 #安装chrome
@@ -21,7 +21,7 @@ Github图床打造 新建GitHub仓库，注意仓库要设置成公开
 Token：前面生成的token密钥
 存储路径：按你自己的需求填写
 自定义域名：图片上传后，PicGo 会按照 自定义域名+上传的图片名 的方式生成访问链接，此处我们填写jsDelivr的CDN加速地址，格式：https://cdn.jsdelivr.net/gh/&amp;lt;用户名&amp;gt;/&amp;lt;仓库名&amp;gt;
-​ ​</description></item><item><title>MacOS Catalina 10.15 install on PC</title><link>/post/macos-catalina-10.15-install-on-pc/</link><pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate><guid>/post/macos-catalina-10.15-install-on-pc/</guid><description>安装MacOS Catalina需要的工具和系统下载：
+​</description></item><item><title>MacOS Catalina 10.15 install on PC</title><link>/post/macos-catalina-10.15-install-on-pc/</link><pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate><guid>/post/macos-catalina-10.15-install-on-pc/</guid><description>安装MacOS Catalina需要的工具和系统下载：
 Tools：
 Etcher：https://www.balena.io/etcher
 DiskGenius：http://www.diskgenius.cn
@@ -65,16 +65,6 @@ h5ai官网：https://larsjung.de/h5ai
 Use EXIF thumbs 安装php的exif模块即可。 把需要的exif模块编译进去，然后重启lnmp即可。
 PDF thumbs 选择安装convert，直接yum -y install ImageMagick即可。
 Shell tar，Shell zip和Shell du 这三项，根据h5ai官网，在php.ini被禁用函数中去掉exec和passthru即可，是否有危险不知道，自己掂量，禁用好像也不影响一些功能。 另外顺便把scandir函数去掉禁用，不然会出现无非显示目录中文件的情况。
-CentOS 安装 FFmpeg</description></item><item><title/><link>/%E8%8B%B9%E6%9E%9Ccmsv10%E5%85%A8%E7%AB%99%E4%BC%AA%E9%9D%99%E6%80%81%E8%A7%84%E5%88%99%E6%95%99%E7%A8%8B%E5%AE%9D%E5%A1%94linux%E7%B3%BB%E7%BB%9F/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/%E8%8B%B9%E6%9E%9Ccmsv10%E5%85%A8%E7%AB%99%E4%BC%AA%E9%9D%99%E6%80%81%E8%A7%84%E5%88%99%E6%95%99%E7%A8%8B%E5%AE%9D%E5%A1%94linux%E7%B3%BB%E7%BB%9F/</guid><description>苹果CMSv10_全站伪静态规则教程_宝塔Linux系统 苹果CMS又名MacCMS，是大多视频站长常用的视频网管理程序。
-苹果CMS网站为了加强收录优化SEO，做静态的链接是最理想的。
-伪静态有利于搜索引擎优化，更好的获得排名。
-但是生成静态页面则会占用服务器大量的磁盘，以及影响服务器的运行速度。尤其是轻量配置的新站长，是极其不愿意看到的。
-开始正题：
-一、宝塔后台设置伪静态规则 填充宝塔伪静态规则：宝塔面板&amp;ndash;网站&amp;ndash;设置&amp;ndash;伪静态&amp;ndash;黏贴规则代码&amp;ndash;保存
-伪静态规则：
-if (!-e $request_filename) { rewrite ^/index.php(.*)$ /index.php?s=$1 last; rewrite ^/api.php(.*)$ /api.php?s=$1 last; rewrite ^/admin.php(.*)$ /admin.php?s=$1 last; rewrite ^(.*)$ /index.php?s=$1 last; break; }
-二、苹果CMS后台设置路由伪静态规则以及开启伪静态 1.设置苹果后台路由伪静态：苹果后台&amp;ndash;系统&amp;ndash;URL地址配置&amp;ndash;路由伪静态设置&amp;ndash;路由规则&amp;ndash;黏贴规则代码&amp;ndash;保存
-路由伪静态规则：
-map =&amp;gt; map/index rss =&amp;gt; rss/index index-&amp;lt;page?&amp;gt; =&amp;gt; index/index gbook-&amp;lt;page?&amp;gt; =&amp;gt; gbook/index gbook$ =&amp;gt; gbook/index topic-&amp;lt;page?&amp;gt; =&amp;gt; topic/index topic$ =&amp;gt; topic/index topicdetail-&amp;lt;id&amp;gt; =&amp;gt; topic/detail actor-&amp;lt;page?&amp;gt; =&amp;gt; actor/index actor$ =&amp;gt; actor/index actordetail-&amp;lt;id&amp;gt; =&amp;gt; actor/detail actorshow/&amp;lt;area?</description></item><item><title>About</title><link>/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/about/</guid><description>记录和分享一些有趣的内容&amp;hellip;&amp;hellip;
+CentOS 安装 FFmpeg</description></item><item><title>About</title><link>/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/about/</guid><description>记录和分享一些有趣的内容&amp;hellip;&amp;hellip;
 联系方式：
 Email：oneufo.com@hotmail.com</description></item><item><title>Archive</title><link>/archive/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/archive/</guid><description/></item><item><title>BookMarks</title><link>/website/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/website/</guid><description>名 称 链 接 说 明 Visual Studio Code https://code.visualstudio.com 代码编辑器 Typora http://typora.io Markdown格式编辑 MSDN https://msdn.itellyou.cn windows系统下载 Kms-activate https://github.com/jm33-m0/kms-activate Windows激活KMS服务器 Outline https://getoutline.org 全平台代理设置工具 Shadowsocks https://github.com/shadowsocks 代理设置工具 CocoCut https://cococut.net 网站在线视频下载 VIP解析 http://www.jspoo.com/vip.html VIP视频解析 美剧 http://xijing.tv 美剧翻译在线下载 Balena Etcher https://www.balena.io/etcher 系统镜像制作工具 Fossbytes https://fossbytes.com 国外科技资讯 OMG!</description></item></channel></rss>
