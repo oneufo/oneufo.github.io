@@ -12,7 +12,7 @@ sudo pacman -S google-chrome sudo pacman -S shadowsocks-qt5 sudo pacman -S typor
 timedatectl set-local-rtc true Manjaro安装googlepinyin
 sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin 在用户根目录创建一个新文件:
 nano ~/.xprofile 内容写:
-export LC_ALL=zh_CN.UTF-8 export GTK_IM_MODULE=fcitx export QT_IM_MODULE=fcitx export XMODIFIERS=“@im=fcitx” 保存，注销再登录，在输入法里面选择 Configure Current Input Method 即可配置快捷键了。</description></item><item><title>WP-China-Yes插件解决WordPress更新</title><link>/post/wp-china-yes-wordpress-update/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>/post/wp-china-yes-wordpress-update/</guid><description>WP-China-Yes插件全面替换WP访问官方服务的链接为高速稳定的中国大陆节点，以此加快站点更新版本、安装升级插件主题的速度，并彻底解决429报错问题。
+export LC_ALL=zh_CN.UTF-8 export GTK_IM_MODULE=fcitx export QT_IM_MODULE=fcitx export XMODIFIERS=“@im=fcitx” 保存，注销再登录，在输入法里面选择 Configure Current Input Method 即可配置快捷键了。</description></item><item><title>WP-China-Yes解决WordPress更新</title><link>/post/wp-china-yes-wordpress-update/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>/post/wp-china-yes-wordpress-update/</guid><description>WP-China-Yes插件全面替换WP访问官方服务的链接为高速稳定的中国大陆节点，以此加快站点更新版本、安装升级插件主题的速度，并彻底解决429报错问题。
 特性 极致编码，安装包仅仅3KB大小，对服务器无任何负担 为官方应用市场提供反代加速，解决应用安装/更新缓慢、失败等问题 通过加速API调用和接管WordPress核心所依赖的静态文件来极大的加快站点后台访问速度 提供对Gravatar头像的加速支持 提供对谷歌字体的加速支持 WP-China-Yes下载：
 本地下载
 Github</description></item><item><title>利用jsDelivr搭建GitHub免费图床</title><link>/post/github-jsdelivr-picgo/</link><pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate><guid>/post/github-jsdelivr-picgo/</guid><description>jsDelivr是国外的一家优秀的公共 CDN 服务提供商，该平台是首个「打通中国大陆与海外的免费CDN服务」，无须担心中国防火墙问题而影响使用。官网：http://www.jsdelivr.com
