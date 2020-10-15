@@ -9,7 +9,7 @@ sudo pacman -S google-chrome sudo pacman -S shadowsocks-qt5 sudo pacman -S typor
 timedatectl set-local-rtc true Manjaro安装googlepinyin
 sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin 在用户根目录创建一个新文件:
 nano ~/.xprofile 内容写:
-export LC_ALL=zh_CN.UTF-8 export GTK_IM_MODULE=fcitx export QT_IM_MODULE=fcitx export XMODIFIERS=“@im=fcitx” 保存，注销再登录，在输入法里面选择 Configure Current Input Method 即可配置快捷键了。</description></item><item><title>MacCMS v10全站伪静态规则教程</title><link>/post/maccms-seo/</link><pubDate>Fri, 15 May 2020 00:00:00 +0000</pubDate><guid>/post/maccms-seo/</guid><description>MacCMS网站为了加强收录优化SEO，做静态的链接是最理想的。伪静态有利于搜索引擎优化，更好的获得排名。
+export LC_ALL=zh_CN.UTF-8 export GTK_IM_MODULE=fcitx export QT_IM_MODULE=fcitx export XMODIFIERS=“@im=fcitx” 保存，注销再登录，在输入法里面选择 Configure Current Input Method 即可配置快捷键了。</description></item><item><title>WebSite</title><link>/website/</link><pubDate>Sun, 05 Jul 2020 00:00:00 +0000</pubDate><guid>/website/</guid><description>名 称 链 接 说 明 Visual Studio Code https://code.visualstudio.com 代码编辑器 Typora http://typora.io Markdown格式编辑 MSDN https://msdn.itellyou.cn windows系统下载 Kms-activate https://github.com/jm33-m0/kms-activate Windows激活KMS服务器 Outline https://getoutline.org 全平台代理设置工具 Shadowsocks https://github.com/shadowsocks 代理设置工具 CocoCut https://cococut.net 网站在线视频下载 美剧 http://xijing.tv 美剧翻译在线下载 Balena Etcher https://www.balena.io/etcher 系统镜像制作工具 Fossbytes https://fossbytes.com 国外科技资讯 OMG!</description></item><item><title>MacCMS v10全站伪静态规则教程</title><link>/post/maccms-seo/</link><pubDate>Fri, 15 May 2020 00:00:00 +0000</pubDate><guid>/post/maccms-seo/</guid><description>MacCMS网站为了加强收录优化SEO，做静态的链接是最理想的。伪静态有利于搜索引擎优化，更好的获得排名。
 一、宝塔后台设置伪静态规则
 填充宝塔伪静态规则：宝塔面板–网站–设置–伪静态–粘贴规则代码–保存
 伪静态规则：
@@ -68,6 +68,8 @@ h5ai官网：https://larsjung.de/h5ai
 Use EXIF thumbs 安装php的exif模块即可。 把需要的exif模块编译进去，然后重启lnmp即可。
 PDF thumbs 选择安装convert，直接yum -y install ImageMagick即可。
 Shell tar，Shell zip和Shell du 这三项，根据h5ai官网，在php.ini被禁用函数中去掉exec和passthru即可，是否有危险不知道，自己掂量，禁用好像也不影响一些功能。 另外顺便把scandir函数去掉禁用，不然会出现无非显示目录中文件的情况。
-CentOS 安装 FFmpeg</description></item><item><title>About</title><link>/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/about/</guid><description>记录和分享一些有趣的内容&amp;hellip;&amp;hellip;
+CentOS 安装 FFmpeg</description></item><item><title/><link>/tools/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/tools/</guid><description>Tools
+2020-10-15
+VPN Outline outline-server outline-client Shadowsocks shadowsocks-windows shadowsocks-android Windows MSDN itellyou.cn Windows原版系统下载 KMS kms.jm33.me kms.v0v.bid Balena Etcher www.balena.io/etcher Code Visual Studio Code code.visualstudio.com 代码编辑器 Typora typora.</description></item><item><title>About</title><link>/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/about/</guid><description>记录和分享一些有趣的内容&amp;hellip;&amp;hellip;
 联系方式：
-Email：oneufo.com@hotmail.com</description></item><item><title>Archive</title><link>/archive/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/archive/</guid><description/></item><item><title>BookMarks</title><link>/website/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/website/</guid><description>名 称 链 接 说 明 Visual Studio Code https://code.visualstudio.com 代码编辑器 Typora http://typora.io Markdown格式编辑 MSDN https://msdn.itellyou.cn windows系统下载 Kms-activate https://github.com/jm33-m0/kms-activate Windows激活KMS服务器 Outline https://getoutline.org 全平台代理设置工具 Shadowsocks https://github.com/shadowsocks 代理设置工具 CocoCut https://cococut.net 网站在线视频下载 VIP解析 http://www.jspoo.com/vip.html VIP视频解析 美剧 http://xijing.tv 美剧翻译在线下载 Balena Etcher https://www.balena.io/etcher 系统镜像制作工具 Fossbytes https://fossbytes.com 国外科技资讯 OMG!</description></item></channel></rss>
+Email：oneufo.com@hotmail.com</description></item><item><title>Archive</title><link>/archive/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/archive/</guid><description/></item></channel></rss>
