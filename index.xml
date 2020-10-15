@@ -68,8 +68,7 @@ h5ai官网：https://larsjung.de/h5ai
 Use EXIF thumbs 安装php的exif模块即可。 把需要的exif模块编译进去，然后重启lnmp即可。
 PDF thumbs 选择安装convert，直接yum -y install ImageMagick即可。
 Shell tar，Shell zip和Shell du 这三项，根据h5ai官网，在php.ini被禁用函数中去掉exec和passthru即可，是否有危险不知道，自己掂量，禁用好像也不影响一些功能。 另外顺便把scandir函数去掉禁用，不然会出现无非显示目录中文件的情况。
-CentOS 安装 FFmpeg</description></item><item><title/><link>/tools/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/tools/</guid><description>Tools
-2020-10-15
+CentOS 安装 FFmpeg</description></item><item><title/><link>/tools/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/tools/</guid><description>2020-10-15
 VPN Outline outline-server outline-client Shadowsocks shadowsocks-windows shadowsocks-android Windows MSDN itellyou.cn Windows原版系统下载 KMS kms.jm33.me kms.v0v.bid Balena Etcher www.balena.io/etcher Code Visual Studio Code code.visualstudio.com 代码编辑器 Typora typora.</description></item><item><title>About</title><link>/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/about/</guid><description>记录和分享一些有趣的内容&amp;hellip;&amp;hellip;
 联系方式：
 Email：oneufo.com@hotmail.com</description></item><item><title>Archive</title><link>/archive/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/archive/</guid><description/></item></channel></rss>
