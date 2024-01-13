@@ -1,39 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
-    <title>UFO导航页面</title>
+    <meta charset="UTF-8">
+    <title>UFO风格页面</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
         body {
-            background-color: #000000;
+            background-color: #01030D;
             background-image: url('path_to_your_space_image');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            font-family: 'Your Sci-Fi Font', Arial, sans-serif;
+            background-size: cover;
+            font-family: 'Orbitron', sans-serif;
             color: #FFFFFF;
         }
-        .navlink {
-            background: #616161;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
+
+        .nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .nav a {
             text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
+            color: white;
+            padding: 14px 16px;
+            text-align: center;
+            font-size: 24px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            transition: background 0.5s ease;
+        }
+
+        .nav a:hover {
+            background: rgba(58, 134, 255, 0.7);
+        }
+
+        .main-content {
+            text-align: center;
+            padding: 20px;
+            font-size: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>欢迎来到我的UFO页面！</h1>
-    
-    <div>
-        <a class="navlink" href="#link1">链接1</a>
-        <a class="navlink" href="#link2">链接2</a>
-        <a class="navlink" href="#link3">链接3</a>
+    <div class="nav">
+        <a href="#link1">链接1</a>
+        <a href="#link2">链接2</a>
+        <a href="#link3">链接3</a>
     </div>
     
-    <h2>这里可以添加更多UFO相关的内容。</h2>
+    <div class="main-content">
+        <h1>欢迎来到我的UFO页面！</h1>
+        <p>这里可以添加更多UFO相关的内容。</p>
+    </div>
 </body>
 </html>
