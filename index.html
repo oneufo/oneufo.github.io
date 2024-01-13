@@ -1,74 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>美观大方暖色调导航页面</title>
+    <title>UFO导航页面</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fff5e6;
+            background-color: #000000;
+            background-image: url('path_to_your_space_image');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Your Sci-Fi Font', Arial, sans-serif;
+            color: #FFFFFF;
         }
-        header {
-            background: linear-gradient(to bottom right, #ff704d, #ff9933);
-            color: #fff;
-            padding: 10px 0;
+        .navlink {
+            background: #616161;
+            border: none;
+            color: white;
+            padding: 15px 32px;
             text-align: center;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: space-around;
-            background-color: #ff704d;
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-        }
-        nav ul li a {
-            color: #fff;
             text-decoration: none;
-            font-size: 1.2em;
-            transition: color .2s;
-        }
-        nav ul li a:hover {
-            color: #ff9933;
-        }
-        main {
-            padding: 20px;
-        }
-        section {
-            margin-bottom: 20px;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>欢迎来到我的主页</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#section1">部分1</a></li>
-            <li><a href="#section2">部分2</a></li>
-            <li><a href="#section3">部分3</a></li>
-            <li><a href="#section4">部分4</a></li>
-        </ul>
-    </nav>
-    <main>
-        <section id="section1">
-            <h2>部分1</h2>
-            <p>这是第一部分的内容。</p>
-        </section>
-        <section id="section2">
-            <h2>部分2</h2>
-            <p>这是第二部分的内容。</p>
-        </section>
-        <section id="section3">
-            <h2>部分3</h2>
-            <p>这是第三部分的内容。</p>
-        </section>
-        <section id="section4">
-            <h2>部分4</h2>
-            <p>这是第四部分的内容。</p>
-        </section>
-    </main>
+    <h1>欢迎来到我的UFO页面！</h1>
+    
+    <div>
+        <a class="navlink" href="#link1">链接1</a>
+        <a class="navlink" href="#link2">链接2</a>
+        <a class="navlink" href="#link3">链接3</a>
+    </div>
+    
+    <h2>这里可以添加更多UFO相关的内容。</h2>
 </body>
 </html>
