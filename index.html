@@ -1,57 +1,51 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>UFO风格页面</title>
+    <title>UFO 风格页面</title>
+    <meta charset="utf-8">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
-
         body {
-            background-color: #01030D;
-            background-image: url('path_to_your_space_image');
-            background-size: cover;
-            font-family: 'Orbitron', sans-serif;
-            color: #FFFFFF;
+            background: black;
+            font-family: 'Courier New', monospace;
+            color: green;
         }
-
-        .nav {
+        
+        .container {
             display: flex;
-            justify-content: space-around;
-            padding: 20px;
-        }
-
-        .nav a {
-            text-decoration: none;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            flex-direction: column;
             color: white;
-            padding: 14px 16px;
-            text-align: center;
-            font-size: 24px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            margin: auto;
+        }
+        
+        .container h1 {
+            margin-bottom: 20px;
+        }
+        
+        .container a {
+            color: white;
+            text-decoration: none;
+            margin: 5px;
+            border: 2px solid white;
             border-radius: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            transition: background 0.5s ease;
-        }
-
-        .nav a:hover {
-            background: rgba(58, 134, 255, 0.7);
-        }
-
-        .main-content {
-            text-align: center;
-            padding: 20px;
-            font-size: 20px;
+            padding: 10px;
         }
     </style>
+    <script src="https://threejs.org/build/three.js"></script>
 </head>
 <body>
-    <div class="nav">
-        <a href="#link1">链接1</a>
-        <a href="#link2">链接2</a>
-        <a href="#link3">链接3</a>
+    <div id="content" class="container">
+        <h1>Welcome to UFO Page</h1>
+        <a href="#">链接1</a>
+        <a href="#">链接2</a>
+        <a href="#">链接3</a>
     </div>
-    
-    <div class="main-content">
-        <h1>欢迎来到我的UFO页面！</h1>
-        <p>这里可以添加更多UFO相关的内容。</p>
-    </div>
+    <script src="path_to_your_code_rain_script.js"></script>
 </body>
 </html>
