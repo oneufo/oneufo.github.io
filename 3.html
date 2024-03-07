@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneUFO</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #0f0;
+      font-family: monospace;
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 36px;
+      text-shadow: 0 0 10px #0f0;
+      animation: glitch 3s infinite;
+      margin-bottom: 30px;
+    }
+
+    nav {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    nav > div {
+      margin: 10px;
+      text-align: left;
+    }
+
+    nav h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    nav a {
+      display: inline-block;
+      color: #0f0;
+      text-decoration: none;
+      margin: 5px;
+      padding: 8px 16px;
+      border: 1px solid #0f0;
+      transition: all 0.3s ease;
+      target: _blank;
+    }
+
+    nav a:hover {
+      background-color: #0f0;
+      color: #000;
+      text-shadow: 0 0 10px #0f0;
+      box-shadow: 0 0 20px #0f0;
+    }
+
+    @keyframes glitch {
+      0% {
+        text-shadow: 0 0 10px #0f0;
+      }
+      25% {
+        text-shadow: 0 0 20px #0f0, 0 0 40px #0f0;
+      }
+      50% {
+        text-shadow: 0 0 10px #0f0;
+      }
+      75% {
+        text-shadow: 0 0 20px #0f0, 0 0 40px #0f0;
+      }
+      100% {
+        text-shadow: 0 0 10px #0f0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 28px;
+      }
+
+      nav h2 {
+        font-size: 18px;
+      }
+
+      nav a {
+        font-size: 14px;
+        padding: 6px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>OneUFO</h1>
+  <nav>
+    <div>
+      <h2>AI & Chat</h2>
+      <a href="https://lmsys.org" target="_blank">AI Chat</a>
+      <a href="https://hack.chat" target="_blank">Hack.Chat</a>
+    </div>
+    <div>
+      <h2>Browsers & Tools</h2>
+      <a href="https://vivaldi.com" target="_blank">Vivaldi</a>
+      <a href="https://dns0.eu" target="_blank">Dns0.eu</a>      
+    </div>
+    <div>
+      <h2>Archives & Resources</h2>
+      <a href="https://annas-archive.org" target="_blank">Anna's Archive</a>
+      <a href="https://oneufo.com" target="_blank">OneUFO.com</a>
+    </div>
+  </nav>
+</body>
+</html>
