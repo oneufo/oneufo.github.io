@@ -1,1 +1,1 @@
-https://OneUFO.com
+https://oneufo.com
