@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OneUFO - 如何入侵地球网络</title>
   <style>
     body {
@@ -8,17 +10,27 @@
       color: #ffffff;
       font-family: Courier, monospace;
       line-height: 1.5;
-    }
-    h1 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
       text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 2px;
     }
+
+    h1 {
+      font-size: 3vh;
+    }
+
     pre {
       background-color: #000000;
-      padding: 20px;
+      padding: 2vh 4vw;
       border: 1px solid #00ff00;
+      text-align: left;
+      width: 60vw;
+      font-size: 1.5vh; /* 缩小字体大小 */
     }
+
     canvas {
       display: block;
       position: fixed;
@@ -26,12 +38,17 @@
       left: 0;
       z-index: -1;
     }
+
+    .content {
+      text-align: center;
+      display: inline-block;
+    }
   </style>
 </head>
 <body>
-  <h1>OneUFO - 如何入侵地球网络</h1>
-  
-  <pre>
+  <div class="content">
+    <h1>OneUFO - 如何入侵地球网络</h1>
+    <pre>
 /// 初始化黑客协议
 HACKING_PROTOCOL.initiate()
 
@@ -52,8 +69,8 @@ while (!WORLD.isConquered()) {
 /// 万事顺利，黑客任务完成
 MISSION.success("地球网络已被外星人控制")
 </pre>
-        
-  <p>更多内容,敬请期待...</p>
+    <p>更多内容,敬请期待...</p>
+  </div>
 
   <canvas id="codeRainCanvas"></canvas>
   <script>
