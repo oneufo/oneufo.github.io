@@ -1,120 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OneUFO</title>
+  <title>OneUFO - 如何入侵地球网络</title>
   <style>
     body {
-      background-color: #000;
-      color: #0f0;
-      font-family: monospace;
-      text-align: center;
-      padding: 20px;
-      box-sizing: border-box;
+      background-color: #121212;
+      color: #ffffff;
+      font-family: Courier, monospace;
+      line-height: 1.5;
     }
-
     h1 {
-      font-size: 36px;
-      text-shadow: 0 0 10px #0f0;
-      animation: glitch 3s infinite;
-      margin-bottom: 30px;
-    }
-
-    nav {
-      margin-top: 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    nav > div {
-      margin: 10px 0;
       text-align: center;
-      width: 100%;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
-
-    nav h2 {
-      font-size: 20px;
-      margin-bottom: 10px;
+    pre {
+      background-color: #000000;
+      padding: 20px;
+      border: 1px solid #00ff00;
     }
-
-    nav a {
-      display: inline-block;
-      color: #0f0;
-      text-decoration: none;
-      margin: 5px;
-      padding: 8px 16px;
-      border: 1px solid #0f0;
-      transition: all 0.3s ease;
-      target: _blank;
-    }
-
-    nav a:hover {
-      background-color: #0f0;
-      color: #000;
-      text-shadow: 0 0 10px #0f0;
-      box-shadow: 0 0 20px #0f0;
-    }
-
-    @keyframes glitch {
-      0% {
-        text-shadow: 0 0 10px #0f0;
-      }
-      25% {
-        text-shadow: 0 0 20px #0f0, 0 0 40px #0f0;
-      }
-      50% {
-        text-shadow: 0 0 10px #0f0;
-      }
-      75% {
-        text-shadow: 0 0 20px #0f0, 0 0 40px #0f0;
-      }
-      100% {
-        text-shadow: 0 0 10px #0f0;
-      }
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 28px;
-      }
-
-      nav h2 {
-        font-size: 18px;
-      }
-
-      nav a {
-        font-size: 14px;
-        padding: 6px 12px;
-      }
+    canvas {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
     }
   </style>
 </head>
 <body>
-  <h1>OneUFO</h1>
-  <nav>
-    <div>
-      <h2>AI & Chat</h2>
-      <a href="https://lmsys.org" target="_blank">AI Chat</a>
-      <a href="https://hack.chat" target="_blank">Hack.Chat</a>
-    </div>
-    <div>
-      <h2>Browsers & Tools</h2>
-      <a href="https://vivaldi.com" target="_blank">Vivaldi</a>
-      <a href="https://dns0.eu" target="_blank">Dns0.eu</a>
-      <a href="https://ping.pe" target="_blank">ping.pe</a>
-      <a href="https://1.1.1.1" target="_blank">1.1.1.1</a>
-    </div>
-    <div>
-      <h2>Archives & Resources</h2>
-      <a href="https://annas-archive.org" target="_blank">Anna's Archive</a>
-      <a href="https://oneufo.com" target="_blank">OneUFO.com</a>
-    </div>
-    <div>
-      <h2>Contact & Email</h2>
-      <a >oneufo.com@gmail.com</a>
-    </div>
-  </nav>
+  <h1>OneUFO - 如何入侵地球网络</h1>
+  
+  <pre>
+/// 初始化黑客协议
+HACKING_PROTOCOL.initiate()
+
+/// 扫描地球网络脆弱点
+let weaknesses = NETWORK_SCANNER.scanForWeaknesses()
+
+/// 渗透防火墙
+FIREWALL.breach(weaknesses)
+
+/// 植入恶意代码
+MALWARE.injectPayload("TOTAL_CONTROL_OVER_HUMANS.exe")
+
+/// 坐等地球人类臣服
+while (!WORLD.isConquered()) {
+  WORLD.waitForConquest()
+}
+
+/// 万事顺利，黑客任务完成
+MISSION.success("地球网络已被外星人控制")
+</pre>
+        
+  <p>更多内容,敬请期待...</p>
+
+  <canvas id="codeRainCanvas"></canvas>
+  <script>
+    // 代码雨效果
+    const canvas = document.getElementById('codeRainCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()+=-[]{}|;:",./<>?';
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const rainDrops = [];
+
+    for (let i = 0; i < columns; i++) {
+      rainDrops[i] = 1;
+    }
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#00ff00';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < rainDrops.length; i++) {
+        const text = characters.charAt(Math.floor(Math.random() * characters.length));
+        ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+        if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          rainDrops[i] = 0;
+        }
+        rainDrops[i]++;
+      }
+    }
+
+    setInterval(draw, 30);
+  </script>
 </body>
 </html>
