@@ -69,12 +69,30 @@
         }
 
         a {
-            color: #ffffff; 
-            text-decoration: none; 
+            color: #ffffff;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        a:before {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #e5da06; 
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
 
         a:hover {
             color: #ffffff; 
+        }
+
+        a:hover:before {
+            transform: scaleX(1);
         }
     </style>
 </head>
@@ -82,7 +100,7 @@
     <div class="container">
         <h1><span class="uppercase"></span> OpenVPN Install</h1>
         <pre>
-    Server: <a href="https://www.vultr.com/?ref=9285991" target="_blank">Vultr.com</a>  Tools: <a href="https://termius.com" target="_blank">Termius.com</a>
+    Server: <a href="https://www.vultr.com/?ref=9285991" target="_blank">Vultr.com</a>   Tools: <a href="https://termius.com" target="_blank">Termius.com</a>
 
 root@vultr:~# sudo ufw disable
 root@vultr:~# sudo apt install nginx
