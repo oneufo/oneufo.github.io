@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>key</title>
+  <script>
+    function checkPassword() {
+      var password = prompt("Password:");
+      if (password === "OneUFO") {
+        // 如果密码正确,则显示网页内容
+        document.getElementById("content").style.display = "block";
+      } else {
+        alert("Error,Please try!");
+      }
+    }
+  </script>
+</head>
+<body onload="checkPassword()">
+  <div id="content" style="display:none;">
+    <!-- 这里是需要密码保护的网页内容 -->
+    <h1>Key</h1>
+    <p>6r3U10ts-12KA50bG-e5A90H7J</p>
+  </div>
+</body>
+</html>
