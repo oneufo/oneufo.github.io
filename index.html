@@ -5,47 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OneUFO</title>
   <style>
+    /* 整体样式 */
     body {
       background-color: #000;
       color: #0f0;
-      font-family: monospace;
+      font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
       text-align: center;
-      padding: 20px;
+      padding: 40px 20px;
       box-sizing: border-box;
     }
 
+    /* 标题样式 */
     h1 {
       font-size: 36px;
-      text-shadow: 0 0 10px #0f0;
+      font-weight: 600;
+      text-shadow: 0 0 20px #0f0;
       animation: glitch 3s infinite;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
+    /* 导航样式 */
     nav {
-      margin-top: 30px;
+      margin-top: 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     nav > div {
-      margin: 10px 0;
+      margin: 15px 0;
       text-align: center;
       width: 100%;
     }
 
     nav h2 {
-      font-size: 20px;
-      margin-bottom: 10px;
+      font-size: 23px;
+      font-weight: 500;
+      margin-bottom: 15px;
     }
 
     nav a {
       display: inline-block;
       color: #0f0;
       text-decoration: none;
-      margin: 5px;
-      padding: 8px 16px;
-      border: 1px solid #0f0;
+      margin: 8px;
+      padding: 10px 20px;
+      border: 2px solid #0f0;
+      border-radius: 6px;
       transition: all 0.3s ease;
       target: _blank;
     }
@@ -53,40 +59,42 @@
     nav a:hover {
       background-color: #0f0;
       color: #000;
-      text-shadow: 0 0 10px #0f0;
-      box-shadow: 0 0 20px #0f0;
+      text-shadow: 0 0 20px #0f0;
+      box-shadow: 0 0 40px #0f0;
     }
 
+    /* 发光特效 */
     @keyframes glitch {
       0% {
-        text-shadow: 0 0 10px #0f0;
+        text-shadow: 0 0 20px #0f0;
       }
       25% {
-        text-shadow: 0 0 20px #0f0, 0 0 40px #0f0;
+        text-shadow: 0 0 40px #0f0, 0 0 80px #0f0;
       }
       50% {
-        text-shadow: 0 0 10px #0f0;
+        text-shadow: 0 0 20px #0f0;
       }
       75% {
-        text-shadow: 0 0 20px #0f0, 0 0 40px #0f0;
+        text-shadow: 0 0 40px #0f0, 0 0 80px #0f0;
       }
       100% {
-        text-shadow: 0 0 10px #0f0;
+        text-shadow: 0 0 20px #0f0;
       }
     }
 
+    /* 响应式样式 */
     @media (max-width: 768px) {
       h1 {
-        font-size: 28px;
+        font-size: 48px;
       }
 
       nav h2 {
-        font-size: 18px;
+        font-size: 22px;
       }
 
       nav a {
         font-size: 14px;
-        padding: 6px 12px;
+        padding: 8px 16px;
       }
     }
   </style>
@@ -107,10 +115,9 @@
       <a href="https://ping.pe" target="_blank">ping.pe</a>
       <a href="https://1.1.1.1" target="_blank">1.1.1.1</a>
       <a href="https://ui.com" target="_blank">UniFi</a>
-      <br />
       <a href="https://termius.com" target="_blank">Termius</a>
+      <br/>
       <a href="https://github.com" target="_blank">GitHub</a>
-      
       <a href="https://deepl.com" target="_blank">DeepL</a>
       <a href="https://write.as" target="_blank">Write.as</a>
     </div>
@@ -120,7 +127,7 @@
       <a href="https://www.vultr.com/?ref=9285991" target="_blank">Vultr</a>
       <a href="https://oneufo.com/vpn" target="_blank">OpenVPN</a>
     </div>
-    <div>
+    <div>  
       <h2>Contact & Email</h2>
       <a href="https://www.youtube.com/@oneufo" target="_blank">YouTube</a>
       <a >oneufo.com@gmail.com</a>
