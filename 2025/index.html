@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025年倒计时</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #1a1a1a, #4a4a4a);
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .time-box {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 100px;
+        }
+
+        .number {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .label {
+            font-size: 1em;
+            text-transform: uppercase;
+        }
+
+        .progress-container {
+            width: 100%;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 3px;
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background: linear-gradient(90deg, #00ff00, #00aa00);
+            border-radius: 7px;
+            transition: width 1s ease-in-out;
+        }
+
+        .progress-text {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+
+        .current-time {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #00ff00;
+        }
+
+        @media (max-width: 600px) {
+            .countdown {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .time-box {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>距离2025年结束还有</h1>
+        <div class="countdown">
+            <div class="time-box">
+                <div class="number" id="days">000</div>
+                <div class="label">天</div>
+            </div>
+            <div class="time-box">
+                <div class="number" id="hours">00</div>
+                <div class="label">时</div>
+            </div>
+            <div class="time-box">
+                <div class="number" id="minutes">00</div>
+                <div class="label">分</div>
+            </div>
+            <div class="time-box">
+                <div class="number" id="seconds">00</div>
+                <div class="label">秒</div>
+            </div>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress"></div>
+        </div>
+        <div class="progress-text" id="progress-text">已完成 0%</div>
+        <div class="current-time" id="current-time">当前时间：</div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const now = new Date();
+            const year2025Start = new Date('2025-01-01T00:00:00');
+            const year2025End = new Date('2025-12-31T23:59:59.999');
+            
+            // 计算2025年的总毫秒数
+            const totalMilliseconds = year2025End - year2025Start;
+            
+            // 如果现在还没到2025年
+            if (now < year2025Start) {
+                const progress = 0;
+                document.getElementById('progress').style.width = '0%';
+                document.getElementById('progress-text').textContent = '等待2025年开始';
+            }
+            // 如果现在是2025年
+            else if (now >= year2025Start && now <= year2025End) {
+                const elapsedMilliseconds = now - year2025Start;
+                const progress = (elapsedMilliseconds / totalMilliseconds) * 100;
+                document.getElementById('progress').style.width = `${progress}%`;
+                document.getElementById('progress-text').textContent = `已完成 ${progress.toFixed(2)}%`;
+            }
+            // 如果2025年已经结束
+            else {
+                document.getElementById('progress').style.width = '100%';
+                document.getElementById('progress-text').textContent = '2025年已结束';
+            }
+
+            // 计算倒计时
+            const remainingTime = year2025End - now;
+            
+            if (remainingTime > 0) {
+                const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days.toString().padStart(3, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                document.getElementById('days').textContent = '000';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+            }
+
+            // 更新当前时间显示
+            const currentTimeStr = now.toLocaleString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            document.getElementById('current-time').textContent = `当前时间：${currentTimeStr}`;
+        }
+
+        // 初始更新
+        updateCountdown();
+
+        // 每秒更新一次
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
