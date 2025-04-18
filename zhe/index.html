@@ -1,0 +1,205 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row =>
+                    row.some(cell => cell !== '' && cell !== null && cell !== undefined)
+                );
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>庄周之境 | 哲学理念</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
+    
+    body {
+      font-family: 'Noto Serif SC', serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #2d3748;
+      overflow-x: hidden;
+    }
+    
+    .butterfly {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: url('https://via.placeholder.com/50x50?text=🦋') no-repeat center;
+      background-size: contain;
+      animation: flutter 10s infinite ease-in-out;
+      opacity: 0.3;
+    }
+    
+    @keyframes flutter {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(100px, 50px) rotate(180deg); }
+      100% { transform: translate(0, 0) rotate(360deg); }
+    }
+    
+    .hero-text {
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 2s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    .scroll-section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .scroll-section:hover {
+      transform: translateY(-10px);
+    }
+    
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <!-- 动态背景画布 -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- 蝴蝶动画 -->
+  <div class="butterfly" style="top: 10%; left: 20%;"></div>
+  <div class="butterfly" style="top: 60%; left: 70%; animation-delay: 2s;"></div>
+  <div class="butterfly" style="top: 30%; left: 50%; animation-delay: 4s;"></div>
+
+  <!-- 导航栏 -->
+  <nav class="fixed top-0 w-full bg-white bg-opacity-80 shadow-md z-10">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-gray-800">庄周之境</h1>
+      <ul class="flex space-x-6">
+        <li><a href="#home" class="text-gray-600 hover:text-gray-900">首页</a></li>
+        <li><a href="#philosophy" class="text-gray-600 hover:text-gray-900">理念</a></li>
+        <li><a href="#reflect" class="text-gray-600 hover:text-gray-900">反思</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 主视觉区域 -->
+  <section id="home" class="min-h-screen flex items-center justify-center">
+    <div class="text-center">
+      <h2 class="text-5xl md:text-7xl font-bold hero-text mb-6">我思故我在</h2>
+      <p class="text-xl md:text-2xl text-gray-700 hero-text">我存在，世界就在；我不在，世界何意义？</p>
+      <a href="#philosophy" class="mt-8 inline-block px-6 py-3 bg-gray-800 text-white rounded-full hover:bg-gray-900 transition">探索理念</a>
+    </div>
+  </section>
+
+  <!-- 哲学理念区域 -->
+  <section id="philosophy" class="py-20">
+    <div class="container mx-auto px-6">
+      <h3 class="text-4xl font-bold text-center mb-12">庄周之思</h3>
+      <div class="scroll-section p-8 mx-auto max-w-2xl">
+        <p class="text-lg leading-relaxed">
+          庄周梦蝶，蝶即我，我即蝶。世界之存在，系于吾心。吾在，天地有灵；吾去，宇宙归寂。万物皆虚，皆真，唯心念流转，赋予意义。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 反思区域 -->
+  <section id="reflect" class="py-20 bg-gray-100">
+    <div class="container mx-auto px-6">
+      <h3 class="text-4xl font-bold text-center mb-12">心境流转</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="scroll-section p-8">
+          <h4 class="text-2xl font-semibold mb-4">存在之问</h4>
+          <p class="text-lg">
+            世界因我而生，亦因我而灭。然，吾为何物？一念起，天地生；一念灭，宇宙空。
+          </p>
+        </div>
+        <div class="scroll-section p-8">
+          <h4 class="text-2xl font-semibold mb-4">虚实之间</h4>
+          <p class="text-lg">
+            庄周之梦，蝶舞翩跹。真耶？幻耶？心之所向，世界成真。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="py-6 bg-gray-800 text-white text-center">
+    <p>&copy; 2025 庄周之境 | 哲学与心境的交融</p>
+  </footer>
+
+  <!-- 动态背景脚本 -->
+  <script>
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    for (let i = 0; i < 50; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 5 + 2,
+        vx: Math.random() * 2 - 1,
+        vy: Math.random() * 2 - 1,
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.fill();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
