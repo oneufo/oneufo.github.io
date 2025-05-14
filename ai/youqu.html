@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>交互式粒子系统</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #000;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    // 设置Canvas
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    // 跟踪鼠标位置
+    let mouse = {
+      x: null,
+      y: null,
+      radius: 150
+    }
+    
+    window.addEventListener('mousemove', function(event) {
+      mouse.x = event.x;
+      mouse.y = event.y;
+    });
+    
+    // 粒子类
+    class Particle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.baseX = x;
+        this.baseY = y;
+        this.size = Math.random() * 3 + 1;
+        this.density = (Math.random() * 30) + 1;
+        this.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
+      }
+      
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+      
+      update() {
+        // 计算鼠标与粒子的距离
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        let forceDirectionX = dx / distance;
+        let forceDirectionY = dy / distance;
+        
+        // 最大距离，超过此距离粒子不受影响
+        const maxDistance = 150;
+        let force = (maxDistance - distance) / maxDistance;
+        
+        // 如果力为负，设为0
+        if (force < 0) force = 0;
+        
+        // 粒子位移
+        let directionX = (forceDirectionX * force * this.density) * -1;
+        let directionY = (forceDirectionY * force * this.density) * -1;
+        
+        if (distance < maxDistance) {
+          this.x += directionX;
+          this.y += directionY;
+        } else {
+          // 逐渐恢复到原位
+          if (this.x !== this.baseX) {
+            let dx = this.x - this.baseX;
+            this.x -= dx/20;
+          }
+          if (this.y !== this.baseY) {
+            let dy = this.y - this.baseY;
+            this.y -= dy/20;
+          }
+        }
+        
+        this.draw();
+      }
+    }
+    
+    // 创建粒子数组
+    const particleArray = [];
+    function init() {
+      particleArray.length = 0;
+      
+      // 根据屏幕大小调整粒子数量
+      let numberOfParticles = (canvas.width * canvas.height) / 9000;
+      
+      for (let i = 0; i < numberOfParticles; i++) {
+        let x = Math.random() * canvas.width;
+        let y = Math.random() * canvas.height;
+        particleArray.push(new Particle(x, y));
+      }
+    }
+    
+    // 连接附近的粒子
+    function connect() {
+      for (let a = 0; a < particleArray.length; a++) {
+        for (let b = a; b < particleArray.length; b++) {
+          let dx = particleArray[a].x - particleArray[b].x;
+          let dy = particleArray[a].y - particleArray[b].y;
+          let distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 100) {
+            let opacity = 1 - (distance/100);
+            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particleArray[a].x, particleArray[a].y);
+            ctx.lineTo(particleArray[b].x, particleArray[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+    
+    // 动画循环
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      for (let i = 0; i < particleArray.length; i++) {
+        particleArray[i].update();
+      }
+      connect();
+      requestAnimationFrame(animate);
+    }
+    
+    // 处理窗口大小改变
+    window.addEventListener('resize', function() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+    
+    // 鼠标离开时重置位置
+    window.addEventListener('mouseout', function() {
+      mouse.x = undefined;
+      mouse.y = undefined;
+    });
+    
+    init();
+    animate();
+  </script>
+</body>
+</html>
