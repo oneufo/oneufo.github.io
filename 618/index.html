@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Φ 黄金律</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Italiana&family=Montserrat:wght@300;400;500;600&display=swap');
+        
+        :root {
+            /* 黄金比例变量 */
+            --phi: 1.618;
+            
+            /* 主题色彩系统 */
+            --gold: #D4B168;
+            --gold-light: #F8EFD4;
+            --gold-dark: #9C7A37;
+            --canvas: #F9F6F0;
+            --ink: #1D1D1D;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --paper: #FFFFFF;
+            
+            /* 间距系统 - 基于黄金比例 */
+            --space-1: clamp(0.8rem, 2vw, 1.2rem);
+            --space-2: calc(var(--space-1) * var(--phi));
+            --space-3: calc(var(--space-2) * var(--phi));
+            --space-4: calc(var(--space-3) * var(--phi));
+            
+            /* 排版系统 */
+            --title-font: 'Italiana', serif;
+            --body-font: 'Montserrat', sans-serif;
+            
+            /* 动画 */
+            --transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--body-font);
+            background-color: var(--canvas);
+            color: var(--ink);
+            line-height: var(--phi);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            margin: 0 auto;
+            width: 94%;
+            max-width: 1400px;
+            padding: var(--space-2) 0;
+        }
+        
+        /* 精致排版 */
+        h1, h2, h3 {
+            font-family: var(--title-font);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+        
+        h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            margin-bottom: var(--space-2);
+            letter-spacing: -0.03em;
+        }
+        
+        h2 {
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            margin-bottom: var(--space-2);
+            letter-spacing: -0.01em;
+        }
+        
+        p {
+            font-weight: 300;
+            font-size: clamp(1rem, 1.5vw, 1.1rem);
+            margin-bottom: var(--space-2);
+            max-width: 36em;
+            opacity: 0.9;
+        }
+        
+        .highlight {
+            color: var(--gold-dark);
+        }
+        
+        .symbol {
+            font-family: var(--title-font);
+            font-size: 1.2em;
+            vertical-align: -0.05em;
+        }
+        
+        /* 艺术布局系统 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            padding: var(--space-3) 0;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "φ";
+            position: absolute;
+            font-family: var(--title-font);
+            font-size: 140vh;
+            opacity: 0.03;
+            top: -10vh;
+            right: -10vw;
+            z-index: 0;
+            color: var(--gold);
+        }
+        
+        .phi-grid {
+            display: grid;
+            grid-template-columns: 1fr calc(1fr * var(--phi));
+            gap: var(--space-3);
+            margin: var(--space-4) 0;
+        }
+        
+        @media (max-width: 768px) {
+            .phi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 优雅卡片 */
+        .art-card {
+            background-color: var(--paper);
+            box-shadow: 0 var(--space-1) var(--space-2) var(--shadow);
+            border-radius: 2px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .art-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 var(--space-2) var(--space-3) var(--shadow);
+        }
+        
+        .art-card-content {
+            padding: var(--space-2);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* 金边装饰 */
+        .gold-edge {
+            position: relative;
+        }
+        
+        .gold-edge::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: calc(100% / var(--phi));
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+            transform-origin: left;
+        }
+        
+        /* 艺术感视觉元素 */
+        .phi-visual {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: var(--phi);
+            background: var(--gold-light);
+            margin: var(--space-2) 0;
+        }
+        
+        .golden-spiral-art {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .golden-sequence {
+            display: flex;
+            height: 180px;
+            align-items: flex-end;
+            margin: var(--space-2) 0;
+        }
+        
+        .sequence-item {
+            flex: 1;
+            margin: 0 2px;
+            background: linear-gradient(to top, var(--gold) 30%, var(--gold-light));
+            transition: var(--transition);
+            transform-origin: bottom;
+        }
+        
+        .sequence-item:hover {
+            transform: scaleY(1.1);
+            background: var(--gold);
+        }
+        
+        /* 艺术互动元素 */
+        .phi-button {
+            display: inline-block;
+            padding: var(--space-1) var(--space-2);
+            background-color: transparent;
+            color: var(--ink);
+            border: 1px solid var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            margin-top: var(--space-2);
+        }
+        
+        .phi-button::before {
+            content: "";
+            position: absolute;
+            background-color: var(--gold);
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .phi-button:hover {
+            color: var(--canvas);
+        }
+        
+        .phi-button:hover::before {
+            left: 0;
+        }
+        
+        /* 艺术矩形视觉装置 */
+        .golden-rectangles {
+            position: relative;
+            aspect-ratio: 1/1;
+            margin: var(--space-3) 0;
+        }
+        
+        .rectangle {
+            position: absolute;
+            border: 1px solid var(--gold);
+            transition: all 0.8s ease;
+            transform-origin: bottom left;
+        }
+        
+        /* 主要动画 */
+        @keyframes fadeScale {
+            from {
+                opacity: 0;
+                transform: scale(0.94);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes drawPath {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        .animate {
+            opacity: 0;
+            animation: fadeScale 1.2s forwards;
+            animation-delay: calc(var(--delay, 0) * 0.2s);
+        }
+        
+        /* 高级视差效果 */
+        .parallax-section {
+            position: relative;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: var(--space-4) 0;
+            overflow: hidden;
+            background-color: var(--ink);
+            color: var(--paper);
+        }
+        
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-size: cover;
+            opacity: 0.15;
+            transform: scale(1.1);
+        }
+        
+        .parallax-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            text-align: center;
+            padding: 0 var(--space-2);
+        }
+        
+        /* 交互式黄金点阵 */
+        .golden-grid-art {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
+            gap: 6px;
+            margin: var(--space-3) 0;
+        }
+        
+        .grid-dot {
+            aspect-ratio: 1/1;
+            background-color: var(--gold-light);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .grid-dot:hover {
+            background-color: var(--gold);
+            transform: scale(1.2);
+        }
+        
+        /* 设计感页脚 */
+        footer {
+            padding: var(--space-3) 0;
+            text-align: center;
+            font-size: 0.9em;
+            opacity: 0.7;
+            margin-top: var(--space-4);
+        }
+        
+        .signature {
+            font-family: var(--title-font);
+            display: inline-block;
+            margin-top: var(--space-1);
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="container">
+            <h1 class="animate" style="--delay:1">
+                黄金比例 <span class="highlight symbol">Φ</span><br>
+                <span style="font-size: 0.75em;">艺术与科学的完美交汇</span>
+            </h1>
+            <p class="animate" style="--delay:2; max-width: calc(100% / var(--phi));">
+                一个神秘的常数 1.618，贯穿于人类艺术史与自然规律中。从希腊帕特农神庙的建筑比例到达芬奇的绘画构图，从贝壳螺旋到星系旋臂，黄金比例为世界带来无尽的和谐与美感。
+            </p>
+            <a href="#explore" class="phi-button animate" style="--delay:3">探索艺术比例</a>
+        </div>
+    </div>
+
+    <div class="container" id="explore">
+        <div class="phi-grid">
+            <div class="art-card gold-edge animate" style="--delay:4">
+                <div class="art-card-content">
+                    <h2>自然的数学诗篇</h2>
+                    <p>黄金比例（φ = 1.618...）是自然界中普遍存在的一种神奇比例关系，从DNA分子的螺旋结构到向日葵的种子排列，从海螺壳的生长模式到人体各部位的比例关系，都能发现这一比例的踪迹。</p>
+                    
+                    <div class="phi-visual">
+                        <div class="golden-spiral-art">
+                            <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                                <path d="M98,2 C98,55.2 55.2,98 2,98 L2,60.6 C34.8,60.6 60.6,34.8 60.6,2 L98,2 Z M60.6,2 C60.6,34.8 34.8,60.6 2,60.6 L2,37.4 C21.6,37.4 37.4,21.6 37.4,2 L60.6,2 Z M37.4,2 C37.4,21.6 21.6,37.4 2,37.4 L2,23.2 C13.4,23.2 23.2,13.4 23.2,2 L37.4,2 Z M23.2,2 C23.2,13.4 13.4,23.2 2,23.2 L2,14.4 C8.32,14.4 14.4,8.32 14.4,2 L23.2,2 Z M14.4,2 C14.4,8.32 8.32,14.4 2,14.4 L2,9 C5.16,9 9,5.16 9,2 L14.4,2 Z" 
+                                    fill="none" 
+                                    stroke="var(--gold)" 
+                                    stroke-width="0.8" 
+                                    style="stroke-dasharray: 500; stroke-dashoffset: 500; animation: drawPath 3s forwards ease-out 0.5s;"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <p>这个黄金螺旋遵循了严格的数学规律，每个扩展部分与前一部分的比例都接近黄金比φ。这种螺旋形状可在鹦鹉螺贝壳、某些植物的生长模式以及漩涡星系的结构中发现。</p>
+                </div>
+            </div>
+            
+            <div class="art-card gold-edge animate" style="--delay:5">
+                <div class="art-card-content">
+                    <h2>斐波那契的数学序曲</h2>
+                    <p>斐波那契数列（1, 1, 2, 3, 5, 8, 13, 21...）与黄金比例有着密不可分的联系。随着数列向前推进，相邻两数的比值越来越接近黄金比例1.618。这个数列在自然界和艺术设计中有着广泛应用。</p>
+                    
+                    <div class="golden-sequence">
+                        <div class="sequence-item" style="height: 1%"></div>
+                        <div class="sequence-item" style="height: 1%"></div>
+                        <div class="sequence-item" style="height: 2%"></div>
+                        <div class="sequence-item" style="height: 3%"></div>
+                        <div class="sequence-item" style="height: 5%"></div>
+                        <div class="sequence-item" style="height: 8%"></div>
+                        <div class="sequence-item" style="height: 13%"></div>
+                        <div class="sequence-item" style="height: 21%"></div>
+                        <div class="sequence-item" style="height: 34%"></div>
+                        <div class="sequence-item" style="height: 55%"></div>
+                        <div class="sequence-item" style="height: 89%"></div>
+                        <div class="sequence-item" style="height: 100%"></div>
+                        <div class="sequence-item" style="height: 100%"></div>
+                    </div>
+                    
+                    <p>上图展示了斐波那契数列的可视化表达，每个柱体的高度代表相应的斐波那契数。这种递增序列在音乐、建筑、金融市场分析等多个领域都有应用。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="parallax-section">
+            <div class="parallax-bg" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23111%22/><path d=%22M98,2 C98,55.2 55.2,98 2,98 L2,60.6 C34.8,60.6 60.6,34.8 60.6,2 L98,2 Z%22 fill=%22%23D4B168%22 opacity=%220.2%22/></svg>');" data-speed="0.2"></div>
+            <div class="parallax-content">
+                <h2 class="animate" style="--delay:6">艺术中的神圣比例</h2>
+                <p class="animate" style="--delay:7; margin: 0 auto;">
+                    从古希腊帕特农神庙到达芬奇的《蒙娜丽莎》，从毕加索的立体派作品到现代品牌设计，黄金比例被艺术家和设计师用作创造和谐构图的基础。这不仅是数学，更是一种美学直觉，一种能被人类普遍感知的视觉舒适。
+                </p>
+            </div>
+        </div>
+        
+        <div class="phi-grid">
+            <div class="art-card gold-edge animate" style="--delay:8">
+                <div class="art-card-content">
+                    <h2>黄金矩形的分割艺术</h2>
+                    <p>黄金矩形是一种特殊的矩形，其长宽比为黄金比例(1:1.618)。这种矩形有一个独特的性质：如果从中切出一个正方形，剩下的部分仍然是一个黄金矩形。这种无限分割的特性使它在视觉艺术中具有特殊地位。</p>
+                    
+                    <div class="golden-rectangles" id="golden-rect">
+                        <!-- JavaScript会动态生成矩形 -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="art-card gold-edge animate" style="--delay:9">
+                <div class="art-card-content">
+                    <h2>现代设计中的黄金律</h2>
+                    <p>在现代设计中，黄金比例被用于创建平衡、和谐的视觉体验。从网页布局到产品设计，从排版系统到空间规划，这一比例帮助设计师创造出既美观又实用的作品。</p>
+                    
+                    <div class="golden-grid-art">
+                        <!-- 生成36个点 -->
+                        <div class="grid-dot"></div><div class="grid-dot"></div><div class="grid-dot"></div>
+                        <div class="grid-dot"></div><div class="grid-dot"></div><div class="grid-dot"></div>
+                        <div class="grid-dot"></div><div class="grid-dot"></div><div class="grid-dot"></div>
+                        <div class="grid-dot"></div><div class="grid-dot"></div><div class="grid-dot"></div>
+                        <div class="grid-dot"></div><div class="grid-dot"></div><div class="grid-dot"></div>
+                        <div class="grid-dot"></div><div class="grid-dot"></div><div class="grid-dot"></div>
+                        <div class="grid-dot"></div><div class="grid-dot"></div><div class="grid-dot"></div>
+                        <div class="grid-dot"></div><div class="grid-dot"></div><div class="grid-dot"></div>
+                        <div class="grid-dot"></div><div class="grid-dot"></div><div class="grid-dot"></div>
+                        <div class="grid-dot"></div><div class="grid-dot"></div><div class="grid-dot"></div>
+                        <div class="grid-dot"></div><div class="grid-dot"></div><div class="grid-dot"></div>
+                        <div class="grid-dot"></div><div class="grid-dot"></div><div class="grid-dot"></div>
+                    </div>
+                    
+                    <p>这个交互式点阵展示了一种基于黄金比例的现代设计元素，它既可以用于UI设计，也可以作为建筑和室内设计的灵感来源。</p>
+                    
+                    <a href="#" class="phi-button">应用黄金比例</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>艺术与科学的完美交汇</p>
+            <div class="signature">Φ</div>
+        </div>
+    </footer>
+    
+    <script>
+        // 生成黄金矩形层叠效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('golden-rect');
+            const phi = 1.618;
+            const totalRectangles = 8;
+            
+            // 创建初始矩形
+            for (let i = 0; i < totalRectangles; i++) {
+                const rect = document.createElement('div');
+                rect.className = 'rectangle';
+                
+                // 设置样式
+                rect.style.width = `${100 * Math.pow(1/phi, i)}%`;
+                rect.style.height = `${100 * Math.pow(1/phi, i)}%`;
+                rect.style.borderColor = `rgba(212, 177, 104, ${0.9 - i * 0.1})`;
+                
+                // 根据矩形序号设置位置
+                if (i % 4 === 0) {
+                    rect.style.bottom = '0';
+                    rect.style.left = '0';
+                } else if (i % 4 === 1) {
+                    rect.style.bottom = '0';
+                    rect.style.right = '0';
+                } else if (i % 4 === 2) {
+                    rect.style.top = '0';
+                    rect.style.right = '0';
+                } else {
+                    rect.style.top = '0';
+                    rect.style.left = '0';
+                }
+                
+                container.appendChild(rect);
+            }
+            
+            // 交互效果 - 矩形动画
+            const rectangles = document.querySelectorAll('.rectangle');
+            rectangles.forEach((rect, index) => {
+                rect.addEventListener('mouseenter', () => {
+                    rect.style.borderWidth = '2px';
+                    rect.style.borderColor = 'var(--gold)';
+                    rect.style.transform = 'scale(1.02)';
+                });
+                
+                rect.addEventListener('mouseleave', () => {
+                    rect.style.borderWidth = '1px';
+                    rect.style.borderColor = `rgba(212, 177, 104, ${0.9 - index * 0.1})`;
+                    rect.style.transform = 'scale(1)';
+                });
+            });
+            
+            // 滚动动画
+            const animateElements = document.querySelectorAll('.animate');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.animation = `fadeScale 1.2s forwards ${entry.target.style.getPropertyValue('--delay') * 0.2}s`;
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animateElements.forEach(el => {
+                observer.observe(el);
+            });
+            
+            // 简单视差效果
+            document.addEventListener('scroll', () => {
+                const parallaxBg = document.querySelector('.parallax-bg');
+                const scrollPosition = window.pageYOffset;
+                parallaxBg.style.transform = `translateY(${scrollPosition * 0.05}px) scale(1.1)`;
+            });
+        });
+    </script>
+</body>
+</html>
