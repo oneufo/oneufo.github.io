@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>此在 | Ontological Manifestation</title>
+   <style>
+       @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300&family=IBM+Plex+Mono:wght@300;400&display=swap');
+       
+       :root {
+           --void: #0a0a0b;
+           --whisper: #1a1a1c;
+           --breath: #2a2a2e;
+           --consciousness: #f8f8f2;
+           --revelation: #bd93f9;
+           --anxiety: #ff6b6b;
+           --temporality: #50fa7b;
+           --thrownness: #8be9fd;
+           --dasein-gold: #f1fa8c;
+           
+           --primary-font: 'Playfair Display', serif;
+           --mono-font: 'IBM Plex Mono', monospace;
+       }
+
+       * {
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+       }
+
+       body {
+           font-family: var(--primary-font);
+           background: var(--void);
+           color: var(--consciousness);
+           overflow-x: hidden;
+           cursor: none;
+           line-height: 1.6;
+           font-weight: 300;
+       }
+
+       /* Artistic Cursor Constellation */
+       .cursor-constellation {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           pointer-events: none;
+           z-index: 10000;
+           mix-blend-mode: screen;
+       }
+
+       .cursor-nucleus {
+           position: absolute;
+           width: 12px;
+           height: 12px;
+           background: radial-gradient(circle, var(--revelation) 0%, transparent 70%);
+           border-radius: 50%;
+           transform: translate(-50%, -50%);
+           transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+           filter: blur(0.5px);
+       }
+
+       .cursor-orbit {
+           position: absolute;
+           width: 40px;
+           height: 40px;
+           border: 1px solid rgba(189, 147, 249, 0.2);
+           border-radius: 50%;
+           transform: translate(-50%, -50%);
+           animation: orbital-rotation 8s linear infinite;
+       }
+
+       .cursor-orbit::before {
+           content: '';
+           position: absolute;
+           width: 3px;
+           height: 3px;
+           background: var(--revelation);
+           border-radius: 50%;
+           top: -1px;
+           left: 50%;
+           transform: translateX(-50%);
+           box-shadow: 0 0 6px var(--revelation);
+       }
+
+       @keyframes orbital-rotation {
+           0% { transform: translate(-50%, -50%) rotate(0deg); }
+           100% { transform: translate(-50%, -50%) rotate(360deg); }
+       }
+
+       /* Phenomenological Canvas */
+       .phenomenological-canvas {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           z-index: -2;
+           background: 
+               radial-gradient(ellipse at 20% 70%, rgba(189, 147, 249, 0.03) 0%, transparent 50%),
+               radial-gradient(ellipse at 80% 30%, rgba(255, 107, 107, 0.02) 0%, transparent 50%),
+               radial-gradient(ellipse at 50% 50%, rgba(80, 250, 123, 0.01) 0%, transparent 50%),
+               linear-gradient(135deg, var(--void) 0%, var(--whisper) 50%, var(--breath) 100%);
+       }
+
+       /* Existential Grid */
+       .existential-grid {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background-image: 
+               linear-gradient(rgba(248, 248, 242, 0.005) 1px, transparent 1px),
+               linear-gradient(90deg, rgba(248, 248, 242, 0.005) 1px, transparent 1px);
+           background-size: 60px 60px;
+           animation: grid-drift 45s linear infinite;
+           z-index: -1;
+       }
+
+       @keyframes grid-drift {
+           0% { transform: translate(0, 0); }
+           100% { transform: translate(60px, 60px); }
+       }
+
+       /* Hero: The Ontological Revelation */
+       .hero-revelation {
+           height: 100vh;
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+           position: relative;
+           text-align: center;
+           padding: 0 2rem;
+       }
+
+       .dasein-manifestation {
+           font-size: clamp(4rem, 20vw, 28rem);
+           font-weight: 300;
+           letter-spacing: -0.08em;
+           line-height: 0.7;
+           font-style: italic;
+           background: linear-gradient(
+               135deg,
+               var(--dasein-gold) 0%,
+               var(--consciousness) 25%,
+               var(--revelation) 50%,
+               var(--temporality) 75%,
+               var(--anxiety) 100%
+           );
+           background-size: 400% 400%;
+           -webkit-background-clip: text;
+           -webkit-text-fill-color: transparent;
+           background-clip: text;
+           animation: 
+               color-shift 12s ease-in-out infinite,
+               existential-tremor 8s ease-in-out infinite;
+           position: relative;
+       }
+
+       @keyframes color-shift {
+           0%, 100% { background-position: 0% 50%; }
+           50% { background-position: 100% 50%; }
+       }
+
+       @keyframes existential-tremor {
+           0%, 100% { 
+               transform: scale(1) rotate(0deg);
+               filter: blur(0px) brightness(1);
+           }
+           25% { 
+               transform: scale(1.015) rotate(0.3deg);
+               filter: blur(0.3px) brightness(1.1);
+           }
+           75% { 
+               transform: scale(0.995) rotate(-0.2deg);
+               filter: blur(0.2px) brightness(0.95);
+           }
+       }
+
+       .ontological-subtitle {
+           font-family: var(--mono-font);
+           font-size: clamp(0.6rem, 1.5vw, 1.2rem);
+           font-weight: 300;
+           opacity: 0;
+           letter-spacing: 0.4em;
+           text-transform: uppercase;
+           margin-top: 3rem;
+           color: var(--revelation);
+           animation: quantum-emergence 3s ease-out 2s forwards;
+       }
+
+       @keyframes quantum-emergence {
+           0% { 
+               opacity: 0; 
+               transform: translateY(40px) scale(0.8);
+               filter: blur(4px);
+           }
+           100% { 
+               opacity: 0.8; 
+               transform: translateY(0) scale(1);
+               filter: blur(0px);
+           }
+       }
+
+       /* Temporal Coordinates */
+       .temporal-coordinate {
+           position: absolute;
+           bottom: 8%;
+           left: 50%;
+           transform: translateX(-50%);
+           font-family: var(--mono-font);
+           font-size: 0.6rem;
+           opacity: 0.3;
+           letter-spacing: 0.3em;
+           color: var(--thrownness);
+           animation: coordinate-pulse 4s ease-in-out infinite;
+       }
+
+       @keyframes coordinate-pulse {
+           0%, 100% { opacity: 0.3; }
+           50% { opacity: 0.7; }
+       }
+
+       /* Philosophical Installations */
+       .installations-gallery {
+           max-width: 1600px;
+           margin: 0 auto;
+           padding: 12rem 3rem;
+           position: relative;
+       }
+
+       .gallery-title {
+           font-size: clamp(2rem, 6vw, 5rem);
+           font-weight: 300;
+           font-style: italic;
+           text-align: center;
+           margin-bottom: 8rem;
+           color: var(--consciousness);
+           opacity: 0.9;
+           letter-spacing: -0.02em;
+       }
+
+       .installation-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+           gap: 6rem 4rem;
+           margin-top: 10rem;
+       }
+
+       .installation-piece {
+           background: linear-gradient(135deg, 
+               rgba(248, 248, 242, 0.01) 0%, 
+               rgba(189, 147, 249, 0.02) 50%, 
+               rgba(248, 248, 242, 0.005) 100%);
+           border: 1px solid rgba(248, 248, 242, 0.03);
+           border-radius: 0;
+           padding: 5rem 4rem;
+           position: relative;
+           transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+           backdrop-filter: blur(40px);
+           overflow: hidden;
+       }
+
+       .installation-piece::before {
+           content: '';
+           position: absolute;
+           top: 0;
+           left: 0;
+           right: 0;
+           height: 1px;
+           background: linear-gradient(90deg, 
+               transparent 0%, 
+               var(--revelation) 30%, 
+               var(--anxiety) 50%, 
+               var(--temporality) 70%, 
+               transparent 100%);
+           transform: translateX(-100%);
+           transition: transform 1.5s ease-out;
+       }
+
+       .installation-piece:hover::before {
+           transform: translateX(100%);
+       }
+
+       .installation-piece::after {
+           content: '';
+           position: absolute;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+               rgba(189, 147, 249, 0.03) 0%, 
+               transparent 70%);
+           opacity: 0;
+           transition: opacity 0.5s ease;
+           pointer-events: none;
+       }
+
+       .installation-piece:hover::after {
+           opacity: 1;
+       }
+
+       .installation-piece:hover {
+           transform: translateY(-30px) scale(1.02);
+           background: linear-gradient(135deg, 
+               rgba(248, 248, 242, 0.03) 0%, 
+               rgba(189, 147, 249, 0.05) 50%, 
+               rgba(248, 248, 242, 0.02) 100%);
+           border-color: rgba(189, 147, 249, 0.2);
+           box-shadow: 
+               0 40px 80px rgba(0, 0, 0, 0.4),
+               0 20px 40px rgba(189, 147, 249, 0.1);
+       }
+
+       .piece-index {
+           font-family: var(--mono-font);
+           font-size: 0.6rem;
+           font-weight: 400;
+           color: var(--revelation);
+           letter-spacing: 0.4em;
+           text-transform: uppercase;
+           margin-bottom: 3rem;
+           opacity: 0.7;
+       }
+
+       .piece-title {
+           font-size: 2.5rem;
+           font-weight: 300;
+           margin-bottom: 2.5rem;
+           color: var(--consciousness);
+           line-height: 1.1;
+           font-style: italic;
+       }
+
+       .piece-concept {
+           font-size: 1.1rem;
+           line-height: 1.9;
+           opacity: 0.8;
+           font-weight: 300;
+           color: var(--consciousness);
+       }
+
+       /* Existential Manifesto */
+       .manifesto-section {
+           text-align: center;
+           margin: 15rem 0;
+           position: relative;
+           max-width: 1000px;
+           margin-left: auto;
+           margin-right: auto;
+           padding: 0 3rem;
+       }
+
+       .manifesto-text {
+           font-size: clamp(1.8rem, 5vw, 4.5rem);
+           font-weight: 300;
+           line-height: 1.2;
+           font-style: italic;
+           opacity: 0;
+           animation: manifesto-revelation 6s steps(80) 1s forwards;
+           position: relative;
+           color: var(--consciousness);
+       }
+
+       .manifesto-text::after {
+           content: '|';
+           color: var(--revelation);
+           animation: cursor-pulse 1.2s infinite, cursor-vanish 0.5s 7s forwards;
+       }
+
+       @keyframes manifesto-revelation {
+           to { opacity: 1; }
+       }
+
+       @keyframes cursor-pulse {
+           0%, 50% { opacity: 1; }
+           51%, 100% { opacity: 0; }
+       }
+
+       @keyframes cursor-vanish {
+           to { opacity: 0; }
+       }
+
+       .manifesto-attribution {
+           font-family: var(--mono-font);
+           font-size: 0.7rem;
+           font-weight: 300;
+           opacity: 0.5;
+           margin-top: 4rem;
+           letter-spacing: 0.3em;
+           text-transform: uppercase;
+           color: var(--thrownness);
+       }
+
+       /* Existential Waves */
+       .existential-waves {
+           position: fixed;
+           bottom: 0;
+           left: 0;
+           width: 100%;
+           height: 300px;
+           overflow: hidden;
+           z-index: -1;
+           opacity: 0.4;
+       }
+
+       .wave-layer {
+           position: absolute;
+           bottom: 0;
+           left: 0;
+           width: 300%;
+           height: 100%;
+           background: url("data:image/svg+xml,%3csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M0,60 Q25,20 50,60 T100,60 V100 H0 Z' fill='rgba(189,147,249,0.03)'/%3e%3c/svg%3e") repeat-x;
+           animation: wave-consciousness 20s linear infinite;
+       }
+
+       .wave-layer:nth-child(2) {
+           animation-duration: 15s;
+           animation-direction: reverse;
+           background: url("data:image/svg+xml,%3csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M0,70 Q25,30 50,70 T100,70 V100 H0 Z' fill='rgba(255,107,107,0.02)'/%3e%3c/svg%3e") repeat-x;
+       }
+
+       .wave-layer:nth-child(3) {
+           animation-duration: 25s;
+           background: url("data:image/svg+xml,%3csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M0,50 Q25,10 50,50 T100,50 V100 H0 Z' fill='rgba(80,250,123,0.015)'/%3e%3c/svg%3e") repeat-x;
+       }
+
+       @keyframes wave-consciousness {
+           0% { transform: translateX(0); }
+           100% { transform: translateX(-33.333%); }
+       }
+
+       /* Artistic Navigation */
+       .artistic-navigation {
+           position: fixed;
+           left: 3rem;
+           top: 50%;
+           transform: translateY(-50%);
+           display: flex;
+           flex-direction: column;
+           gap: 2rem;
+           z-index: 1000;
+       }
+
+       .nav-node {
+           width: 3px;
+           height: 3px;
+           background: rgba(189, 147, 249, 0.4);
+           transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+           cursor: pointer;
+           position: relative;
+       }
+
+       .nav-node::before {
+           content: '';
+           position: absolute;
+           width: 20px;
+           height: 20px;
+           border: 1px solid rgba(189, 147, 249, 0.1);
+           border-radius: 50%;
+           top: 50%;
+           left: 50%;
+           transform: translate(-50%, -50%);
+           opacity: 0;
+           transition: all 0.4s ease;
+       }
+
+       .nav-node.active,
+       .nav-node:hover {
+           width: 6px;
+           height: 30px;
+           background: var(--revelation);
+           box-shadow: 0 0 20px rgba(189, 147, 249, 0.5);
+       }
+
+       .nav-node.active::before,
+       .nav-node:hover::before {
+           opacity: 1;
+           transform: translate(-50%, -50%) scale(1.2);
+       }
+
+       /* Responsive Artistry */
+       @media (max-width: 1200px) {
+           .installation-grid {
+               grid-template-columns: 1fr;
+               gap: 4rem;
+           }
+       }
+
+       @media (max-width: 768px) {
+           .installations-gallery {
+               padding: 8rem 2rem;
+           }
+           
+           .installation-piece {
+               padding: 4rem 3rem;
+           }
+           
+           .artistic-navigation {
+               display: none;
+           }
+           
+           .temporal-coordinate {
+               font-size: 0.5rem;
+           }
+       }
+
+       /* Intersection Observer Reveal */
+       .art-reveal {
+           opacity: 0;
+           transform: translateY(80px) scale(0.95);
+           filter: blur(2px);
+           transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+       }
+
+       .art-reveal.revealed {
+           opacity: 1;
+           transform: translateY(0) scale(1);
+           filter: blur(0px);
+       }
+
+       /* Performance Optimization */
+       .installation-piece,
+       .cursor-constellation * {
+           will-change: transform;
+       }
+
+       @media (prefers-reduced-motion: reduce) {
+           * {
+               animation-duration: 0.01ms !important;
+               animation-iteration-count: 1 !important;
+               transition-duration: 0.01ms !important;
+           }
+       }
+   </style>
+</head>
+<body>
+   <!-- Artistic Cursor Constellation -->
+   <div class="cursor-constellation">
+       <div class="cursor-nucleus"></div>
+       <div class="cursor-orbit"></div>
+   </div>
+
+   <!-- Phenomenological Canvas -->
+   <div class="phenomenological-canvas"></div>
+   <div class="existential-grid"></div>
+
+   <!-- Hero: The Ontological Revelation -->
+   <section class="hero-revelation">
+       <h1 class="dasein-manifestation">此在</h1>
+       <p class="ontological-subtitle">Dasein · Being-in-the-World</p>
+       <div class="temporal-coordinate">Temporal Coordinate: NOW</div>
+   </section>
+
+   <!-- Philosophical Installations -->
+   <div class="installations-gallery">
+       <h2 class="gallery-title">Ontological Installations</h2>
+       
+       <div class="installation-grid">
+           <div class="installation-piece art-reveal">
+               <div class="piece-index">Installation 01</div>
+               <h3 class="piece-title">Temporality as Existence</h3>
+               <p class="piece-concept">时间性不是容器，而是此在存在的基本结构。过去的已在性、现在的当前化、未来的向前性，三者统一在此在的绽出之中。我们不是在时间中存在，我们就是时间。</p>
+           </div>
+
+           <div class="installation-piece art-reveal">
+               <div class="piece-index">Installation 02</div>
+               <h3 class="piece-title">Anxiety & Authenticity</h3>
+               <p class="piece-concept">焦虑不是对具体事物的恐惧，而是面对虚无时此在的基本情调。在焦虑中，常人世界的熟悉性崩塌，此在被抛回到自己最本己的存在可能性面前。</p>
+           </div>
+
+           <div class="installation-piece art-reveal">
+               <div class="piece-index">Installation 03</div>
+               <h3 class="piece-title">Thrownness & Project</h3>
+               <p class="piece-concept">此在的被抛状态揭示了存在的偶然性和有限性。但在这种无根基的抛掷中，此在向着自己的可能性筹划自己，在筹划中超越既定的实际状态。</p>
+           </div>
+
+           <div class="installation-piece art-reveal">
+               <div class="piece-index">Installation 04</div>
+               <h3 class="piece-title">Being-with-Others</h3>
+               <p class="piece-concept">此在从不是孤立的主体，而是本质上与他人共在。但这种共在往往沦为"常人"的统治，只有通过良知的召唤，此在才能从沉沦中解脱，获得本真的共在。</p>
+           </div>
+       </div>
+   </div>
+
+   <!-- Existential Manifesto -->
+   <div class="manifesto-section">
+       <p class="manifesto-text">"存在问题必须重新提出"</p>
+       <p class="manifesto-attribution">— Martin Heidegger, Being and Time</p>
+   </div>
+
+   <!-- Existential Waves -->
+   <div class="existential-waves">
+       <div class="wave-layer"></div>
+       <div class="wave-layer"></div>
+       <div class="wave-layer"></div>
+   </div>
+
+   <!-- Artistic Navigation -->
+   <div class="artistic-navigation">
+       <div class="nav-node active"></div>
+       <div class="nav-node"></div>
+       <div class="nav-node"></div>
+   </div>
+
+   <script>
+       // Artistic Cursor Constellation
+       const cursorNucleus = document.querySelector('.cursor-nucleus');
+       const cursorOrbit = document.querySelector('.cursor-orbit');
+       
+       let mouseX = 0, mouseY = 0;
+       let currentX = 0, currentY = 0;
+       
+       document.addEventListener('mousemove', (e) => {
+           mouseX = e.clientX;
+           mouseY = e.clientY;
+       });
+       
+       function updateCursor() {
+           currentX += (mouseX - currentX) * 0.15;
+           currentY += (mouseY - currentY) * 0.15;
+           
+           cursorNucleus.style.left = currentX + 'px';
+           cursorNucleus.style.top = currentY + 'px';
+           cursorOrbit.style.left = currentX + 'px';
+           cursorOrbit.style.top = currentY + 'px';
+           
+           requestAnimationFrame(updateCursor);
+       }
+       updateCursor();
+
+       // Interactive Installation Pieces
+       document.querySelectorAll('.installation-piece').forEach(piece => {
+           piece.addEventListener('mousemove', (e) => {
+               const rect = piece.getBoundingClientRect();
+               const x = ((e.clientX - rect.left) / rect.width) * 100;
+               const y = ((e.clientY - rect.top) / rect.height) * 100;
+               
+               piece.style.setProperty('--mouse-x', `${x}%`);
+               piece.style.setProperty('--mouse-y', `${y}%`);
+           });
+           
+           piece.addEventListener('mouseenter', () => {
+               cursorNucleus.style.transform = 'translate(-50%, -50%) scale(2)';
+               cursorNucleus.style.background = 'radial-gradient(circle, var(--dasein-gold) 0%, transparent 70%)';
+               cursorOrbit.style.width = '60px';
+               cursorOrbit.style.height = '60px';
+           });
+           
+           piece.addEventListener('mouseleave', () => {
+               cursorNucleus.style.transform = 'translate(-50%, -50%) scale(1)';
+               cursorNucleus.style.background = 'radial-gradient(circle, var(--revelation) 0%, transparent 70%)';
+               cursorOrbit.style.width = '40px';
+               cursorOrbit.style.height = '40px';
+           });
+       });
+
+       // Intersection Observer for Art Reveals
+       const artObserver = new IntersectionObserver((entries) => {
+           entries.forEach((entry, index) => {
+               if (entry.isIntersecting) {
+                   setTimeout(() => {
+                       entry.target.classList.add('revealed');
+                   }, index * 200);
+               }
+           });
+       }, {
+           threshold: 0.3,
+           rootMargin: '0px 0px -100px 0px'
+       });
+
+       document.querySelectorAll('.art-reveal').forEach(el => {
+           artObserver.observe(el);
+       });
+
+       // Navigation System
+       const navNodes = document.querySelectorAll('.nav-node');
+       const sections = document.querySelectorAll('.hero-revelation, .installations-gallery, .manifesto-section');
+       
+       const navObserver = new IntersectionObserver((entries) => {
+           entries.forEach(entry => {
+               if (entry.isIntersecting) {
+                   const index = Array.from(sections).indexOf(entry.target);
+                   navNodes.forEach((node, i) => {
+                       node.classList.toggle('active', i === index);
+                   });
+               }
+           });
+       }, { 
+           threshold: 0.5,
+           rootMargin: '-100px 0px -100px 0px'
+       });
+
+       sections.forEach(section => {
+           navObserver.observe(section);
+       });
+
+       // Dynamic Temporal Coordinate
+       const temporalCoordinate = document.querySelector('.temporal-coordinate');
+       function updateTemporal() {
+           const now = new Date();
+           const existentialMoment = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')} | ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+           temporalCoordinate.textContent = `Existential Coordinate: ${existentialMoment}`;
+       }
+       
+       updateTemporal();
+       setInterval(updateTemporal, 1000);
+
+       // Phenomenological Canvas Response
+       const canvas = document.querySelector('.phenomenological-canvas');
+       document.addEventListener('mousemove', (e) => {
+           const x = (e.clientX / window.innerWidth) * 100;
+           const y = (e.clientY / window.innerHeight) * 100;
+           
+           canvas.style.background = `
+               radial-gradient(ellipse at ${x}% ${y}%, rgba(189, 147, 249, 0.06) 0%, transparent 50%),
+               radial-gradient(ellipse at ${100-x}% ${100-y}%, rgba(255, 107, 107, 0.04) 0%, transparent 50%),
+               radial-gradient(ellipse at 50% 50%, rgba(80, 250, 123, 0.02) 0%, transparent 50%),
+               linear-gradient(135deg, var(--void) 0%, var(--whisper) 50%, var(--breath) 100%)
+           `;
+       });
+
+       // Performance optimization for animations
+       let rafId;
+       function optimizedAnimation() {
+           // Batch DOM updates here if needed
+           rafId = requestAnimationFrame(optimizedAnimation);
+       }
+       optimizedAnimation();
+
+       // Cleanup on page unload
+       window.addEventListener('beforeunload', () => {
+           if (rafId) {
+               cancelAnimationFrame(rafId);
+           }
+       });
+   </script>
+</body>
+</html>
