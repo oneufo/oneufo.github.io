@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Web Tools Showcase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Subtle card animation */
+        .card {
+            opacity: 0;
+            transform: translateY(15px);
+            animation: slideIn 0.5s ease-out forwards;
+        }
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Card hover effect */
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        /* Minimal button style */
+        .btn-minimal {
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+        .btn-minimal:hover {
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+            transform: scale(1.03);
+        }
+        /* Clean background */
+        body {
+            background: #f8fafc;
+        }
+        /* Header text shadow for depth */
+        h1 {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="font-inter min-h-screen">
+    <header class="bg-white py-16 text-center">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                Web Tools Showcase
+            </h1>
+            <p class="text-lg text-gray-600 max-w-xl mx-auto">
+                A curated selection of innovative tools for developers and creators.
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Cloudflare Orange Demo Card -->
+            <div class="card bg-white rounded-lg shadow-sm p-6" style="animation-delay: 0.1s;">
+                <h2 class="text-xl font-semibold text-gray-900 mb-3">Cloudflare Orange</h2>
+                <p class="text-gray-600 text-sm mb-4">
+                    A dynamic demo of Cloudflare’s performance and security solutions for web applications.
+                </p>
+                <a 
+                    href="https://demo.orange.cloudflare.dev" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="inline-block btn-minimal text-white px-4 py-2 rounded-md text-sm font-medium"
+                >
+                    Visit Site
+                </a>
+            </div>
+
+            <!-- Excalidraw Card -->
+            <div class="card bg-white rounded-lg shadow-sm p-6" style="animation-delay: 0.2s;">
+                <h2 class="text-xl font-semibold text-gray-900 mb-3">Excalidraw</h2>
+                <p class="text-gray-600 text-sm mb-4">
+                    A virtual whiteboard for collaborative, hand-drawn diagrams and creative ideation.
+                </p>
+                <a 
+                    href="https://excalidraw.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="inline-block btn-minimal text-white px-4 py-2 rounded-md text-sm font-medium"
+                >
+                    Visit Site
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white py-8 text-center">
+        <div class="container mx-auto px-4">
+            <p class="text-gray-500 text-sm">© 2025 Web Tools Showcase. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
