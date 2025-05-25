@@ -1,101 +1,935 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimal Web Tools Showcase</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Metamorphosis · Digital Consciousness</title>
     <style>
-        /* Subtle card animation */
-        .card {
-            opacity: 0;
-            transform: translateY(15px);
-            animation: slideIn 0.5s ease-out forwards;
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Source+Code+Pro:wght@200;300;400&family=Inter:wght@100;200;300;400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        @keyframes slideIn {
-            to {
+        
+        :root {
+            --void: #0a0a0a;
+            --cosmos: #1a1a1a;
+            --nebula: #2a2a2a;
+            --stardust: #f8f8f8;
+            --aurora: #ffffff;
+            --quantum: #6366f1;
+            --plasma: #8b5cf6;
+            --photon: #06b6d4;
+            --antimatter: #10b981;
+            --signal-blue: #3a76f0;
+            --golden-ratio: 1.618;
+            --sacred-unit: 4px;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: 
+                radial-gradient(ellipse 120% 80% at 50% 0%, rgba(99, 102, 241, 0.03) 0%, transparent 60%),
+                radial-gradient(ellipse 100% 60% at 80% 100%, rgba(139, 92, 246, 0.02) 0%, transparent 60%),
+                radial-gradient(ellipse 150% 120% at 20% 50%, rgba(6, 182, 212, 0.015) 0%, transparent 60%),
+                radial-gradient(ellipse 80% 100% at 90% 10%, rgba(58, 118, 240, 0.02) 0%, transparent 50%),
+                #0a0a0a;
+            min-height: 100vh;
+            color: var(--stardust);
+            overflow-x: hidden;
+            cursor: none;
+            font-weight: 100;
+        }
+        
+        /* 自定义光标 */
+        .cursor {
+            position: fixed;
+            width: 24px;
+            height: 24px;
+            border: 1px solid rgba(248, 248, 248, 0.2);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            backdrop-filter: blur(1px);
+        }
+        
+        .cursor::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 3px;
+            height: 3px;
+            background: var(--stardust);
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+        
+        .cursor.hover {
+            width: 48px;
+            height: 48px;
+            background: rgba(99, 102, 241, 0.05);
+            backdrop-filter: blur(8px);
+        }
+        
+        /* 粒子背景 */
+        .particle-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--stardust);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float infinite linear;
+        }
+        
+        @keyframes float {
+            from {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
                 opacity: 1;
-                transform: translateY(0);
+            }
+            90% {
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
             }
         }
-        /* Card hover effect */
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        
+        /* 主容器 */
+        .consciousness {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: calc(var(--sacred-unit) * 10);
+            position: relative;
         }
-        /* Minimal button style */
-        .btn-minimal {
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
-            transition: background 0.3s ease, transform 0.2s ease;
+        
+        .neural-network {
+            max-width: 720px;
+            width: 100%;
+            position: relative;
         }
-        .btn-minimal:hover {
-            background: linear-gradient(90deg, #2563eb, #3b82f6);
-            transform: scale(1.03);
+        
+        /* 主框架 */
+        .synaptic-frame {
+            background: 
+                linear-gradient(135deg, rgba(248, 248, 248, 0.02) 0%, rgba(248, 248, 248, 0.008) 100%),
+                radial-gradient(circle at 30% 20%, rgba(99, 102, 241, 0.03) 0%, transparent 60%),
+                radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.02) 0%, transparent 60%),
+                radial-gradient(circle at 50% 50%, rgba(58, 118, 240, 0.015) 0%, transparent 80%);
+            border: 1px solid rgba(248, 248, 248, 0.06);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-radius: calc(var(--sacred-unit) * 6);
+            padding: calc(var(--sacred-unit) * 20) calc(var(--sacred-unit) * 16);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 0 1px rgba(248, 248, 248, 0.02),
+                0 calc(var(--sacred-unit) * 8) calc(var(--sacred-unit) * 16) rgba(0, 0, 0, 0.4),
+                0 calc(var(--sacred-unit) * 16) calc(var(--sacred-unit) * 32) rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(248, 248, 248, 0.04);
         }
-        /* Clean background */
-        body {
-            background: #f8fafc;
+        
+        /* 动态边框 */
+        .synaptic-frame::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            background: linear-gradient(45deg, 
+                rgba(99, 102, 241, 0.3), 
+                rgba(139, 92, 246, 0.3), 
+                rgba(6, 182, 212, 0.3), 
+                rgba(58, 118, 240, 0.3),
+                rgba(16, 185, 129, 0.3),
+                rgba(99, 102, 241, 0.3));
+            border-radius: calc(var(--sacred-unit) * 6);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            animation: border-dance 10s linear infinite;
+            opacity: 0;
+            transition: opacity 1s ease;
         }
-        /* Header text shadow for depth */
-        h1 {
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        
+        .synaptic-frame:hover::before {
+            opacity: 1;
+        }
+        
+        @keyframes border-dance {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* 量子噪声纹理 */
+        .synaptic-frame::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(248, 248, 248, 0.003) 2px, rgba(248, 248, 248, 0.003) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(248, 248, 248, 0.003) 2px, rgba(248, 248, 248, 0.003) 4px);
+            opacity: 0;
+            transition: opacity 2s ease;
+            pointer-events: none;
+        }
+        
+        .synaptic-frame:hover::after {
+            opacity: 1;
+        }
+        
+        /* 标题区域 */
+        .quantum-header {
+            text-align: center;
+            margin-bottom: calc(var(--sacred-unit) * 18);
+            position: relative;
+        }
+        
+        .prime-sigil {
+            font-family: 'Playfair Display', serif;
+            font-size: calc(var(--sacred-unit) * 16);
+            font-weight: 300;
+            font-style: italic;
+            background: linear-gradient(135deg, var(--stardust), var(--quantum), var(--plasma), var(--photon), var(--signal-blue));
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: calc(var(--sacred-unit) * 4);
+            letter-spacing: calc(var(--sacred-unit) * 1);
+            animation: color-shift 8s ease-in-out infinite;
+            position: relative;
+        }
+        
+        @keyframes color-shift {
+            0%, 100% { background-position: 0% 50%; }
+            33% { background-position: 100% 50%; }
+            66% { background-position: 50% 100%; }
+        }
+        
+        .frequency-signature {
+            font-family: 'Source Code Pro', monospace;
+            font-size: calc(var(--sacred-unit) * 2.5);
+            font-weight: 200;
+            letter-spacing: calc(var(--sacred-unit) * 2);
+            text-transform: uppercase;
+            color: rgba(248, 248, 248, 0.4);
+            margin-bottom: calc(var(--sacred-unit) * 2);
+            position: relative;
+        }
+        
+        .frequency-signature::before {
+            content: '◦';
+            position: absolute;
+            left: -20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .frequency-signature::after {
+            content: '◦';
+            position: absolute;
+            right: -20px;
+            animation: pulse 2s ease-in-out infinite 1s;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+        
+        .consciousness-echo {
+            font-family: 'Playfair Display', serif;
+            font-size: calc(var(--sacred-unit) * 4);
+            font-style: italic;
+            font-weight: 300;
+            color: rgba(248, 248, 248, 0.6);
+            position: relative;
+        }
+        
+        /* 神经连接区域 */
+        .neural-connections {
+            display: grid;
+            gap: calc(var(--sacred-unit) * 6);
+        }
+        
+        .synapse {
+            display: block;
+            text-decoration: none;
+            background: rgba(248, 248, 248, 0.015);
+            border: 1px solid rgba(248, 248, 248, 0.03);
+            border-radius: calc(var(--sacred-unit) * 4);
+            padding: calc(var(--sacred-unit) * 8);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            backdrop-filter: blur(4px);
+        }
+        
+        /* 量子涟漪效果 */
+        .synapse::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease-out;
+            pointer-events: none;
+        }
+        
+        .synapse.signal-synapse::before {
+            background: radial-gradient(circle, rgba(58, 118, 240, 0.12) 0%, transparent 70%);
+        }
+        
+        .synapse:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+        
+        .synapse:hover {
+            background: rgba(248, 248, 248, 0.03);
+            border-color: rgba(99, 102, 241, 0.2);
+            transform: translateY(calc(var(--sacred-unit) * -2)) scale(1.01);
+            box-shadow: 
+                0 calc(var(--sacred-unit) * 6) calc(var(--sacred-unit) * 12) rgba(0, 0, 0, 0.3),
+                0 0 calc(var(--sacred-unit) * 8) rgba(99, 102, 241, 0.1),
+                inset 0 1px 0 rgba(248, 248, 248, 0.08);
+        }
+        
+        .synapse.signal-synapse:hover {
+            border-color: rgba(58, 118, 240, 0.25);
+            box-shadow: 
+                0 calc(var(--sacred-unit) * 6) calc(var(--sacred-unit) * 12) rgba(0, 0, 0, 0.3),
+                0 0 calc(var(--sacred-unit) * 8) rgba(58, 118, 240, 0.15),
+                inset 0 1px 0 rgba(248, 248, 248, 0.08);
+        }
+        
+        .synapse-matrix {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--sacred-unit) * 6);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .quantum-node {
+            width: calc(var(--sacred-unit) * 16);
+            height: calc(var(--sacred-unit) * 16);
+            border-radius: calc(var(--sacred-unit) * 2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: calc(var(--sacred-unit) * 6);
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .node-orange {
+            background: linear-gradient(135deg, #ff6b35, #f7931e, #ffab40);
+            box-shadow: 
+                0 0 calc(var(--sacred-unit) * 4) rgba(255, 107, 53, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        .node-violet {
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe, #fd79a8);
+            box-shadow: 
+                0 0 calc(var(--sacred-unit) * 4) rgba(108, 92, 231, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        .node-signal {
+            background: linear-gradient(135deg, #3a76f0, #2563eb, #1d4ed8);
+            box-shadow: 
+                0 0 calc(var(--sacred-unit) * 4) rgba(58, 118, 240, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+        
+        .node-signal::before {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            border-radius: calc(var(--sacred-unit) * 1.5);
+        }
+        
+        .synapse:hover .quantum-node {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 
+                0 0 calc(var(--sacred-unit) * 6) rgba(99, 102, 241, 0.4),
+                0 calc(var(--sacred-unit) * 2) calc(var(--sacred-unit) * 4) rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        .synapse.signal-synapse:hover .quantum-node {
+            box-shadow: 
+                0 0 calc(var(--sacred-unit) * 8) rgba(58, 118, 240, 0.5),
+                0 calc(var(--sacred-unit) * 2) calc(var(--sacred-unit) * 4) rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+        
+        .neural-data {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .data-stream {
+            font-family: 'Playfair Display', serif;
+            font-size: calc(var(--sacred-unit) * 6);
+            font-weight: 400;
+            color: var(--stardust);
+            margin-bottom: calc(var(--sacred-unit) * 1);
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        
+        .synapse:hover .data-stream {
+            color: var(--aurora);
+            text-shadow: 0 0 calc(var(--sacred-unit) * 2) rgba(248, 248, 248, 0.3);
+        }
+        
+        .protocol-type {
+            font-family: 'Source Code Pro', monospace;
+            font-size: calc(var(--sacred-unit) * 2.5);
+            font-weight: 200;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba(248, 248, 248, 0.4);
+            margin-bottom: calc(var(--sacred-unit) * 2);
+        }
+        
+        .dimensional-description {
+            font-size: calc(var(--sacred-unit) * 3.5);
+            font-weight: 200;
+            color: rgba(248, 248, 248, 0.6);
+            line-height: var(--golden-ratio);
+            transition: all 0.3s ease;
+        }
+        
+        .synapse:hover .dimensional-description {
+            color: rgba(248, 248, 248, 0.8);
+        }
+        
+        .quantum-arrow {
+            color: rgba(248, 248, 248, 0.3);
+            font-size: calc(var(--sacred-unit) * 4);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: translateX(0);
+        }
+        
+        .synapse:hover .quantum-arrow {
+            color: var(--quantum);
+            transform: translateX(calc(var(--sacred-unit) * 2));
+            text-shadow: 0 0 calc(var(--sacred-unit) * 2) rgba(99, 102, 241, 0.5);
+        }
+        
+        .synapse.signal-synapse:hover .quantum-arrow {
+            color: var(--signal-blue);
+            text-shadow: 0 0 calc(var(--sacred-unit) * 2) rgba(58, 118, 240, 0.6);
+        }
+        
+        /* 时空签名 */
+        .temporal-signature {
+            position: absolute;
+            bottom: calc(var(--sacred-unit) * 4);
+            right: calc(var(--sacred-unit) * 4);
+            font-family: 'Source Code Pro', monospace;
+            font-size: calc(var(--sacred-unit) * 2.5);
+            color: rgba(248, 248, 248, 0.2);
+            letter-spacing: 2px;
+            transform: rotate(-90deg);
+            transform-origin: center;
+        }
+        
+        /* 连接脉冲动画 */
+        .connection-pulse {
+            position: absolute;
+            top: 50%;
+            left: -10px;
+            width: 20px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--quantum), transparent);
+            animation: pulse-flow 3s ease-in-out infinite;
+            opacity: 0;
+        }
+        
+        .synapse.signal-synapse .connection-pulse {
+            background: linear-gradient(90deg, transparent, var(--signal-blue), transparent);
+            animation-duration: 2.5s;
+        }
+        
+        @keyframes pulse-flow {
+            0%, 100% { 
+                opacity: 0; 
+                transform: translateX(-100px) scaleX(0);
+            }
+            50% { 
+                opacity: 1; 
+                transform: translateX(calc(100vw + 100px)) scaleX(1);
+            }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .consciousness {
+                padding: calc(var(--sacred-unit) * 6);
+            }
+            
+            .synaptic-frame {
+                padding: calc(var(--sacred-unit) * 12) calc(var(--sacred-unit) * 8);
+            }
+            
+            .prime-sigil {
+                font-size: calc(var(--sacred-unit) * 12);
+            }
+            
+            .synapse-matrix {
+                gap: calc(var(--sacred-unit) * 4);
+            }
+            
+            .quantum-node {
+                width: calc(var(--sacred-unit) * 12);
+                height: calc(var(--sacred-unit) * 12);
+                font-size: calc(var(--sacred-unit) * 5);
+            }
+        }
+        
+        /* 意识加载动画 */
+        @keyframes consciousness-emerge {
+            from {
+                opacity: 0;
+                transform: perspective(1000px) rotateX(30deg) translateY(50px) scale(0.9);
+                filter: blur(10px);
+            }
+            to {
+                opacity: 1;
+                transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+        
+        .neural-network {
+            animation: consciousness-emerge 2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .synapse:nth-child(1) {
+            animation: consciousness-emerge 2s cubic-bezier(0.23, 1, 0.32, 1) 0.3s both;
+        }
+        
+        .synapse:nth-child(2) {
+            animation: consciousness-emerge 2s cubic-bezier(0.23, 1, 0.32, 1) 0.6s both;
+        }
+        
+        .synapse:nth-child(3) {
+            animation: consciousness-emerge 2s cubic-bezier(0.23, 1, 0.32, 1) 0.9s both;
+        }
+        
+        /* 量子涟漪和加密扫描动画 */
+        @keyframes quantum-ripple {
+            to {
+                width: 200px;
+                height: 200px;
+                opacity: 0;
+            }
+        }
+        
+        @keyframes encrypt-scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* 神经脉冲效果 */
+        @keyframes neural-pulse {
+            0%, 100% { 
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+        
+        /* 数据流效果 */
+        @keyframes data-flow {
+            0% {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(20px);
+            }
         }
     </style>
 </head>
-<body class="font-inter min-h-screen">
-    <header class="bg-white py-16 text-center">
-        <div class="container mx-auto px-4">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                Web Tools Showcase
-            </h1>
-            <p class="text-lg text-gray-600 max-w-xl mx-auto">
-                A curated selection of innovative tools for developers and creators.
-            </p>
-        </div>
-    </header>
-
-    <main class="container mx-auto px-4 py-12">
-        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Cloudflare Orange Demo Card -->
-            <div class="card bg-white rounded-lg shadow-sm p-6" style="animation-delay: 0.1s;">
-                <h2 class="text-xl font-semibold text-gray-900 mb-3">Cloudflare Orange</h2>
-                <p class="text-gray-600 text-sm mb-4">
-                    A dynamic demo of Cloudflare’s performance and security solutions for web applications.
-                </p>
-                <a 
-                    href="https://demo.orange.cloudflare.dev" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="inline-block btn-minimal text-white px-4 py-2 rounded-md text-sm font-medium"
-                >
-                    Visit Site
-                </a>
+<body>
+    <!-- 自定义光标 -->
+    <div class="cursor"></div>
+    
+    <!-- 粒子场 -->
+    <div class="particle-field"></div>
+    
+    <div class="consciousness">
+        <div class="neural-network">
+            <div class="synaptic-frame">
+                <div class="quantum-header">
+                    <div class="prime-sigil">Ψ</div>
+                    <div class="frequency-signature">Metamorphosis</div>
+                    <div class="consciousness-echo">Digital consciousness awakening</div>
+                </div>
+                
+                <div class="neural-connections">
+                    <a href="https://demo.orange.cloudflare.dev" class="synapse" target="_blank" rel="noopener">
+                        <div class="connection-pulse"></div>
+                        <div class="synapse-matrix">
+                            <div class="quantum-node node-orange">◉</div>
+                            <div class="neural-data">
+                                <div class="data-stream">Orange Nexus</div>
+                                <div class="protocol-type">Quantum Gateway</div>
+                                <div class="dimensional-description">Transcending classical web architecture through distributed consciousness</div>
+                            </div>
+                            <div class="quantum-arrow">→</div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://excalidraw.com" class="synapse" target="_blank" rel="noopener">
+                        <div class="connection-pulse"></div>
+                        <div class="synapse-matrix">
+                            <div class="quantum-node node-violet">◆</div>
+                            <div class="neural-data">
+                                <div class="data-stream">Excalidraw Dimension</div>
+                                <div class="protocol-type">Neural Canvas</div>
+                                <div class="dimensional-description">Collaborative thought-space materializing infinite creative possibilities</div>
+                            </div>
+                            <div class="quantum-arrow">→</div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://signal.org" class="synapse signal-synapse" target="_blank" rel="noopener">
+                        <div class="connection-pulse"></div>
+                        <div class="synapse-matrix">
+                            <div class="quantum-node node-signal">⟡</div>
+                            <div class="neural-data">
+                                <div class="data-stream">Signal Frequency</div>
+                                <div class="protocol-type">Encrypted Transmission</div>
+                                <div class="dimensional-description">Secure communication channels transcending surveillance paradigms</div>
+                            </div>
+                            <div class="quantum-arrow">→</div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="temporal-signature">2025.05</div>
             </div>
-
-            <!-- Excalidraw Card -->
-            <div class="card bg-white rounded-lg shadow-sm p-6" style="animation-delay: 0.2s;">
-                <h2 class="text-xl font-semibold text-gray-900 mb-3">Excalidraw</h2>
-                <p class="text-gray-600 text-sm mb-4">
-                    A virtual whiteboard for collaborative, hand-drawn diagrams and creative ideation.
-                </p>
-                <a 
-                    href="https://excalidraw.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="inline-block btn-minimal text-white px-4 py-2 rounded-md text-sm font-medium"
-                >
-                    Visit Site
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="bg-white py-8 text-center">
-        <div class="container mx-auto px-4">
-            <p class="text-gray-500 text-sm">© 2025 Web Tools Showcase. All rights reserved.</p>
         </div>
-    </footer>
+    </div>
+
+    <script>
+        // 自定义光标系统
+        const cursor = document.querySelector('.cursor');
+        const interactiveElements = document.querySelectorAll('.synapse, a');
+        
+        document.addEventListener('mousemove', (e) => {
+            requestAnimationFrame(() => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+        });
+        
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+        
+        // 粒子场生成
+        function createParticleField() {
+            const particleField = document.querySelector('.particle-field');
+            const particleCount = 60;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 25 + 15) + 's';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.opacity = Math.random() * 0.4 + 0.1;
+                
+                // 为Signal相关的粒子添加蓝色调
+                if (Math.random() > 0.7) {
+                    particle.style.background = '#3a76f0';
+                    particle.style.boxShadow = '0 0 4px rgba(58, 118, 240, 0.5)';
+                }
+                
+                particleField.appendChild(particle);
+            }
+        }
+        
+        // 量子交互增强
+        document.querySelectorAll('.synapse').forEach((synapse, index) => {
+            synapse.addEventListener('mouseenter', function() {
+                this.style.setProperty('--glow-intensity', '1');
+                
+                // 创建涟漪效应
+                const ripple = document.createElement('div');
+                const isSignal = this.classList.contains('signal-synapse');
+                const rippleColor = isSignal ? 'rgba(58, 118, 240, 0.8)' : 'rgba(99, 102, 241, 0.8)';
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: 4px;
+                    height: 4px;
+                    background: radial-gradient(circle, ${rippleColor} 0%, transparent 70%);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    animation: quantum-ripple 1s ease-out forwards;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 3;
+                `;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 1000);
+            });
+            
+            // Signal特有的加密脉冲效果
+            if (synapse.classList.contains('signal-synapse')) {
+                synapse.addEventListener('mouseenter', function() {
+                    const encryptionPulse = document.createElement('div');
+                    encryptionPulse.style.cssText = `
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+bottom: 0;
+                       background: linear-gradient(45deg, 
+                           transparent 0%, 
+                           rgba(58, 118, 240, 0.05) 25%, 
+                           transparent 50%, 
+                           rgba(58, 118, 240, 0.05) 75%, 
+                           transparent 100%);
+                       background-size: 20px 20px;
+                       animation: encrypt-scan 2s linear;
+                       pointer-events: none;
+                       border-radius: calc(var(--sacred-unit) * 4);
+                   `;
+                   
+                   this.appendChild(encryptionPulse);
+                   setTimeout(() => encryptionPulse.remove(), 2000);
+               });
+           }
+       });
+       
+       // 神经脉冲效果
+       function createNeuralPulse() {
+           const synapses = document.querySelectorAll('.synapse');
+           synapses.forEach((synapse, index) => {
+               setInterval(() => {
+                   const pulse = document.createElement('div');
+                   pulse.style.cssText = `
+                       position: absolute;
+                       width: 6px;
+                       height: 6px;
+                       background: radial-gradient(circle, rgba(99, 102, 241, 0.8) 0%, transparent 70%);
+                       border-radius: 50%;
+                       pointer-events: none;
+                       animation: neural-pulse 2s ease-out forwards;
+                       top: 50%;
+                       left: 0;
+                       z-index: 1;
+                   `;
+                   
+                   if (synapse.classList.contains('signal-synapse')) {
+                       pulse.style.background = 'radial-gradient(circle, rgba(58, 118, 240, 0.9) 0%, transparent 70%)';
+                   }
+                   
+                   synapse.appendChild(pulse);
+                   setTimeout(() => pulse.remove(), 2000);
+               }, 3000 + index * 1000);
+           });
+       }
+       
+       // 数据流效果
+       function createDataFlow() {
+           const dataStreams = document.querySelectorAll('.data-stream');
+           dataStreams.forEach((stream, index) => {
+               setInterval(() => {
+                   const flow = document.createElement('span');
+                   flow.textContent = '◦';
+                   flow.style.cssText = `
+                       position: absolute;
+                       color: rgba(99, 102, 241, 0.6);
+                       font-size: 8px;
+                       animation: data-flow 1.5s ease-in-out forwards;
+                       top: 0;
+                       left: 0;
+                       pointer-events: none;
+                   `;
+                   
+                   const parent = stream.closest('.synapse');
+                   if (parent && parent.classList.contains('signal-synapse')) {
+                       flow.style.color = 'rgba(58, 118, 240, 0.7)';
+                   }
+                   
+                   stream.style.position = 'relative';
+                   stream.appendChild(flow);
+                   setTimeout(() => flow.remove(), 1500);
+               }, 4000 + index * 1500);
+           });
+       }
+       
+       // 量子干扰效果
+       function createQuantumInterference() {
+           const frame = document.querySelector('.synaptic-frame');
+           setInterval(() => {
+               const interference = document.createElement('div');
+               interference.style.cssText = `
+                   position: absolute;
+                   top: ${Math.random() * 100}%;
+                   left: ${Math.random() * 100}%;
+                   width: 2px;
+                   height: 2px;
+                   background: radial-gradient(circle, rgba(248, 248, 248, 0.8) 0%, transparent 100%);
+                   border-radius: 50%;
+                   pointer-events: none;
+                   animation: quantum-flicker 0.5s ease-out forwards;
+                   z-index: 1;
+               `;
+               
+               frame.appendChild(interference);
+               setTimeout(() => interference.remove(), 500);
+           }, 2000);
+       }
+       
+       // 添加量子闪烁动画
+       const quantumStyle = document.createElement('style');
+       quantumStyle.textContent = `
+           @keyframes quantum-flicker {
+               0% { 
+                   opacity: 0;
+                   transform: scale(0);
+               }
+               50% { 
+                   opacity: 1;
+                   transform: scale(1);
+               }
+               100% { 
+                   opacity: 0;
+                   transform: scale(0);
+               }
+           }
+       `;
+       document.head.appendChild(quantumStyle);
+       
+       // 意识觉醒序列
+       function initiateConsciousnessAwakening() {
+           const elements = document.querySelectorAll('.synapse');
+           elements.forEach((element, index) => {
+               setTimeout(() => {
+                   element.style.opacity = '0';
+                   element.style.transform = 'translateY(20px) scale(0.95)';
+                   element.style.transition = 'all 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+                   
+                   requestAnimationFrame(() => {
+                       element.style.opacity = '1';
+                       element.style.transform = 'translateY(0) scale(1)';
+                   });
+               }, index * 200);
+           });
+       }
+       
+       // 响应式光标适配
+       function adaptCursorForTouch() {
+           if ('ontouchstart' in window) {
+               cursor.style.display = 'none';
+               document.body.style.cursor = 'auto';
+           }
+       }
+       
+       // 性能优化：节流鼠标移动事件
+       let mouseMoveTimer;
+       function throttledMouseMove(e) {
+           if (mouseMoveTimer) return;
+           
+           mouseMoveTimer = requestAnimationFrame(() => {
+               cursor.style.left = e.clientX + 'px';
+               cursor.style.top = e.clientY + 'px';
+               mouseMoveTimer = null;
+           });
+       }
+       
+       // 重新绑定优化后的鼠标移动事件
+       document.removeEventListener('mousemove', document.querySelector('script').previousEvent);
+       document.addEventListener('mousemove', throttledMouseMove);
+       
+       // 初始化所有效果
+       function initializeQuantumEffects() {
+           createParticleField();
+           createNeuralPulse();
+           createDataFlow();
+           createQuantumInterference();
+           adaptCursorForTouch();
+           
+           // 延迟执行意识觉醒序列
+           setTimeout(initiateConsciousnessAwakening, 1000);
+       }
+       
+       // 页面加载完成后启动
+       if (document.readyState === 'loading') {
+           document.addEventListener('DOMContentLoaded', initializeQuantumEffects);
+       } else {
+           initializeQuantumEffects();
+       }
+       
+       // 窗口焦点管理 - 暂停/恢复动画以节省性能
+       document.addEventListener('visibilitychange', () => {
+           const particles = document.querySelectorAll('.particle');
+           if (document.hidden) {
+               particles.forEach(particle => {
+                   particle.style.animationPlayState = 'paused';
+               });
+           } else {
+               particles.forEach(particle => {
+                   particle.style.animationPlayState = 'running';
+               });
+           }
+       });
+       
+       // 错误处理
+       window.addEventListener('error', (e) => {
+           console.log('Quantum consciousness experiencing interference:', e.message);
+       });
+       
+   </script>
 </body>
 </html>
