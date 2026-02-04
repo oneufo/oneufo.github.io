@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2025年倒计时</title>
+    <title>2026年倒计时</title>
     <style>
         body {
             margin: 0;
@@ -94,7 +94,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>距离2025年结束还有</h1>
+        <h1>距离2026年结束还有</h1>
         <div class="countdown">
             <div class="time-box">
                 <div class="number" id="days">000</div>
@@ -123,33 +123,33 @@
     <script>
         function updateCountdown() {
             const now = new Date();
-            const year2025Start = new Date('2025-01-01T00:00:00');
-            const year2025End = new Date('2025-12-31T23:59:59.999');
+            const year2026Start = new Date('2026-01-01T00:00:00');
+            const year2026End = new Date('2026-12-31T23:59:59.999');
             
-            // 计算2025年的总毫秒数
-            const totalMilliseconds = year2025End - year2025Start;
+            // 计算2026年的总毫秒数
+            const totalMilliseconds = year2026End - year2026Start;
             
-            // 如果现在还没到2025年
-            if (now < year2025Start) {
+            // 如果现在还没到2026年
+            if (now < year2026Start) {
                 const progress = 0;
                 document.getElementById('progress').style.width = '0%';
-                document.getElementById('progress-text').textContent = '等待2025年开始';
+                document.getElementById('progress-text').textContent = '等待2026年开始';
             }
-            // 如果现在是2025年
-            else if (now >= year2025Start && now <= year2025End) {
-                const elapsedMilliseconds = now - year2025Start;
+            // 如果现在是2026年
+            else if (now >= year2026Start && now <= year2026End) {
+                const elapsedMilliseconds = now - year2026Start;
                 const progress = (elapsedMilliseconds / totalMilliseconds) * 100;
                 document.getElementById('progress').style.width = `${progress}%`;
                 document.getElementById('progress-text').textContent = `已完成 ${progress.toFixed(2)}%`;
             }
-            // 如果2025年已经结束
+            // 如果2026年已经结束
             else {
                 document.getElementById('progress').style.width = '100%';
-                document.getElementById('progress-text').textContent = '2025年已结束';
+                document.getElementById('progress-text').textContent = '2026年已结束';
             }
 
             // 计算倒计时
-            const remainingTime = year2025End - now;
+            const remainingTime = year2026End - now;
             
             if (remainingTime > 0) {
                 const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
