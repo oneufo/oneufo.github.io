@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>隐私DNS配置</title>
+    <title>Privacy DNS Configuration</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
@@ -12,55 +14,174 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 动态背景 */
+        body::before {
+            content: '';
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(168, 85, 247, 0.2) 0%, transparent 50%);
+            animation: gradientShift 15s ease infinite;
+            z-index: 0;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(5%, 5%) rotate(120deg); }
+            66% { transform: translate(-5%, 5%) rotate(240deg); }
+        }
+
+        /* 网格背景 */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 1;
+            pointer-events: none;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 40px;
-            max-width: 600px;
+            background: rgba(17, 17, 17, 0.7);
+            border-radius: 24px;
+            box-shadow: 
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            padding: 50px;
+            max-width: 700px;
             width: 100%;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(40px) saturate(180%);
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+            color: white;
         }
 
         h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 28px;
+            color: #ffffff;
+            margin-bottom: 12px;
+            font-size: 32px;
             font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .subtitle {
+            color: #888;
+            font-size: 15px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 16px;
             text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(102, 126, 234, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 11px;
             color: #666;
-            margin-bottom: 30px;
-            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .dns-grid {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 40px;
         }
 
         .dns-card {
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-        }
-
-        .dns-card:hover {
-            border-color: #667eea;
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
-            transform: translateY(-2px);
+            cursor: pointer;
         }
 
         .dns-card::before {
@@ -68,232 +189,566 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
 
-        .dns-header {
+        .dns-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .dns-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(102, 126, 234, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 
+                0 0 0 1px rgba(102, 126, 234, 0.2),
+                0 20px 40px rgba(102, 126, 234, 0.15);
+        }
+
+        .dns-card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
-        .dns-label {
-            font-size: 12px;
+        .dns-provider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .provider-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .provider-info {
+            flex: 1;
+        }
+
+        .provider-name {
+            font-size: 13px;
             font-weight: 600;
-            color: #667eea;
+            color: #999;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-bottom: 2px;
         }
 
-        .dns-type {
+        .provider-location {
             font-size: 11px;
-            background: #f0f0f0;
             color: #666;
-            padding: 4px 10px;
-            border-radius: 12px;
+        }
+
+        .dns-type-badge {
+            background: rgba(102, 126, 234, 0.15);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            color: #a5b4fc;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 11px;
             font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .dns-address-container {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .dns-card:hover .dns-address-container {
+            background: rgba(0, 0, 0, 0.4);
+            border-color: rgba(102, 126, 234, 0.2);
         }
 
         .dns-address {
-            font-size: 24px;
-            font-weight: 700;
-            color: #333;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 1px;
-            word-break: break-all;
-            margin-bottom: 10px;
-        }
-
-        .dns-info {
-            font-size: 13px;
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .copy-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 12px;
+            font-size: 20px;
             font-weight: 600;
+            color: #ffffff;
+            font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+            letter-spacing: 0.5px;
+            flex: 1;
+        }
+
+        .copy-icon-btn {
+            background: transparent;
+            border: none;
+            color: #666;
             cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
             transition: all 0.3s ease;
-            margin-top: 10px;
-            display: inline-flex;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-icon-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #a5b4fc;
+        }
+
+        .copy-icon-btn.copied {
+            color: #10b981;
+        }
+
+        .dns-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .feature-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #888;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 500;
+            display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        .copy-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        .feature-tag svg {
+            width: 12px;
+            height: 12px;
         }
 
-        .copy-btn:active {
-            transform: scale(0.98);
+        .copy-full-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
         }
 
-        .copy-btn.copied {
-            background: #10b981;
+        .copy-full-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+        }
+
+        .copy-full-btn:active {
+            transform: translateY(0);
+        }
+
+        .copy-full-btn.copied {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
         }
 
         .footer {
             text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #e0e0e0;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-text {
             color: #666;
             font-size: 13px;
+            line-height: 1.8;
+            margin-bottom: 20px;
         }
 
-        .icon {
-            width: 16px;
-            height: 16px;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
-        @media (max-width: 600px) {
+        .footer-link {
+            color: #888;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-link:hover {
+            color: #a5b4fc;
+        }
+
+        /* 通知提示 */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(17, 17, 17, 0.95);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-icon {
+            width: 20px;
+            height: 20px;
+            color: #10b981;
+        }
+
+        @media (max-width: 768px) {
             .container {
-                padding: 25px;
+                padding: 30px 25px;
             }
 
             h1 {
-                font-size: 24px;
+                font-size: 26px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+
+            .stat-card {
+                padding: 12px;
+            }
+
+            .stat-value {
+                font-size: 20px;
             }
 
             .dns-address {
-                font-size: 18px;
+                font-size: 16px;
+            }
+
+            .provider-icon {
+                width: 32px;
+                height: 32px;
             }
         }
 
-        .tooltip {
-            position: relative;
-            display: inline-block;
+        /* 脉冲动画 */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px 10px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 12px;
-            white-space: nowrap;
-        }
-
-        .tooltip .tooltiptext::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #333 transparent transparent transparent;
-        }
-
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+        .loading {
+            animation: pulse 2s ease-in-out infinite;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🔒 隐私DNS配置</h1>
-        <p class="subtitle">无日志 · 无审查 · 高隐私</p>
-
-        <!-- DNS Card 1 -->
-        <div class="dns-card">
-            <div class="dns-header">
-                <span class="dns-label">Quad9 无过滤版</span>
-                <span class="dns-type">IPv4</span>
-            </div>
-            <div class="dns-address">9.9.9.10</div>
-            <div class="dns-info">瑞士运营 | 完全不过滤内容 | 无日志记录</div>
-            <button class="copy-btn" onclick="copyToClipboard('9.9.9.10', this)">
-                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+        <div class="header">
+            <div class="logo">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                 </svg>
-                复制地址
-            </button>
+            </div>
+            <h1>Privacy DNS Configuration</h1>
+            <p class="subtitle">Zero-Log · Uncensored · Maximum Privacy</p>
         </div>
 
-        <!-- DNS Card 2 -->
-        <div class="dns-card">
-            <div class="dns-header">
-                <span class="dns-label">UncensoredDNS</span>
-                <span class="dns-type">IPv4</span>
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value">0</div>
+                <div class="stat-label">Logs</div>
             </div>
-            <div class="dns-address">91.239.100.100</div>
-            <div class="dns-info">丹麦运营 | 反审查专用 | 零日志政策</div>
-            <button class="copy-btn" onclick="copyToClipboard('91.239.100.100', this)">
-                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                </svg>
-                复制地址
-            </button>
+            <div class="stat-card">
+                <div class="stat-value">4</div>
+                <div class="stat-label">Servers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">∞</div>
+                <div class="stat-label">Privacy</div>
+            </div>
         </div>
 
-        <!-- DNS Card 3 -->
-        <div class="dns-card">
-            <div class="dns-header">
-                <span class="dns-label">Quad9 无过滤版</span>
-                <span class="dns-type">IPv6</span>
-            </div>
-            <div class="dns-address">2620:fe::10</div>
-            <div class="dns-info">IPv6支持 | 现代化协议 | 高隐私保护</div>
-            <button class="copy-btn" onclick="copyToClipboard('2620:fe::10', this)">
-                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                </svg>
-                复制地址
-            </button>
-        </div>
+        <div class="dns-grid">
+            <!-- DNS Card 1 -->
+            <div class="dns-card">
+                <div class="dns-card-header">
+                    <div class="dns-provider">
+                        <div class="provider-icon">9️⃣</div>
+                        <div class="provider-info">
+                            <div class="provider-name">Quad9 Unfiltered</div>
+                            <div class="provider-location">🇨🇭 Switzerland</div>
+                        </div>
+                    </div>
+                    <div class="dns-type-badge">IPv4</div>
+                </div>
+                
+                <div class="dns-address-container">
+                    <div class="dns-address">9.9.9.10</div>
+                    <button class="copy-icon-btn" onclick="copyAddress('9.9.9.10', this)">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                    </button>
+                </div>
 
-        <!-- DNS Card 4 -->
-        <div class="dns-card">
-            <div class="dns-header">
-                <span class="dns-label">UncensoredDNS</span>
-                <span class="dns-type">IPv6</span>
+                <div class="dns-features">
+                    <div class="feature-tag">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        No Filtering
+                    </div>
+                    <div class="feature-tag">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                        Zero Logs
+                    </div>
+                    <div class="feature-tag">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        Fast
+                    </div>
+                </div>
+
+                <button class="copy-full-btn" onclick="copyFull('9.9.9.10', this)">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                    Copy Address
+                </button>
             </div>
-            <div class="dns-address">2a01:3a0:53:53::</div>
-            <div class="dns-info">备用IPv6服务器 | 全球可用 | 匿名保护</div>
-            <button class="copy-btn" onclick="copyToClipboard('2a01:3a0:53:53::', this)">
-                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                </svg>
-                复制地址
-            </button>
+
+            <!-- DNS Card 2 -->
+            <div class="dns-card">
+                <div class="dns-card-header">
+                    <div class="dns-provider">
+                        <div class="provider-icon">🔓</div>
+                        <div class="provider-info">
+                            <div class="provider-name">UncensoredDNS</div>
+                            <div class="provider-location">🇩🇰 Denmark</div>
+                        </div>
+                    </div>
+                    <div class="dns-type-badge">IPv4</div>
+                </div>
+                
+                <div class="dns-address-container">
+                    <div class="dns-address">91.239.100.100</div>
+                    <button class="copy-icon-btn" onclick="copyAddress('91.239.100.100', this)">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="dns-features">
+                    <div class="feature-tag">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Anti-Censorship
+                    </div>
+                    <div class="feature-tag">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                        Anonymous
+                    </div>
+                </div>
+
+                <button class="copy-full-btn" onclick="copyFull('91.239.100.100', this)">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                    Copy Address
+                </button>
+            </div>
+
+            <!-- DNS Card 3 -->
+            <div class="dns-card">
+                <div class="dns-card-header">
+                    <div class="dns-provider">
+                        <div class="provider-icon">9️⃣</div>
+                        <div class="provider-info">
+                            <div class="provider-name">Quad9 Unfiltered</div>
+                            <div class="provider-location">🇨🇭 Switzerland</div>
+                        </div>
+                    </div>
+                    <div class="dns-type-badge">IPv6</div>
+                </div>
+                
+                <div class="dns-address-container">
+                    <div class="dns-address">2620:fe::10</div>
+                    <button class="copy-icon-btn" onclick="copyAddress('2620:fe::10', this)">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="dns-features">
+                    <div class="feature-tag">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                        </svg>
+                        IPv6 Ready
+                    </div>
+                    <div class="feature-tag">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                        Secure
+                    </div>
+                </div>
+
+                <button class="copy-full-btn" onclick="copyFull('2620:fe::10', this)">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                    Copy Address
+                </button>
+            </div>
+
+            <!-- DNS Card 4 -->
+            <div class="dns-card">
+                <div class="dns-card-header">
+                    <div class="dns-provider">
+                        <div class="provider-icon">🔓</div>
+                        <div class="provider-info">
+                            <div class="provider-name">UncensoredDNS</div>
+                            <div class="provider-location">🇩🇰 Denmark</div>
+                        </div>
+                    </div>
+                    <div class="dns-type-badge">IPv6</div>
+                </div>
+                
+                <div class="dns-address-container">
+                    <div class="dns-address">2a01:3a0:53:53::</div>
+                    <button class="copy-icon-btn" onclick="copyAddress('2a01:3a0:53:53::', this)">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="dns-features">
+                    <div class="feature-tag">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                        </svg>
+                        Global
+                    </div>
+                    <div class="feature-tag">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                        </svg>
+                        Modern Protocol
+                    </div>
+                </div>
+
+                <button class="copy-full-btn" onclick="copyFull('2a01:3a0:53:53::', this)">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                    Copy Address
+                </button>
+            </div>
         </div>
 
         <div class="footer">
-            💡 建议配合 DNS over HTTPS (DoH) 或 DNS over TLS (DoT) 使用以获得最佳隐私保护
+            <div class="footer-text">
+                💡 For maximum privacy, combine with DNS over HTTPS (DoH) or DNS over TLS (DoT)
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Documentation
+                </a>
+                <a href="#" class="footer-link">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    Setup Guide
+                </a>
+                <a href="#" class="footer-link">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                    Privacy Policy
+                </a>
+            </div>
         </div>
     </div>
 
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span id="toastText">Copied to clipboard!</span>
+    </div>
+
     <script>
-        function copyToClipboard(text, button) {
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toastText');
+            toastText.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function copyAddress(text, button) {
             navigator.clipboard.writeText(text).then(() => {
                 const originalHTML = button.innerHTML;
                 button.classList.add('copied');
                 button.innerHTML = `
-                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
-                    已复制
                 `;
                 
                 setTimeout(() => {
@@ -301,9 +756,48 @@
                     button.innerHTML = originalHTML;
                 }, 2000);
             }).catch(err => {
-                alert('复制失败，请手动复制');
+                showToast('Copy failed');
             });
         }
+
+        function copyFull(text, button) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalHTML = button.innerHTML;
+                button.classList.add('copied');
+                button.innerHTML = `
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Copied!
+                `;
+                
+                showToast(`${text} copied to clipboard!`);
+                
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = originalHTML;
+                }, 2000);
+            }).catch(err => {
+                showToast('Copy failed');
+            });
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.dns-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                }, index * 100);
+            });
+        });
     </script>
 </body>
 </html>
