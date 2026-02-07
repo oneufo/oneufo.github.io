@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #fafaf9;
+            --color-text: #1a1a1a;
+            --color-text-secondary: #737373;
+            --color-border: #e5e5e5;
+            --color-accent: #1a1a1a;
+            --color-hover: #525252;
+            --color-success: #16a34a;
+            --color-danger: #dc2626;
+            --spacing-unit: 8px;
+            --transition: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', -apple-system, sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--color-text);
+            background: var(--color-bg);
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 10) calc(var(--spacing-unit) * 3);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            margin-bottom: calc(var(--spacing-unit) * 12);
+            padding-bottom: calc(var(--spacing-unit) * 6);
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            flex: 1;
+        }
+
+        .site-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            color: var(--color-text);
+        }
+
+        .site-description {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.02em;
+            font-weight: 300;
+        }
+
+        .admin-button {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 12px;
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+            background: transparent;
+            color: var(--color-text-secondary);
+            border: 1px solid var(--color-border);
+            cursor: pointer;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            transition: all 0.3s var(--transition);
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .admin-button:hover {
+            background: var(--color-accent);
+            color: var(--color-bg);
+            border-color: var(--color-accent);
+        }
+
+        /* Article List */
+        .article-list {
+            list-style: none;
+        }
+
+        .article-item {
+            padding: calc(var(--spacing-unit) * 3) 0;
+            border-bottom: 1px solid var(--color-border);
+            transition: all 0.3s var(--transition);
+            position: relative;
+        }
+
+        .article-item:last-child {
+            border-bottom: none;
+        }
+
+        .article-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 0;
+            background: var(--color-accent);
+            transition: height 0.3s var(--transition);
+        }
+
+        .article-item:hover::before {
+            height: 60%;
+        }
+
+        .article-link {
+            display: flex;
+            align-items: baseline;
+            gap: calc(var(--spacing-unit) * 3);
+            text-decoration: none;
+            color: var(--color-text);
+            transition: all 0.3s var(--transition);
+        }
+
+        .article-link:hover {
+            color: var(--color-hover);
+            transform: translateX(4px);
+        }
+
+        .article-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            min-width: 32px;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+
+        .article-title {
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            flex: 1;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: calc(var(--spacing-unit) * 8);
+            padding-top: calc(var(--spacing-unit) * 6);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .pagination button {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 13px;
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+            background: transparent;
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+            cursor: pointer;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            transition: all 0.3s var(--transition);
+            text-transform: uppercase;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background: var(--color-accent);
+            color: var(--color-bg);
+            border-color: var(--color-accent);
+            transform: translateY(-1px);
+        }
+
+        .pagination button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .page-info {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.05em;
+        }
+
+        /* Article Detail */
+        .article-detail {
+            display: none;
+            animation: fadeIn 0.5s var(--transition);
+        }
+
+        .article-detail.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 1);
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            margin-bottom: calc(var(--spacing-unit) * 8);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            transition: all 0.3s var(--transition);
+            text-transform: uppercase;
+        }
+
+        .back-button:hover {
+            color: var(--color-text);
+            transform: translateX(-4px);
+        }
+
+        .article-header {
+            margin-bottom: calc(var(--spacing-unit) * 6);
+            padding-bottom: calc(var(--spacing-unit) * 4);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .article-detail-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            color: var(--color-text);
+        }
+
+        .article-meta {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: calc(var(--spacing-unit) * 10);
+            color: var(--color-text);
+        }
+
+        .article-content p {
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        /* Comments Section */
+        .comments-section {
+            margin-top: calc(var(--spacing-unit) * 10);
+            padding-top: calc(var(--spacing-unit) * 8);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .comments-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            margin-bottom: calc(var(--spacing-unit) * 6);
+            color: var(--color-text);
+        }
+
+        .comment-form {
+            margin-bottom: calc(var(--spacing-unit) * 8);
+        }
+
+        .form-group {
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+            color: var(--color-text-secondary);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: calc(var(--spacing-unit) * 2);
+            border: 1px solid var(--color-border);
+            background: transparent;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 14px;
+            color: var(--color-text);
+            transition: all 0.3s var(--transition);
+            font-weight: 300;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            background: #ffffff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+            line-height: 1.6;
+        }
+
+        .submit-button {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 13px;
+            padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 4);
+            background: var(--color-accent);
+            color: var(--color-bg);
+            border: none;
+            cursor: pointer;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            transition: all 0.3s var(--transition);
+            text-transform: uppercase;
+        }
+
+        .submit-button:hover {
+            background: var(--color-hover);
+            transform: translateY(-1px);
+        }
+
+        .comments-list {
+            list-style: none;
+        }
+
+        .comment-item {
+            padding: calc(var(--spacing-unit) * 4) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .comment-item:last-child {
+            border-bottom: none;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .comment-author {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--color-text);
+            letter-spacing: 0.02em;
+        }
+
+        .comment-time {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.03em;
+        }
+
+        .comment-text {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--color-text);
+        }
+
+        .no-comments {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 8) 0;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            font-style: italic;
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            display: none;
+            animation: fadeIn 0.5s var(--transition);
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: calc(var(--spacing-unit) * 6);
+        }
+
+        .admin-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .btn {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 13px;
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+            border: 1px solid var(--color-border);
+            cursor: pointer;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            transition: all 0.3s var(--transition);
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-bg);
+            border-color: var(--color-accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-text);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-accent);
+            color: var(--color-bg);
+        }
+
+        .btn-danger {
+            background: var(--color-danger);
+            color: white;
+            border-color: var(--color-danger);
+        }
+
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
+
+        .btn-small {
+            font-size: 11px;
+            padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 2);
+        }
+
+        .admin-article-list {
+            list-style: none;
+        }
+
+        .admin-article-item {
+            padding: calc(var(--spacing-unit) * 3);
+            border: 1px solid var(--color-border);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s var(--transition);
+        }
+
+        .admin-article-item:hover {
+            border-color: var(--color-accent);
+        }
+
+        .admin-article-info {
+            flex: 1;
+        }
+
+        .admin-article-title {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: calc(var(--spacing-unit) * 1);
+        }
+
+        .admin-article-meta {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .admin-article-actions {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 1);
+        }
+
+        .editor-form {
+            margin-top: calc(var(--spacing-unit) * 6);
+        }
+
+        .editor-form .form-group input[type="text"] {
+            font-size: 16px;
+        }
+
+        .editor-form textarea {
+            min-height: 300px;
+            font-family: 'Work Sans', monospace;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 4);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Login */
+        .login-panel {
+            display: none;
+            max-width: 400px;
+            margin: 100px auto;
+        }
+
+        .login-panel.active {
+            display: block;
+        }
+
+        .login-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 6);
+        }
+
+        .alert {
+            padding: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            border: 1px solid;
+            font-size: 13px;
+        }
+
+        .alert-danger {
+            background: #fef2f2;
+            border-color: var(--color-danger);
+            color: var(--color-danger);
+        }
+
+        .alert-success {
+            background: #f0fdf4;
+            border-color: var(--color-success);
+            color: var(--color-success);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: calc(var(--spacing-unit) * 6) calc(var(--spacing-unit) * 2);
+            }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: calc(var(--spacing-unit) * 3);
+            }
+
+            .site-title {
+                font-size: 32px;
+            }
+
+            .article-detail-title {
+                font-size: 28px;
+            }
+
+            .admin-title {
+                font-size: 28px;
+            }
+
+            .admin-actions {
+                flex-direction: column;
+            }
+
+            .admin-article-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: calc(var(--spacing-unit) * 2);
+            }
+
+            .admin-article-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <h1 class="site-title">Minimal Blog</h1>
+                <p class="site-description">A space for thoughtful writing</p>
+            </div>
+            <a href="#" class="admin-button" onclick="showLogin(); return false;">Admin</a>
+        </header>
+
+        <!-- Home View -->
+        <div id="homeView" class="home-view">
+            <ul id="articleList" class="article-list"></ul>
+            <div class="pagination">
+                <button id="prevBtn" onclick="changePage(-1)">Previous</button>
+                <span id="pageInfo" class="page-info"></span>
+                <button id="nextBtn" onclick="changePage(1)">Next</button>
+            </div>
+        </div>
+
+        <!-- Article Detail -->
+        <div id="articleDetail" class="article-detail">
+            <a href="#" class="back-button" onclick="showHome(); return false;">← Back</a>
+            <div class="article-header">
+                <h2 id="articleTitle" class="article-detail-title"></h2>
+                <div class="article-meta">
+                    <span id="articleDate"></span>
+                </div>
+            </div>
+            <div id="articleContent" class="article-content"></div>
+
+            <div class="comments-section">
+                <h3 class="comments-title">Comments</h3>
+                <form class="comment-form" id="commentForm" onsubmit="submitComment(event)">
+                    <div class="form-group">
+                        <label for="commentName">Name (Optional)</label>
+                        <input type="text" id="commentName" placeholder="Anonymous">
+                    </div>
+                    <div class="form-group">
+                        <label for="commentText">Comment *</label>
+                        <textarea id="commentText" required placeholder="Share your thoughts..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Submit</button>
+                </form>
+                <ul id="commentsList" class="comments-list"></ul>
+            </div>
+        </div>
+
+        <!-- Login Panel -->
+        <div id="loginPanel" class="login-panel">
+            <h2 class="login-title">Admin Login</h2>
+            <div id="loginError" class="alert alert-danger hidden"></div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required placeholder="Enter admin password">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="button" class="btn btn-secondary" onclick="showHome()">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Admin Panel -->
+        <div id="adminPanel" class="admin-panel">
+            <div class="admin-header">
+                <h2 class="admin-title">Manage Articles</h2>
+                <div class="admin-actions">
+                    <button class="btn btn-primary" onclick="showEditor()">New Article</button>
+                    <button class="btn btn-secondary" onclick="logout()">Logout</button>
+                </div>
+            </div>
+
+            <!-- Article List -->
+            <div id="adminArticleList">
+                <ul id="adminArticles" class="admin-article-list"></ul>
+            </div>
+
+            <!-- Editor -->
+            <div id="editorPanel" class="hidden">
+                <h3 class="comments-title">Article Editor</h3>
+                <form class="editor-form" id="editorForm" onsubmit="saveArticle(event)">
+                    <input type="hidden" id="editArticleId">
+                    <div class="form-group">
+                        <label for="articleTitleInput">Title *</label>
+                        <input type="text" id="articleTitleInput" required placeholder="Article title">
+                    </div>
+                    <div class="form-group">
+                        <label for="articleContentInput">Content *</label>
+                        <textarea id="articleContentInput" required placeholder="Article content (use double line breaks for paragraphs)"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Article</button>
+                        <button type="button" class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 初始数据和配置
+        const ADMIN_PASSWORD = 'admin123'; // 请修改为你自己的密码
+        let articles = [];
+        let commentsData = {};
+        const itemsPerPage = 15;
+        let currentPage = 1;
+        let currentArticleId = null;
+        let isLoggedIn = false;
+        let editingArticleId = null;
+
+        // 初始化
+        function init() {
+            loadData();
+            renderArticleList();
+        }
+
+        // 加载数据
+        function loadData() {
+            const savedArticles = localStorage.getItem('blogArticles');
+            const savedComments = localStorage.getItem('blogComments');
+            
+            if (savedArticles) {
+                articles = JSON.parse(savedArticles);
+            } else {
+                // 初始示例文章
+                articles = [
+                    { 
+                        id: Date.now(), 
+                        title: "Welcome to Your Blog", 
+                        date: formatDate(new Date()),
+                        content: "This is your first article. You can edit or delete it from the admin panel.\n\nClick the 'Admin' button in the header to manage your blog. The default password is 'admin123' - make sure to change it in the code!"
+                    }
+                ];
+                saveArticles();
+            }
+            
+            if (savedComments) {
+                commentsData = JSON.parse(savedComments);
+            }
+        }
+
+        // 保存文章
+        function saveArticles() {
+            localStorage.setItem('blogArticles', JSON.stringify(articles));
+        }
+
+        // 保存评论
+        function saveComments() {
+            localStorage.setItem('blogComments', JSON.stringify(commentsData));
+        }
+
+        // 格式化日期
+        function formatDate(date) {
+            return new Date(date).toLocaleDateString('en-US', { 
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric'
+            });
+        }
+
+        // 渲染文章列表
+        function renderArticleList() {
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageArticles = articles.slice(startIndex, endIndex);
+            
+            const listHtml = pageArticles.map((article, index) => `
+                <li class="article-item">
+                    <a href="#" class="article-link" onclick="showArticle(${article.id}); return false;">
+                        <span class="article-number">${String(startIndex + index + 1).padStart(2, '0')}</span>
+                        <span class="article-title">${article.title}</span>
+                    </a>
+                </li>
+            `).join('');
+            
+            document.getElementById('articleList').innerHTML = listHtml || '<div class="no-comments">No articles yet.</div>';
+            updatePagination();
+        }
+
+        // 更新分页
+        function updatePagination() {
+            const totalPages = Math.ceil(articles.length / itemsPerPage);
+            document.getElementById('pageInfo').textContent = `${currentPage} / ${totalPages || 1}`;
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages || totalPages === 0;
+        }
+
+        // 翻页
+        function changePage(direction) {
+            currentPage += direction;
+            renderArticleList();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 显示文章详情
+        function showArticle(id) {
+            currentArticleId = id;
+            const article = articles.find(a => a.id === id);
+            
+            if (!article) return;
+            
+            hideAllViews();
+            document.getElementById('articleDetail').classList.add('active');
+            
+            document.getElementById('articleTitle').textContent = article.title;
+            document.getElementById('articleDate').textContent = article.date;
+            
+            const paragraphs = article.content.split('\n\n').map(p => `<p>${p}</p>`).join('');
+            document.getElementById('articleContent').innerHTML = paragraphs;
+            
+            renderComments(id);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 显示首页
+        function showHome() {
+            hideAllViews();
+            document.getElementById('homeView').style.display = 'block';
+            currentArticleId = null;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return false;
+        }
+
+        // 渲染评论
+        function renderComments(articleId) {
+            const comments = commentsData[articleId] || [];
+            const commentsList = document.getElementById('commentsList');
+            
+            if (comments.length === 0) {
+                commentsList.innerHTML = '<div class="no-comments">No comments yet. Be the first to share your thoughts.</div>';
+                return;
+            }
+            
+            const commentsHtml = comments.map(comment => `
+                <li class="comment-item">
+                    <div class="comment-header">
+                        <span class="comment-author">${comment.name}</span>
+                        <span class="comment-time">${comment.time}</span>
+                    </div>
+                    <div class="comment-text">${comment.text}</div>
+                </li>
+            `).join('');
+            
+            commentsList.innerHTML = commentsHtml;
+        }
+
+        // 提交评论
+        function submitComment(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('commentName').value.trim() || 'Anonymous';
+            const text = document.getElementById('commentText').value.trim();
+            
+            if (!text) return;
+            
+            const comment = {
+                name: name,
+                text: text,
+                time: formatDate(new Date())
+            };
+            
+            if (!commentsData[currentArticleId]) {
+                commentsData[currentArticleId] = [];
+            }
+            commentsData[currentArticleId].unshift(comment);
+            
+            saveComments();
+            document.getElementById('commentForm').reset();
+            renderComments(currentArticleId);
+        }
+
+        // 显示登录面板
+        function showLogin() {
+            if (isLoggedIn) {
+                showAdminPanel();
+            } else {
+                hideAllViews();
+                document.getElementById('loginPanel').classList.add('active');
+            }
+        }
+
+        // 处理登录
+        function handleLogin(event) {
+            event.preventDefault();
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('loginError');
+            
+            if (password === ADMIN_PASSWORD) {
+                isLoggedIn = true;
+                document.getElementById('loginForm').reset();
+                errorDiv.classList.add('hidden');
+                showAdminPanel();
+            } else {
+                errorDiv.textContent = 'Incorrect password';
+                errorDiv.classList.remove('hidden');
+            }
+        }
+
+        // 登出
+        function logout() {
+            isLoggedIn = false;
+            showHome();
+        }
+
+        // 显示管理面板
+        function showAdminPanel() {
+            hideAllViews();
+            document.getElementById('adminPanel').classList.add('active');
+            document.getElementById('adminArticleList').style.display = 'block';
+            document.getElementById('editorPanel').classList.add('hidden');
+            renderAdminArticles();
+        }
+
+        // 渲染管理文章列表
+        function renderAdminArticles() {
+            const listHtml = articles.map(article => `
+                <li class="admin-article-item">
+                    <div class="admin-article-info">
+                        <div class="admin-article-title">${article.title}</div>
+                        <div class="admin-article-meta">${article.date}</div>
+                    </div>
+                    <div class="admin-article-actions">
+                        <button class="btn btn-secondary btn-small" onclick="editArticle(${article.id})">Edit</button>
+                        <button class="btn btn-danger btn-small" onclick="deleteArticle(${article.id})">Delete</button>
+                    </div>
+                </li>
+            `).join('');
+            
+            document.getElementById('adminArticles').innerHTML = listHtml || '<div class="no-comments">No articles yet.</div>';
+        }
+
+        // 显示编辑器
+        function showEditor(articleId = null) {
+            document.getElementById('adminArticleList').style.display = 'none';
+            document.getElementById('editorPanel').classList.remove('hidden');
+            
+            if (articleId) {
+                const article = articles.find(a => a.id === articleId);
+                if (article) {
+                    editingArticleId = articleId;
+                    document.getElementById('editArticleId').value = articleId;
+                    document.getElementById('articleTitleInput').value = article.title;
+                    document.getElementById('articleContentInput').value = article.content;
+                }
+            } else {
+                editingArticleId = null;
+                document.getElementById('editorForm').reset();
+            }
+        }
+
+        // 编辑文章
+        function editArticle(id) {
+            showEditor(id);
+        }
+
+        // 保存文章
+        function saveArticle(event) {
+            event.preventDefault();
+            
+            const title = document.getElementById('articleTitleInput').value.trim();
+            const content = document.getElementById('articleContentInput').value.trim();
+            
+            if (!title || !content) return;
+            
+            if (editingArticleId) {
+                // 更新现有文章
+                const article = articles.find(a => a.id === editingArticleId);
+                if (article) {
+                    article.title = title;
+                    article.content = content;
+                }
+            } else {
+                // 创建新文章
+                const newArticle = {
+                    id: Date.now(),
+                    title: title,
+                    content: content,
+                    date: formatDate(new Date())
+                };
+                articles.unshift(newArticle);
+            }
+            
+            saveArticles();
+            document.getElementById('editorForm').reset();
+            showAdminPanel();
+        }
+
+        // 取消编辑
+        function cancelEdit() {
+            document.getElementById('editorForm').reset();
+            editingArticleId = null;
+            showAdminPanel();
+        }
+
+        // 删除文章
+        function deleteArticle(id) {
+            if (confirm('Are you sure you want to delete this article?')) {
+                articles = articles.filter(a => a.id !== id);
+                delete commentsData[id];
+                saveArticles();
+                saveComments();
+                renderAdminArticles();
+            }
+        }
+
+        // 隐藏所有视图
+        function hideAllViews() {
+            document.getElementById('homeView').style.display = 'none';
+            document.getElementById('articleDetail').classList.remove('active');
+            document.getElementById('loginPanel').classList.remove('active');
+            document.getElementById('adminPanel').classList.remove('active');
+        }
+
+        // 页面加载时初始化
+        init();
+    </script>
+</body>
+</html>
