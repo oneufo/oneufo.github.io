@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNS Configuration</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #fafafa;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+            color: #1a1a1a;
+        }
+
+        .container {
+            max-width: 540px;
+            width: 100%;
+        }
+
+        .header {
+            margin-bottom: 60px;
+        }
+
+        .title {
+            font-size: 13px;
+            font-weight: 500;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 32px;
+            font-weight: 300;
+            color: #1a1a1a;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+        }
+
+        .dns-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: #e5e5e5;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .dns-item {
+            background: #fff;
+            padding: 28px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .dns-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #1a1a1a;
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .dns-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .dns-item:hover {
+            padding-left: 40px;
+        }
+
+        .dns-content {
+            flex: 1;
+        }
+
+        .dns-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+        }
+
+        .dns-address {
+            font-size: 18px;
+            font-weight: 400;
+            color: #1a1a1a;
+            font-family: 'SF Mono', Monaco, monospace;
+            letter-spacing: 0.3px;
+        }
+
+        .dns-meta {
+            font-size: 11px;
+            color: #bbb;
+            margin-top: 4px;
+            font-weight: 400;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid #e5e5e5;
+            color: #999;
+            padding: 8px 16px;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+        }
+
+        .copy-btn:hover {
+            border-color: #1a1a1a;
+            color: #1a1a1a;
+        }
+
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+
+        .copy-btn.copied {
+            border-color: #1a1a1a;
+            color: #1a1a1a;
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .info {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: #e5e5e5;
+            margin: 40px auto;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 40px 20px;
+            }
+
+            .header {
+                margin-bottom: 40px;
+            }
+
+            .subtitle {
+                font-size: 24px;
+            }
+
+            .dns-item {
+                padding: 24px 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .dns-item:hover {
+                padding-left: 28px;
+            }
+
+            .dns-address {
+                font-size: 16px;
+            }
+
+            .copy-btn {
+                align-self: stretch;
+                padding: 10px 16px;
+            }
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1a1a1a;
+            color: #fff;
+            padding: 16px 28px;
+            border-radius: 2px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* 加载动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dns-item {
+            animation: fadeInUp 0.5s ease backwards;
+        }
+
+        .dns-item:nth-child(1) { animation-delay: 0.1s; }
+        .dns-item:nth-child(2) { animation-delay: 0.2s; }
+        .dns-item:nth-child(3) { animation-delay: 0.3s; }
+        .dns-item:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">Privacy DNS</div>
+            <div class="subtitle">Zero-log, uncensored DNS servers</div>
+        </div>
+
+        <div class="dns-list">
+            <div class="dns-item" onclick="copyDNS('9.9.9.10', this)">
+                <div class="dns-content">
+                    <div class="dns-label">Quad9 · Switzerland</div>
+                    <div class="dns-address">9.9.9.10</div>
+                    <div class="dns-meta">IPv4 · Unfiltered</div>
+                </div>
+                <button class="copy-btn" onclick="event.stopPropagation(); copyDNS('9.9.9.10', this);">Copy</button>
+            </div>
+
+            <div class="dns-item" onclick="copyDNS('91.239.100.100', this)">
+                <div class="dns-content">
+                    <div class="dns-label">UncensoredDNS · Denmark</div>
+                    <div class="dns-address">91.239.100.100</div>
+                    <div class="dns-meta">IPv4 · Anycast</div>
+                </div>
+                <button class="copy-btn" onclick="event.stopPropagation(); copyDNS('91.239.100.100', this);">Copy</button>
+            </div>
+
+            <div class="dns-item" onclick="copyDNS('2620:fe::10', this)">
+                <div class="dns-content">
+                    <div class="dns-label">Quad9 · Switzerland</div>
+                    <div class="dns-address">2620:fe::10</div>
+                    <div class="dns-meta">IPv6 · Unfiltered</div>
+                </div>
+                <button class="copy-btn" onclick="event.stopPropagation(); copyDNS('2620:fe::10', this);">Copy</button>
+            </div>
+
+            <div class="dns-item" onclick="copyDNS('2a01:3a0:53:53::', this)">
+                <div class="dns-content">
+                    <div class="dns-label">UncensoredDNS · Denmark</div>
+                    <div class="dns-address">2a01:3a0:53:53::</div>
+                    <div class="dns-meta">IPv6 · Unicast</div>
+                </div>
+                <button class="copy-btn" onclick="event.stopPropagation(); copyDNS('2a01:3a0:53:53::', this);">Copy</button>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="info">
+            Combine with DNS over HTTPS or DNS over TLS<br>
+            for enhanced privacy protection
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        function copyDNS(address, element) {
+            navigator.clipboard.writeText(address).then(() => {
+                // 找到按钮元素
+                const button = element.tagName === 'BUTTON' ? element : element.querySelector('.copy-btn');
+                const originalText = button.textContent;
+                
+                button.classList.add('copied');
+                button.textContent = 'Copied';
+                
+                showToast(address);
+                
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.textContent = originalText;
+                }, 1500);
+            }).catch(err => {
+                showToast('Copy failed');
+            });
+        }
+
+        // 阻止点击事件冒泡
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>
