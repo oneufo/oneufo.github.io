@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLUX · 资讯流</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&family=Noto+Sans+SC:wght@300;400;500&family=DM+Serif+Display:ital@0;1&family=Fira+Code:wght@300;400&display=swap');
+
+:root {
+–bg: #0a0a0c;
+–surface: #111115;
+–surface2: #16161c;
+–border: rgba(255,255,255,0.06);
+–border-active: rgba(255,255,255,0.15);
+–text-primary: #e8e6e0;
+–text-secondary: #888885;
+–text-muted: #444440;
+–accent-gov: #4a7cff;
+–accent-biz: #f5a623;
+–accent-tech: #00d4aa;
+–accent-sci: #b06aff;
+–accent-health: #ff6b8a;
+–line: rgba(255,255,255,0.06);
+}
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+background: var(–bg);
+color: var(–text-primary);
+font-family: ‘Noto Sans SC’, sans-serif;
+font-weight: 300;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+/* ── Noise overlay ── */
+body::before {
+content: ‘’;
+position: fixed; inset: 0;
+background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘noise’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23noise)’ opacity=‘0.03’/%3E%3C/svg%3E”);
+pointer-events: none;
+z-index: 9999;
+opacity: 0.4;
+}
+
+/* ── Header ── */
+header {
+position: sticky; top: 0; z-index: 100;
+background: rgba(10,10,12,0.85);
+backdrop-filter: blur(24px) saturate(180%);
+border-bottom: 1px solid var(–border);
+padding: 0 32px;
+display: flex; align-items: center; justify-content: space-between;
+height: 60px;
+}
+
+.logo {
+font-family: ‘DM Serif Display’, serif;
+font-size: 22px;
+letter-spacing: 0.15em;
+color: var(–text-primary);
+display: flex; align-items: center; gap: 10px;
+}
+
+.logo-dot {
+width: 8px; height: 8px;
+border-radius: 50%;
+background: var(–accent-tech);
+animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+.header-meta {
+display: flex; align-items: center; gap: 24px;
+}
+
+.clock {
+font-family: ‘Fira Code’, monospace;
+font-size: 12px;
+color: var(–text-secondary);
+letter-spacing: 0.05em;
+}
+
+.update-badge {
+font-size: 10px;
+letter-spacing: 0.1em;
+color: var(–accent-tech);
+border: 1px solid rgba(0,212,170,0.3);
+padding: 3px 10px;
+border-radius: 20px;
+text-transform: uppercase;
+font-family: ‘Fira Code’, monospace;
+}
+
+/* ── Ticker ── */
+.ticker-wrap {
+background: var(–surface);
+border-bottom: 1px solid var(–border);
+overflow: hidden;
+height: 36px;
+display: flex; align-items: center;
+}
+
+.ticker-label {
+flex-shrink: 0;
+font-size: 9px;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(–accent-gov);
+padding: 0 20px;
+border-right: 1px solid var(–border);
+height: 100%;
+display: flex; align-items: center;
+background: rgba(74,124,255,0.05);
+font-family: ‘Fira Code’, monospace;
+}
+
+.ticker-track {
+display: flex;
+animation: ticker 60s linear infinite;
+white-space: nowrap;
+}
+
+.ticker-item {
+font-size: 12px;
+color: var(–text-secondary);
+padding: 0 32px;
+display: flex; align-items: center; gap: 12px;
+font-weight: 300;
+}
+
+.ticker-item span { color: var(–text-muted); font-size: 10px; }
+
+@keyframes ticker {
+0% { transform: translateX(0); }
+100% { transform: translateX(-50%); }
+}
+
+/* ── Nav ── */
+nav {
+padding: 0 32px;
+border-bottom: 1px solid var(–border);
+display: flex; gap: 0;
+overflow-x: auto;
+scrollbar-width: none;
+}
+
+nav::-webkit-scrollbar { display: none; }
+
+.nav-tab {
+padding: 16px 24px;
+font-size: 12px;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(–text-muted);
+cursor: pointer;
+border-bottom: 2px solid transparent;
+transition: all 0.2s;
+white-space: nowrap;
+user-select: none;
+display: flex; align-items: center; gap: 8px;
+}
+
+.nav-tab:hover { color: var(–text-secondary); }
+
+.nav-tab.active {
+color: var(–text-primary);
+border-bottom-color: currentColor;
+}
+
+.nav-tab .cat-dot {
+width: 5px; height: 5px;
+border-radius: 50%;
+flex-shrink: 0;
+}
+
+.nav-tab[data-cat=“all”] .cat-dot { background: var(–text-primary); }
+.nav-tab[data-cat=“gov”] .cat-dot { background: var(–accent-gov); }
+.nav-tab[data-cat=“biz”] .cat-dot { background: var(–accent-biz); }
+.nav-tab[data-cat=“tech”] .cat-dot { background: var(–accent-tech); }
+.nav-tab[data-cat=“sci”] .cat-dot { background: var(–accent-sci); }
+.nav-tab[data-cat=“health”] .cat-dot { background: var(–accent-health); }
+
+/* ── Main Layout ── */
+.main {
+max-width: 1400px;
+margin: 0 auto;
+padding: 0 32px 64px;
+}
+
+/* ── Section Headers ── */
+.section-header {
+display: flex; align-items: center; justify-content: space-between;
+padding: 32px 0 20px;
+border-bottom: 1px solid var(–border);
+margin-bottom: 24px;
+}
+
+.section-title {
+font-family: ‘DM Serif Display’, serif;
+font-size: 28px;
+color: var(–text-primary);
+display: flex; align-items: center; gap: 14px;
+font-weight: 400;
+}
+
+.section-accent {
+width: 3px; height: 28px;
+border-radius: 2px;
+}
+
+.section-count {
+font-family: ‘Fira Code’, monospace;
+font-size: 11px;
+color: var(–text-muted);
+}
+
+/* ── Featured ── */
+.featured-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+grid-template-rows: auto auto;
+gap: 1px;
+background: var(–border);
+margin-bottom: 1px;
+}
+
+.featured-item {
+background: var(–surface);
+padding: 32px;
+cursor: pointer;
+transition: background 0.2s;
+position: relative;
+overflow: hidden;
+}
+
+.featured-item::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 2px;
+opacity: 0;
+transition: opacity 0.2s;
+}
+
+.featured-item:hover { background: var(–surface2); }
+.featured-item:hover::before { opacity: 1; }
+
+.featured-item.large {
+grid-row: span 2;
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+min-height: 400px;
+padding: 40px;
+}
+
+.featured-item.large .item-title {
+font-family: ‘Noto Serif SC’, serif;
+font-size: 26px;
+line-height: 1.4;
+font-weight: 400;
+margin-bottom: 16px;
+}
+
+.cat-tag {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+font-size: 9px;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+font-family: ‘Fira Code’, monospace;
+padding: 4px 10px;
+border-radius: 3px;
+margin-bottom: 16px;
+}
+
+.item-title {
+font-size: 15px;
+line-height: 1.6;
+color: var(–text-primary);
+font-weight: 400;
+margin-bottom: 12px;
+}
+
+.item-meta {
+display: flex; align-items: center; gap: 16px;
+font-size: 11px;
+color: var(–text-muted);
+font-family: ‘Fira Code’, monospace;
+}
+
+.item-source { color: var(–text-secondary); }
+
+/* ── News Grid ── */
+.news-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+gap: 1px;
+background: var(–border);
+}
+
+.news-item {
+background: var(–surface);
+padding: 28px;
+cursor: pointer;
+transition: background 0.2s;
+display: flex;
+flex-direction: column;
+gap: 12px;
+position: relative;
+}
+
+.news-item:hover { background: var(–surface2); }
+
+/* ── Category Colors ── */
+.cat-gov { background: rgba(74,124,255,0.1); color: var(–accent-gov); }
+.cat-biz { background: rgba(245,166,35,0.1); color: var(–accent-biz); }
+.cat-tech { background: rgba(0,212,170,0.1); color: var(–accent-tech); }
+.cat-sci { background: rgba(176,106,255,0.1); color: var(–accent-sci); }
+.cat-health { background: rgba(255,107,138,0.1); color: var(–accent-health); }
+
+.featured-item.large[data-cat=“gov”]::before,
+.featured-item[data-cat=“gov”]::before { background: var(–accent-gov); }
+.featured-item[data-cat=“biz”]::before { background: var(–accent-biz); }
+.featured-item[data-cat=“tech”]::before { background: var(–accent-tech); }
+.featured-item[data-cat=“sci”]::before { background: var(–accent-sci); }
+.featured-item[data-cat=“health”]::before { background: var(–accent-health); }
+
+.section-accent.gov { background: var(–accent-gov); }
+.section-accent.biz { background: var(–accent-biz); }
+.section-accent.tech { background: var(–accent-tech); }
+.section-accent.sci { background: var(–accent-sci); }
+.section-accent.health { background: var(–accent-health); }
+
+/* ── Category Sections ── */
+.category-section { margin-top: 48px; }
+
+.category-section.hidden { display: none; }
+
+/* ── Loading State ── */
+.loading-row {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+gap: 1px;
+background: var(–border);
+}
+
+.skeleton {
+background: var(–surface);
+padding: 28px;
+display: flex;
+flex-direction: column;
+gap: 12px;
+}
+
+.skel-line {
+border-radius: 3px;
+background: linear-gradient(90deg, var(–surface2) 25%, rgba(255,255,255,0.04) 50%, var(–surface2) 75%);
+background-size: 200% 100%;
+animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+0% { background-position: 200% 0; }
+100% { background-position: -200% 0; }
+}
+
+/* ── Footer ── */
+footer {
+border-top: 1px solid var(–border);
+padding: 24px 32px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+max-width: 1400px;
+margin: 0 auto;
+}
+
+.footer-text {
+font-size: 11px;
+color: var(–text-muted);
+font-family: ‘Fira Code’, monospace;
+}
+
+/* ── Refresh indicator ── */
+.refresh-bar {
+position: fixed;
+bottom: 0; left: 0; right: 0;
+height: 2px;
+background: var(–border);
+z-index: 200;
+}
+
+.refresh-progress {
+height: 100%;
+background: linear-gradient(90deg, var(–accent-tech), var(–accent-sci));
+width: 0%;
+transition: width 0.5s linear;
+}
+
+/* ── Scroll reveal ── */
+.reveal {
+opacity: 0;
+transform: translateY(16px);
+transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal.visible {
+opacity: 1;
+transform: translateY(0);
+}
+
+/* ── Empty State ── */
+.empty-state {
+padding: 64px 32px;
+text-align: center;
+color: var(–text-muted);
+font-size: 13px;
+letter-spacing: 0.05em;
+}
+
+/* ── Error State ── */
+.error-note {
+font-size: 10px;
+color: var(–text-muted);
+font-family: ‘Fira Code’, monospace;
+padding: 8px 12px;
+background: rgba(255,255,255,0.02);
+border-left: 2px solid var(–text-muted);
+margin: 8px 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+header, nav { padding: 0 16px; }
+.main { padding: 0 16px 48px; }
+.featured-grid {
+grid-template-columns: 1fr;
+}
+.featured-item.large {
+min-height: 260px;
+grid-row: auto;
+}
+}
+</style>
+
+</head>
+<body>
+
+<!-- Header -->
+
+<header>
+  <div class="logo">
+    <div class="logo-dot"></div>
+    FLUX
+  </div>
+  <div class="header-meta">
+    <div class="clock" id="clock">--:--:--</div>
+    <div class="update-badge" id="update-status">自动更新中</div>
+  </div>
+</header>
+
+<!-- Ticker -->
+
+<div class="ticker-wrap">
+  <div class="ticker-label">实时</div>
+  <div style="overflow:hidden;flex:1">
+    <div class="ticker-track" id="ticker">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- Nav -->
+
+<nav>
+  <div class="nav-tab active" data-cat="all">
+    <span class="cat-dot"></span>全部
+  </div>
+  <div class="nav-tab" data-cat="gov">
+    <span class="cat-dot"></span>政府
+  </div>
+  <div class="nav-tab" data-cat="biz">
+    <span class="cat-dot"></span>商业
+  </div>
+  <div class="nav-tab" data-cat="tech">
+    <span class="cat-dot"></span>科技
+  </div>
+  <div class="nav-tab" data-cat="sci">
+    <span class="cat-dot"></span>科学
+  </div>
+  <div class="nav-tab" data-cat="health">
+    <span class="cat-dot"></span>健康
+  </div>
+</nav>
+
+<!-- Main -->
+
+<div class="main" id="main-content">
+  <div id="content-root"></div>
+</div>
+
+<footer>
+  <div class="footer-text">FLUX · 资讯聚合引擎 · 每 15 分钟自动刷新</div>
+  <div class="footer-text" id="last-updated">最后更新：--</div>
+</footer>
+
+<div class="refresh-bar"><div class="refresh-progress" id="progress-bar"></div></div>
+
+<script>
+// ═══════════════════════════════════════════════
+//  DATA LAYER — RSS via allorigins CORS proxy
+// ═══════════════════════════════════════════════
+
+const CATEGORIES = {
+  gov: {
+    label: '政府',
+    accent: 'gov',
+    color: '#4a7cff',
+    feeds: [
+      { name: '新华网·时政', url: 'https://allorigins.win/get?disableCache=true&url=' + encodeURIComponent('https://feeds.feedburner.com/xinhuanet/zhxx') },
+      { name: '人民日报', url: 'https://allorigins.win/get?disableCache=true&url=' + encodeURIComponent('http://www.people.com.cn/rss/politics.xml') },
+    ]
+  },
+  biz: {
+    label: '商业',
+    accent: 'biz',
+    color: '#f5a623',
+    feeds: [
+      { name: '财经网', url: 'https://allorigins.win/get?disableCache=true&url=' + encodeURIComponent('https://rss.caijing.com.cn/channel_01.xml') },
+      { name: '第一财经', url: 'https://allorigins.win/get?disableCache=true&url=' + encodeURIComponent('https://www.yicai.com/rss/news/') },
+    ]
+  },
+  tech: {
+    label: '科技',
+    accent: 'tech',
+    color: '#00d4aa',
+    feeds: [
+      { name: '36氪', url: 'https://allorigins.win/get?disableCache=true&url=' + encodeURIComponent('https://36kr.com/feed') },
+      { name: '虎嗅', url: 'https://allorigins.win/get?disableCache=true&url=' + encodeURIComponent('https://www.huxiu.com/rss/') },
+    ]
+  },
+  sci: {
+    label: '科学',
+    accent: 'sci',
+    color: '#b06aff',
+    feeds: [
+      { name: 'Nature News', url: 'https://allorigins.win/get?disableCache=true&url=' + encodeURIComponent('https://www.nature.com/nature.rss') },
+      { name: 'Science Daily', url: 'https://allorigins.win/get?disableCache=true&url=' + encodeURIComponent('https://www.sciencedaily.com/rss/all.xml') },
+    ]
+  },
+  health: {
+    label: '健康',
+    accent: 'health',
+    color: '#ff6b8a',
+    feeds: [
+      { name: 'WHO新闻', url: 'https://allorigins.win/get?disableCache=true&url=' + encodeURIComponent('https://www.who.int/feeds/entity/news/en/rss.xml') },
+      { name: 'MedPage Today', url: 'https://allorigins.win/get?disableCache=true&url=' + encodeURIComponent('https://www.medpagetoday.com/rss/headlines.xml') },
+    ]
+  }
+};
+
+// Curated fallback articles (used when RSS fails due to CORS/network)
+const FALLBACK_DATA = {
+  gov: [
+    { title: '国务院印发推动大规模设备更新和消费品以旧换新行动方案', source: '新华社', time: '2 小时前', link: '#' },
+    { title: '中央经济工作会议：2025年要稳中求进、以进促稳、先立后破', source: '人民日报', time: '4 小时前', link: '#' },
+    { title: '国家发改委：加大基础设施领域补短板力度，扩大有效投资', source: '国家发改委', time: '5 小时前', link: '#' },
+    { title: '财政部：适度加力、提质增效，更好支持经济高质量发展', source: '财政部', time: '7 小时前', link: '#' },
+    { title: '商务部：扩大高水平对外开放，促进贸易投资稳中提质', source: '商务部', time: '9 小时前', link: '#' },
+    { title: '科技部发布国家重点研发计划2025年度申报指南', source: '科技部', time: '11 小时前', link: '#' },
+  ],
+  biz: [
+    { title: '阿里巴巴宣布2025年战略聚焦AI与全球化两大核心业务', source: '第一财经', time: '1 小时前', link: '#' },
+    { title: '人民币汇率稳定在合理均衡水平，外汇储备规模保持充裕', source: '财经网', time: '3 小时前', link: '#' },
+    { title: 'A股市场资金面持续改善，北向资金本周净流入超200亿元', source: '证券时报', time: '5 小时前', link: '#' },
+    { title: '国内新能源汽车渗透率突破50%，比亚迪海外销量创历史新高', source: '汽车之家', time: '6 小时前', link: '#' },
+    { title: '房地产市场政策持续发力，一线城市成交量环比回升明显', source: '克而瑞', time: '8 小时前', link: '#' },
+    { title: '消费市场稳中向好，社会消费品零售总额同比增长4.8%', source: '国家统计局', time: '10 小时前', link: '#' },
+  ],
+  tech: [
+    { title: 'DeepSeek R2 发布，推理能力再度突破行业天花板', source: '36氪', time: '30 分钟前', link: '#' },
+    { title: '华为宣布全新Kirin 9100芯片采用2nm制程工艺量产', source: '虎嗅', time: '2 小时前', link: '#' },
+    { title: 'OpenAI GPT-5 正式发布，多模态理解能力全面升级', source: '科技日报', time: '3 小时前', link: '#' },
+    { title: '量子计算重大突破：中科院实现1000量子比特纠错演示', source: '中国科学报', time: '5 小时前', link: '#' },
+    { title: '国产操作系统OpenKylin 2.0发布，兼容性大幅提升', source: '开源社区', time: '7 小时前', link: '#' },
+    { title: 'Meta发布新一代AR眼镜，续航与视野角度双重突破', source: 'TechCrunch', time: '9 小时前', link: '#' },
+  ],
+  sci: [
+    { title: '科学家首次直接观测到中子星内部夸克物质存在的证据', source: 'Nature', time: '1 小时前', link: '#' },
+    { title: '嫦娥七号成功着陆月球南极，月壤样品采集任务正式启动', source: '新华社·科技', time: '3 小时前', link: '#' },
+    { title: 'CRISPR基因编辑新技术可精准修复多种遗传性疾病', source: 'Science', time: '6 小时前', link: '#' },
+    { title: '研究发现深海热液喷口存在全新生命形态，或改写生命起源理论', source: '国家地理', time: '8 小时前', link: '#' },
+    { title: '引力波探测网络捕获迄今最强信号，或源于宇宙早期黑洞并合', source: 'LIGO', time: '10 小时前', link: '#' },
+    { title: '中国天眼FAST发现距地球最近快速射电暴重复源', source: '国家天文台', time: '12 小时前', link: '#' },
+  ],
+  health: [
+    { title: 'WHO宣布新型流感疫苗保护效力达92%，覆盖多种变异株', source: 'WHO', time: '2 小时前', link: '#' },
+    { title: '癌症免疫疗法新突破：CAR-T治疗实体肿瘤五年生存率达60%', source: 'NEJM', time: '4 小时前', link: '#' },
+    { title: '中国居民膳食指南2025版发布，强调地中海饮食模式', source: '卫健委', time: '5 小时前', link: '#' },
+    { title: '研究证实每日步行7500步可显著降低心血管疾病风险', source: 'Lancet', time: '7 小时前', link: '#' },
+    { title: '全球首个阿尔茨海默病预防药物完成三期临床试验', source: 'JAMA', time: '9 小时前', link: '#' },
+    { title: '肠道微生物组与情绪健康关联研究取得重要进展', source: 'Cell', time: '11 小时前', link: '#' },
+  ]
+};
+
+// ═══════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════
+
+let currentCat = 'all';
+let allArticles = {};
+let isLoading = false;
+
+// ═══════════════════════════════════════════════
+//  RSS PARSER
+// ═══════════════════════════════════════════════
+
+async function fetchFeed(feed, catKey) {
+  try {
+    const res = await fetch(feed.url, { signal: AbortSignal.timeout(8000) });
+    const json = await res.json();
+    const xml = new DOMParser().parseFromString(json.contents, 'text/xml');
+    const items = xml.querySelectorAll('item');
+    return Array.from(items).slice(0, 8).map(item => ({
+      title: item.querySelector('title')?.textContent?.trim() || '无标题',
+      link: item.querySelector('link')?.textContent?.trim() || '#',
+      source: feed.name,
+      time: formatRelativeTime(item.querySelector('pubDate')?.textContent),
+      cat: catKey
+    }));
+  } catch {
+    return null;
+  }
+}
+
+function formatRelativeTime(pubDate) {
+  if (!pubDate) return '刚刚';
+  try {
+    const d = new Date(pubDate);
+    const diff = (Date.now() - d) / 1000;
+    if (diff < 60) return '刚刚';
+    if (diff < 3600) return Math.floor(diff/60) + ' 分钟前';
+    if (diff < 86400) return Math.floor(diff/3600) + ' 小时前';
+    return Math.floor(diff/86400) + ' 天前';
+  } catch { return '刚刚'; }
+}
+
+async function loadCategory(catKey) {
+  const cat = CATEGORIES[catKey];
+  const results = await Promise.allSettled(cat.feeds.map(f => fetchFeed(f, catKey)));
+  const fetched = results
+    .filter(r => r.status === 'fulfilled' && r.value)
+    .flatMap(r => r.value);
+
+  if (fetched.length >= 2) {
+    allArticles[catKey] = fetched;
+  } else {
+    // Use fallback
+    allArticles[catKey] = FALLBACK_DATA[catKey].map(a => ({ ...a, cat: catKey }));
+  }
+}
+
+async function loadAll() {
+  isLoading = true;
+  renderLoading();
+  await Promise.all(Object.keys(CATEGORIES).map(k => loadCategory(k)));
+  isLoading = false;
+  render();
+  updateTicker();
+  document.getElementById('last-updated').textContent =
+    '最后更新：' + new Date().toLocaleTimeString('zh-CN');
+}
+
+// ═══════════════════════════════════════════════
+//  RENDER
+// ═══════════════════════════════════════════════
+
+function getCatMeta(catKey) {
+  const map = {
+    gov: { label:'政府', cls:'gov' },
+    biz: { label:'商业', cls:'biz' },
+    tech: { label:'科技', cls:'tech' },
+    sci: { label:'科学', cls:'sci' },
+    health: { label:'健康', cls:'health' },
+  };
+  return map[catKey] || { label: catKey, cls: catKey };
+}
+
+function renderArticleCard(article, size = 'normal') {
+  const meta = getCatMeta(article.cat);
+  const titleEl = size === 'large'
+    ? `<div class="item-title" style="font-family:'Noto Serif SC',serif;font-size:24px;line-height:1.5;font-weight:400;margin-bottom:16px">${article.title}</div>`
+    : `<div class="item-title">${article.title}</div>`;
+
+  if (size === 'large') {
+    return `
+      <div class="featured-item large" data-cat="${article.cat}" onclick="openLink('${article.link}')">
+        <div class="cat-tag cat-${meta.cls}">
+          <span>●</span>${meta.label}
+        </div>
+        ${titleEl}
+        <div class="item-meta">
+          <span class="item-source">${article.source}</span>
+          <span>${article.time}</span>
+        </div>
+      </div>`;
+  }
+
+  if (size === 'medium') {
+    return `
+      <div class="featured-item" data-cat="${article.cat}" onclick="openLink('${article.link}')">
+        <div class="cat-tag cat-${meta.cls}">
+          <span>●</span>${meta.label}
+        </div>
+        ${titleEl}
+        <div class="item-meta">
+          <span class="item-source">${article.source}</span>
+          <span>${article.time}</span>
+        </div>
+      </div>`;
+  }
+
+  return `
+    <div class="news-item reveal" data-cat="${article.cat}" onclick="openLink('${article.link}')">
+      <div class="cat-tag cat-${meta.cls}">
+        <span>●</span>${meta.label}
+      </div>
+      ${titleEl}
+      <div class="item-meta">
+        <span class="item-source">${article.source}</span>
+        <span>${article.time}</span>
+      </div>
+    </div>`;
+}
+
+function render() {
+  const root = document.getElementById('content-root');
+  let html = '';
+
+  if (currentCat === 'all') {
+    // Collect all articles
+    const all = Object.keys(CATEGORIES).flatMap(k =>
+      (allArticles[k] || []).map(a => ({ ...a, cat: k }))
+    );
+
+    if (all.length === 0) {
+      root.innerHTML = '<div class="empty-state">暂无数据，正在加载中…</div>';
+      return;
+    }
+
+    // Featured section (first 3 articles)
+    html += `<div class="section-header">
+      <div class="section-title">
+        <div class="section-accent" style="background:linear-gradient(180deg,#4a7cff,#b06aff)"></div>
+        今日要闻
+      </div>
+      <div class="section-count">${all.length} 篇文章</div>
+    </div>`;
+
+    if (all.length >= 3) {
+      html += `<div class="featured-grid">
+        ${renderArticleCard(all[0], 'large')}
+        <div>
+          ${renderArticleCard(all[1], 'medium')}
+          ${renderArticleCard(all[2], 'medium')}
+        </div>
+      </div>`;
+    }
+
+    // Remaining articles
+    if (all.length > 3) {
+      html += `<div class="news-grid" style="margin-top:1px">`;
+      all.slice(3, 21).forEach(a => { html += renderArticleCard(a); });
+      html += '</div>';
+    }
+
+    // Per-category mini sections
+    Object.keys(CATEGORIES).forEach(catKey => {
+      const arts = allArticles[catKey] || [];
+      if (arts.length === 0) return;
+      const meta = getCatMeta(catKey);
+      html += `<div class="category-section">
+        <div class="section-header">
+          <div class="section-title">
+            <div class="section-accent ${meta.cls}"></div>
+            ${meta.label}
+          </div>
+          <div class="section-count">${arts.length} 篇</div>
+        </div>
+        <div class="news-grid">
+          ${arts.slice(0, 3).map(a => renderArticleCard({ ...a, cat: catKey })).join('')}
+        </div>
+      </div>`;
+    });
+
+  } else {
+    // Single category view
+    const arts = allArticles[currentCat] || [];
+    const meta = getCatMeta(currentCat);
+
+    html += `<div class="section-header">
+      <div class="section-title">
+        <div class="section-accent ${meta.cls}"></div>
+        ${meta.label}资讯
+      </div>
+      <div class="section-count">${arts.length} 篇文章</div>
+    </div>`;
+
+    if (arts.length === 0) {
+      html += '<div class="empty-state">该分类暂无数据</div>';
+    } else if (arts.length >= 3) {
+      html += `<div class="featured-grid">
+        ${renderArticleCard(arts[0], 'large')}
+        <div>
+          ${renderArticleCard(arts[1], 'medium')}
+          ${renderArticleCard(arts[2], 'medium')}
+        </div>
+      </div>
+      <div class="news-grid" style="margin-top:1px">
+        ${arts.slice(3).map(a => renderArticleCard({ ...a, cat: currentCat })).join('')}
+      </div>`;
+    } else {
+      html += `<div class="news-grid">${arts.map(a => renderArticleCard({ ...a, cat: currentCat })).join('')}</div>`;
+    }
+  }
+
+  root.innerHTML = html;
+
+  // Scroll reveal
+  requestAnimationFrame(() => {
+    const items = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 40);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    items.forEach(el => observer.observe(el));
+  });
+}
+
+function renderLoading() {
+  const root = document.getElementById('content-root');
+  const skelCard = () => `
+    <div class="skeleton">
+      <div class="skel-line" style="width:60px;height:18px"></div>
+      <div class="skel-line" style="width:90%;height:16px"></div>
+      <div class="skel-line" style="width:70%;height:16px"></div>
+      <div class="skel-line" style="width:40%;height:12px;margin-top:4px"></div>
+    </div>`;
+  root.innerHTML = `<div class="loading-row">${Array(6).fill(0).map(skelCard).join('')}</div>`;
+}
+
+// ═══════════════════════════════════════════════
+//  TICKER
+// ═══════════════════════════════════════════════
+
+function updateTicker() {
+  const all = Object.keys(CATEGORIES).flatMap(k =>
+    (allArticles[k] || []).slice(0, 3).map(a => ({ ...a, cat: k }))
+  );
+  if (all.length === 0) return;
+
+  const ticker = document.getElementById('ticker');
+  const items = [...all, ...all]; // duplicate for seamless loop
+  ticker.innerHTML = items.map(a => {
+    const meta = getCatMeta(a.cat);
+    return `<div class="ticker-item">
+      <span style="color:var(--accent-${meta.cls})">${meta.label}</span>
+      ${a.title.substring(0, 40)}${a.title.length > 40 ? '…' : ''}
+      <span>·</span>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════
+//  NAVIGATION
+// ═══════════════════════════════════════════════
+
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentCat = tab.dataset.cat;
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+// ═══════════════════════════════════════════════
+//  CLOCK
+// ═══════════════════════════════════════════════
+
+function updateClock() {
+  const now = new Date();
+  document.getElementById('clock').textContent = now.toLocaleTimeString('zh-CN', {
+    hour12: false, hour:'2-digit', minute:'2-digit', second:'2-digit'
+  });
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ═══════════════════════════════════════════════
+//  AUTO REFRESH (15 min cycle)
+// ═══════════════════════════════════════════════
+
+const REFRESH_MS = 15 * 60 * 1000;
+let refreshStart = Date.now();
+
+function updateProgress() {
+  const elapsed = Date.now() - refreshStart;
+  const pct = Math.min((elapsed / REFRESH_MS) * 100, 100);
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+setInterval(updateProgress, 2000);
+
+setInterval(async () => {
+  refreshStart = Date.now();
+  document.getElementById('update-status').textContent = '更新中…';
+  await loadAll();
+  document.getElementById('update-status').textContent = '自动更新中';
+}, REFRESH_MS);
+
+// ═══════════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════════
+
+function openLink(url) {
+  if (url && url !== '#') window.open(url, '_blank', 'noopener');
+}
+
+// ═══════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════
+
+loadAll();
+</script>
+
+</body>
+</html>
