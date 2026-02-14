@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>墨 · INK</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400&family=IM+Fell+English:ital@1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --paper: #f5f0e8;
+    --paper-warm: #ede8da;
+    --ink-dark: #1a1510;
+    --ink-mid: #3d3428;
+    --ink-light: #7a6e5f;
+    --ink-ghost: rgba(26,21,16,0.06);
+    --red-seal: #c0392b;
+  }
+
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: var(--paper);
+    cursor: crosshair;
+  }
+
+  /* Paper texture */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        0deg, transparent, transparent 60px,
+        rgba(0,0,0,0.015) 60px, rgba(0,0,0,0.015) 61px
+      ),
+      repeating-linear-gradient(
+        90deg, transparent, transparent 80px,
+        rgba(0,0,0,0.01) 80px, rgba(0,0,0,0.01) 81px
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Rice paper aged edges */
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(180,160,120,0.25) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  canvas {
+    position: fixed; inset: 0;
+    z-index: 1;
+  }
+
+  /* UI layer */
+  #ui {
+    position: fixed; inset: 0;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  /* Title - vertical Chinese */
+  .title-block {
+    position: fixed;
+    top: 3rem; right: 3.5rem;
+    text-align: right;
+    pointer-events: none;
+    opacity: 0;
+    animation: inkDrop 1.5s 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
+  }
+
+  .title-zh {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 200;
+    font-size: clamp(13px, 1.5vw, 17px);
+    color: var(--ink-mid);
+    letter-spacing: 0.5em;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    line-height: 2;
+  }
+
+  .title-en {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: clamp(10px, 1.1vw, 13px);
+    color: var(--ink-light);
+    letter-spacing: 0.25em;
+    margin-top: 1rem;
+    display: block;
+  }
+
+  /* Seal stamp */
+  .seal {
+    position: fixed;
+    bottom: 3rem; right: 3.5rem;
+    width: 52px; height: 52px;
+    border: 1.5px solid var(--red-seal);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    animation: sealAppear 0.8s 3s cubic-bezier(0.4,0,0.2,1) forwards;
+  }
+  .seal span {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 300;
+    font-size: 11px;
+    color: var(--red-seal);
+    letter-spacing: 0.15em;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  /* Instruction */
+  .hint {
+    position: fixed;
+    bottom: 3rem; left: 3.5rem;
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 200;
+    font-size: 12px;
+    color: var(--ink-light);
+    letter-spacing: 0.35em;
+    opacity: 0;
+    animation: inkDrop 1.5s 4s forwards;
+    line-height: 2;
+  }
+
+  /* Clear button */
+  .clear-btn {
+    position: fixed;
+    top: 3rem; left: 3.5rem;
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 200;
+    font-size: 12px;
+    color: var(--ink-light);
+    letter-spacing: 0.35em;
+    cursor: pointer;
+    pointer-events: all;
+    opacity: 0;
+    animation: inkDrop 1.5s 4.5s forwards;
+    border: none; background: none;
+    padding: 0.5rem 0;
+    transition: color 0.3s;
+  }
+  .clear-btn:hover { color: var(--ink-dark); }
+
+  /* Brush size indicator */
+  .brush-info {
+    position: fixed;
+    top: 3rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 1.5rem;
+    opacity: 0;
+    animation: inkDrop 1.5s 5s forwards;
+  }
+  .brush-opt {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 200;
+    font-size: 11px;
+    color: var(--ink-ghost);
+    letter-spacing: 0.3em;
+    cursor: pointer;
+    pointer-events: all;
+    transition: color 0.3s;
+    padding: 0.4rem 0.6rem;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s;
+  }
+  .brush-opt:hover { color: var(--ink-mid); }
+  .brush-opt.active {
+    color: var(--ink-dark);
+    border-bottom-color: var(--ink-dark);
+  }
+
+  @keyframes inkDrop {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes sealAppear {
+    from { opacity: 0; transform: scale(1.3) rotate(3deg); }
+    to   { opacity: 0.85; transform: scale(1) rotate(0deg); }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div id="ui">
+  <!-- Title block top right -->
+  <div class="title-block">
+    <div class="title-zh">墨·无尽</div>
+    <span class="title-en">ink, without end</span>
+  </div>
+
+  <!-- Seal bottom right -->
+  <div class="seal"><span>乙<br>巳</span></div>
+
+  <!-- Brush sizes -->
+  <div class="brush-info">
+    <div class="brush-opt active" data-size="fine">细笔</div>
+    <div class="brush-opt" data-size="medium">中笔</div>
+    <div class="brush-opt" data-size="bold">粗笔</div>
+    <div class="brush-opt" data-size="splash">泼墨</div>
+  </div>
+
+  <!-- Hint bottom left -->
+  <div class="hint">拖动作画 · 点击落墨</div>
+
+  <!-- Clear top left -->
+  <button class="clear-btn" id="clearBtn">清纸</button>
+</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let W, H;
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+  // Redraw background tone
+  ctx.fillStyle = 'rgba(245,240,232,0)';
+  ctx.fillRect(0, 0, W, H);
+}
+resize();
+window.addEventListener('resize', resize);
+
+// ─── Brush settings ──────────────────────────────────────────────
+const brushes = {
+  fine:   { minR: 0.5, maxR: 2,  pressure: 0.6, scatter: 2,  drops: 0 },
+  medium: { minR: 2,   maxR: 6,  pressure: 0.5, scatter: 4,  drops: 1 },
+  bold:   { minR: 5,   maxR: 14, pressure: 0.4, scatter: 8,  drops: 2 },
+  splash: { minR: 8,   maxR: 25, pressure: 0.3, scatter: 35, drops: 8 },
+};
+let currentBrush = 'fine';
+let brushConfig = brushes[currentBrush];
+
+// Brush selector
+document.querySelectorAll('.brush-opt').forEach(el => {
+  el.addEventListener('click', () => {
+    document.querySelectorAll('.brush-opt').forEach(e => e.classList.remove('active'));
+    el.classList.add('active');
+    currentBrush = el.dataset.size;
+    brushConfig = brushes[currentBrush];
+  });
+});
+
+// Clear
+document.getElementById('clearBtn').addEventListener('click', () => {
+  ctx.clearRect(0, 0, W, H);
+  inkDrops = [];
+});
+
+// ─── Ink color system ─────────────────────────────────────────────
+function getInkColor(pressure, variation) {
+  // Chinese ink: rich blacks, warm grays, occasional very dilute
+  const shades = [
+    `rgba(18,14,10,${pressure * (0.8 + variation * 0.2)})`,
+    `rgba(26,20,14,${pressure * (0.7 + variation * 0.2)})`,
+    `rgba(35,28,20,${pressure * (0.6 + variation * 0.25)})`,
+    `rgba(50,42,30,${pressure * (0.4 + variation * 0.2)})`,
+  ];
+  return shades[Math.floor(Math.random() * shades.length)];
+}
+
+// ─── Drawing state ────────────────────────────────────────────────
+let isDrawing = false;
+let lastX = 0, lastY = 0;
+let speed = 0;
+let inkDrops = [];
+let strokeCount = 0;
+
+function drawInkStroke(x, y, prevX, prevY) {
+  const dx = x - prevX, dy = y - prevY;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  speed = Math.min(dist * 0.15 + speed * 0.6, 30);
+
+  // Pressure: slower = more ink
+  const pressure = Math.max(0.05, 1 - speed / 30) * brushConfig.pressure;
+  const radius = brushConfig.minR + (brushConfig.maxR - brushConfig.minR) * pressure;
+
+  // Main stroke
+  const steps = Math.max(1, Math.floor(dist / (radius * 0.3)));
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps;
+    const sx = prevX + dx * t + (Math.random() - 0.5) * brushConfig.scatter * 0.2;
+    const sy = prevY + dy * t + (Math.random() - 0.5) * brushConfig.scatter * 0.2;
+    const r = radius * (0.7 + Math.random() * 0.6) * (1 - t * 0.1);
+
+    ctx.save();
+    ctx.globalAlpha = pressure * (0.4 + Math.random() * 0.5);
+    ctx.fillStyle = getInkColor(pressure, Math.random());
+    ctx.beginPath();
+
+    // Brush shape: slightly elongated in direction of stroke
+    const angle = Math.atan2(dy, dx);
+    ctx.ellipse(sx, sy, r, r * (0.5 + Math.random() * 0.5), angle, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  // Fiber texture: tiny hairs alongside stroke
+  if (currentBrush !== 'fine') {
+    for (let f = 0; f < 3; f++) {
+      const ft = Math.random();
+      const fx = prevX + dx * ft + (Math.random() - 0.5) * radius * 2;
+      const fy = prevY + dy * ft + (Math.random() - 0.5) * radius * 2;
+      const fr = radius * (0.05 + Math.random() * 0.15);
+      ctx.save();
+      ctx.globalAlpha = pressure * 0.15 * Math.random();
+      ctx.fillStyle = getInkColor(pressure * 0.3, Math.random());
+      ctx.beginPath();
+      ctx.arc(fx, fy, fr, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  // Splatter drops
+  if (Math.random() < 0.06 + brushConfig.drops * 0.08) {
+    spawnDrops(x, y, radius, brushConfig.drops, brushConfig.scatter);
+  }
+}
+
+function spawnDrops(x, y, r, count, scatter) {
+  const n = Math.floor(count * Math.random()) + (count > 0 ? 1 : 0);
+  for (let i = 0; i < n; i++) {
+    const ang = Math.random() * Math.PI * 2;
+    const dist = (0.5 + Math.random() * 0.5) * scatter * (2 + Math.random() * 3);
+    inkDrops.push({
+      x: x + Math.cos(ang) * dist,
+      y: y + Math.sin(ang) * dist,
+      r: r * (0.05 + Math.random() * 0.25),
+      alpha: 0.08 + Math.random() * 0.35,
+      life: 0,
+    });
+  }
+}
+
+// Render pending drops
+function renderDrops() {
+  inkDrops = inkDrops.filter(d => {
+    if (d.life < 1) {
+      d.life += 0.08;
+      const a = d.alpha * Math.min(d.life * 3, 1);
+      ctx.save();
+      ctx.globalAlpha = a;
+      ctx.fillStyle = `rgba(20,15,10,1)`;
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+      return true;
+    }
+    return false;
+  });
+}
+
+// ─── Click ink splash ─────────────────────────────────────────────
+function inkSplash(x, y) {
+  const cfg = brushConfig;
+  const r = cfg.minR + Math.random() * (cfg.maxR - cfg.minR);
+
+  ctx.save();
+  ctx.globalAlpha = 0.6 + Math.random() * 0.3;
+  ctx.fillStyle = getInkColor(0.8, Math.random());
+  ctx.beginPath();
+  ctx.arc(x, y, r * 0.8, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+
+  spawnDrops(x, y, r, cfg.drops + 2, cfg.scatter * 1.5);
+}
+
+// ─── Intro calligraphy ────────────────────────────────────────────
+function drawIntroStrokes() {
+  // Subtle ghost brushmarks behind center as inspiration
+  const cx = W / 2, cy = H / 2;
+  const strokes = [
+    { sx: cx - 60, sy: cy - 80, ex: cx - 40, ey: cy + 80, r: 3 },
+    { sx: cx + 20, sy: cy - 70, ex: cx + 60, ey: cy + 60, r: 4 },
+    { sx: cx - 100, sy: cy, ex: cx + 100, ey: cy + 10, r: 2 },
+  ];
+  strokes.forEach(({ sx, sy, ex, ey, r }) => {
+    const steps = 40;
+    for (let i = 0; i <= steps; i++) {
+      const t = i / steps;
+      const x = sx + (ex - sx) * t;
+      const y = sy + (ey - sy) * t;
+      const rad = r * (0.4 + Math.sin(t * Math.PI) * 0.8);
+      ctx.save();
+      ctx.globalAlpha = 0.02 + Math.sin(t * Math.PI) * 0.025;
+      ctx.fillStyle = '#1a1510';
+      ctx.beginPath();
+      ctx.arc(x, y, rad, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  });
+}
+
+setTimeout(drawIntroStrokes, 800);
+
+// ─── Pointer events ───────────────────────────────────────────────
+function getPos(e) {
+  if (e.touches) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  return { x: e.clientX, y: e.clientY };
+}
+
+canvas.addEventListener('pointerdown', e => {
+  isDrawing = true;
+  speed = 0;
+  const { x, y } = getPos(e);
+  lastX = x; lastY = y;
+  inkSplash(x, y);
+  strokeCount++;
+});
+
+canvas.addEventListener('pointermove', e => {
+  if (!isDrawing) return;
+  const { x, y } = getPos(e);
+  drawInkStroke(x, y, lastX, lastY);
+  lastX = x; lastY = y;
+});
+
+canvas.addEventListener('pointerup', () => { isDrawing = false; speed = 0; });
+canvas.addEventListener('pointerleave', () => { isDrawing = false; });
+
+// ─── Animation loop (for drops) ───────────────────────────────────
+function loop() {
+  renderDrops();
+  requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body>
+</html>
