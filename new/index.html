@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>要闻 · Dispatch</title>
+<style>
+/* ── TOKENS ─────────────────────────────────────────── */
+:root {
+  --bg:       #f9f9f8;
+  --surface:  #ffffff;
+  --border:   rgba(0,0,0,0.08);
+  --border-md:rgba(0,0,0,0.13);
+  --text-1:   #0f0f0f;
+  --text-2:   #5a5a5a;
+  --text-3:   #9a9a9a;
+  --accent:   #d97706;
+  --accent-bg:#fef3c7;
+  --accent-t: #92400e;
+  --tag-geo:  #dbeafe; --tag-geo-t:#1e3a5f;
+  --tag-pol:  #fce7f3; --tag-pol-t:#831843;
+  --tag-biz:  #d1fae5; --tag-biz-t:#064e3b;
+  --tag-tech: #ede9fe; --tag-tech-t:#4c1d95;
+  --tag-hlth: #fee2e2; --tag-hlth-t:#7f1d1d;
+  --tag-sci:  #e0f2fe; --tag-sci-t:#0c4a6e;
+  --tag-cli:  #dcfce7; --tag-cli-t:#14532d;
+  --radius:   6px;
+  --radius-lg:12px;
+  --shadow:   0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+}
+[data-theme="dark"] {
+  --bg:       #0f0f0f;
+  --surface:  #1a1a1a;
+  --border:   rgba(255,255,255,0.08);
+  --border-md:rgba(255,255,255,0.14);
+  --text-1:   #f0f0f0;
+  --text-2:   #999;
+  --text-3:   #555;
+  --accent:   #f59e0b;
+  --accent-bg:#292218;
+  --accent-t: #fcd34d;
+  --tag-geo:  #1e3046; --tag-geo-t:#93c5fd;
+  --tag-pol:  #3b0a24; --tag-pol-t:#f9a8d4;
+  --tag-biz:  #052e1c; --tag-biz-t:#6ee7b7;
+  --tag-tech: #2e1a4e; --tag-tech-t:#c4b5fd;
+  --tag-hlth: #3a0e0e; --tag-hlth-t:#fca5a5;
+  --tag-sci:  #0a2535; --tag-sci-t:#7dd3fc;
+  --tag-cli:  #052612; --tag-cli-t:#86efac;
+  --shadow:   0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md:0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* ── RESET ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text-1);
+  font-family: -apple-system, 'SF Pro Text', BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background .25s, color .25s;
+}
+button { cursor: pointer; font-family: inherit; }
+a { text-decoration: none; color: inherit; }
+
+/* ── LAYOUT ─────────────────────────────────────────── */
+.shell {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── TOPBAR ─────────────────────────────────────────── */
+.topbar {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky; top: 0; z-index: 90;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 52px;
+  padding: 0 24px;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.wordmark {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -.4px;
+  color: var(--text-1);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.wordmark-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.4;transform:scale(.7);} }
+
+.topbar-date {
+  font-size: 12px;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+.topbar-spacer { flex: 1; }
+.ticker-strip {
+  flex: 1;
+  overflow: hidden;
+  font-size: 12px;
+  color: var(--text-2);
+  max-width: 420px;
+}
+.ticker-inner {
+  display: flex;
+  gap: 40px;
+  white-space: nowrap;
+  animation: tk 55s linear infinite;
+}
+.ticker-inner:hover { animation-play-state: paused; }
+@keyframes tk { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+.tk-item::before { content: '·'; margin-right: 8px; color: var(--accent); }
+
+.theme-btn {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border-md);
+  background: var(--bg);
+  color: var(--text-2);
+  font-size: 15px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s;
+  flex-shrink: 0;
+}
+.theme-btn:hover { background: var(--border); }
+
+/* ── PROGRESS BAR ───────────────────────────────────── */
+.prog-bar {
+  height: 2px;
+  background: var(--border);
+  overflow: hidden;
+}
+.prog-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width .8s linear;
+}
+
+/* ── SUBNAV ─────────────────────────────────────────── */
+.subnav {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.subnav::-webkit-scrollbar { display: none; }
+.subnav-inner {
+  display: flex;
+  gap: 2px;
+  padding: 8px 24px;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.cat-pill {
+  flex-shrink: 0;
+  padding: 5px 14px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-2);
+  background: none;
+  border: 1px solid transparent;
+  transition: all .15s;
+  letter-spacing: .01em;
+}
+.cat-pill:hover { background: var(--bg); border-color: var(--border-md); color: var(--text-1); }
+.cat-pill.on {
+  background: var(--accent-bg);
+  color: var(--accent-t);
+  border-color: transparent;
+}
+
+/* ── MAIN GRID ──────────────────────────────────────── */
+.main { padding: 28px 24px 80px; max-width: 1160px; margin: 0 auto; }
+
+/* stats row */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 28px;
+  animation: fadeUp .5s both;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+}
+.stat-n {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -.5px;
+  color: var(--accent);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.stat-d {
+  font-size: 11px;
+  color: var(--text-3);
+  line-height: 1.4;
+}
+
+/* section head */
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  margin-top: 32px;
+}
+.section-head:first-child { margin-top: 0; }
+.section-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.section-line { flex: 1; height: 1px; background: var(--border); }
+
+/* feature card */
+.feature-card {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+  animation: fadeUp .5s .05s both;
+  transition: box-shadow .2s;
+}
+.feature-card:hover { box-shadow: var(--shadow-md); }
+.fc-body { padding: 28px 28px 24px; }
+.fc-side {
+  border-left: 1px solid var(--border);
+  padding: 28px 22px;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* standard cards */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.cards-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.news-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 20px 16px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .2s, transform .2s;
+  animation: fadeUp .5s both;
+  display: flex;
+  flex-direction: column;
+}
+.news-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.news-card:nth-child(2){animation-delay:.07s;}
+.news-card:nth-child(3){animation-delay:.14s;}
+
+/* tags */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  padding: 3px 9px;
+  border-radius: 4px;
+  margin-bottom: 11px;
+}
+.tag-geo  { background:var(--tag-geo);  color:var(--tag-geo-t);  }
+.tag-pol  { background:var(--tag-pol);  color:var(--tag-pol-t);  }
+.tag-biz  { background:var(--tag-biz);  color:var(--tag-biz-t);  }
+.tag-tech { background:var(--tag-tech); color:var(--tag-tech-t); }
+.tag-hlth { background:var(--tag-hlth); color:var(--tag-hlth-t); }
+.tag-sci  { background:var(--tag-sci);  color:var(--tag-sci-t);  }
+.tag-cli  { background:var(--tag-cli);  color:var(--tag-cli-t);  }
+
+/* headlines */
+.hl-feat {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -.4px;
+  color: var(--text-1);
+  margin-bottom: 12px;
+}
+.hl-feat em { color: var(--accent); font-style: normal; }
+.hl-card {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.38;
+  letter-spacing: -.2px;
+  color: var(--text-1);
+  margin-bottom: 9px;
+  flex: 0;
+}
+.hl-card em { color: var(--accent); font-style: normal; }
+.body-txt {
+  font-size: 13.5px;
+  color: var(--text-2);
+  line-height: 1.65;
+  margin-bottom: 14px;
+  flex: 1;
+}
+.body-sm {
+  font-size: 12.5px;
+  color: var(--text-2);
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 12px;
+}
+
+/* importance */
+.imp-wrap { margin-top: auto; }
+.imp-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.imp-label {
+  font-size: 11px;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+.imp-score {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.imp-track {
+  flex: 1;
+  height: 3px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.imp-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--accent);
+  opacity: .7;
+}
+.src-txt {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 6px;
+}
+
+/* side panel items */
+.side-item {}
+.side-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 5px;
+}
+.side-val {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.55;
+}
+.impact-chip {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent-t);
+  background: var(--accent-bg);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* footer */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.footer-l, .footer-r { font-size: 11px; color: var(--text-3); }
+#nxt { color: var(--accent); }
+
+/* empty */
+.empty {
+  padding: 60px 0;
+  text-align: center;
+  color: var(--text-3);
+  font-size: 14px;
+}
+
+/* animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* responsive */
+@media (max-width: 860px) {
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .stat-card:last-child { display: none; }
+  .feature-card { grid-template-columns: 1fr; }
+  .fc-side { display: none; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .cards-grid-2 { grid-template-columns: 1fr; }
+  .ticker-strip { display: none; }
+  .topbar-date { display: none; }
+}
+@media (max-width: 500px) {
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .shell { padding: 0 16px; }
+  .main { padding: 20px 16px 60px; }
+  .subnav-inner { padding: 8px 16px; }
+  .topbar-inner { padding: 0 16px; }
+  .footer { padding: 14px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="wordmark">
+      <div class="wordmark-dot"></div>
+      要闻
+    </div>
+    <span class="topbar-date" id="hd-date">—</span>
+    <div class="topbar-spacer"></div>
+    <div class="ticker-strip">
+      <div class="ticker-inner" id="tk"></div>
+    </div>
+    <div class="topbar-spacer"></div>
+    <span style="font-size:11px;color:var(--text-3);margin-right:4px;" id="nxt-sm">—</span>
+    <button class="theme-btn" id="theme-btn" title="切换主题">☀</button>
+  </div>
+  <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+</div>
+
+<!-- SUB NAV -->
+<div class="subnav">
+  <div class="subnav-inner" id="nav">
+    <button class="cat-pill on" data-c="all">全部</button>
+    <button class="cat-pill" data-c="geopolitics">地缘</button>
+    <button class="cat-pill" data-c="politics">政治</button>
+    <button class="cat-pill" data-c="business">商业</button>
+    <button class="cat-pill" data-c="tech">科技</button>
+    <button class="cat-pill" data-c="health">健康</button>
+    <button class="cat-pill" data-c="science">科学</button>
+    <button class="cat-pill" data-c="climate">气候</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main" id="grid"></main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span class="footer-l">要闻 · Dispatch · 2026</span>
+  <span class="footer-r">下次更新 <span id="nxt">—</span></span>
+</footer>
+
+<script>
+// ── theme ─────────────────────────────────────────────
+const root = document.documentElement;
+let dark = false;
+document.getElementById('theme-btn').addEventListener('click', () => {
+  dark = !dark;
+  root.setAttribute('data-theme', dark ? 'dark' : 'light');
+  document.getElementById('theme-btn').textContent = dark ? '☾' : '☀';
+});
+
+// ── time ──────────────────────────────────────────────
+function pad(n){ return String(n).padStart(2,'0'); }
+function tick(){
+  const n = new Date();
+  document.getElementById('hd-date').textContent =
+    `${n.getFullYear()}年${n.getMonth()+1}月${n.getDate()}日 ${pad(n.getHours())}:${pad(n.getMinutes())}:${pad(n.getSeconds())}`;
+}
+tick(); setInterval(tick, 1000);
+
+// ── data ──────────────────────────────────────────────
+const STATS = [
+  { n: 'Kevin Warsh', d: '新任美联储主席\n5月22日就职' },
+  { n: '54–45',       d: '史上最分裂\n美联储确认票' },
+  { n: '+7.2%',       d: '美国通胀率\n伊朗战争推升' },
+  { n: '349',         d: '美军中东受伤\nOp. Epic Fury' },
+  { n: '3–5年',       d: '预计突破\n1.5°C 气候临界点' }
+];
+
+const TICKS = [
+  '美伊谈判陷僵局 — 美军持续空袭伊朗目标',
+  'Kevin Warsh就职美联储主席',
+  '伊朗战争推高通胀 — 消费者信心历史新低',
+  '海平面加速上升 — 变暖海水为最大驱因',
+  'AI监管进入立法实施阶段',
+  '宾夕法尼亚大学光子芯片突破',
+  '普京-习近平重启天然气管道',
+  'UNESCO：地中海海啸不可避免',
+  'AT&T豪赌2500亿美元押注AI',
+  '量子算法秒解"不可能"材料问题',
+  '格陵兰冰芯揭示7000年前完全融化或将重演',
+  'β受体阻滞剂对单纯心梗或无益且有害'
+];
+
+const TAG_MAP = {
+  geopolitics: ['地缘政治', 'tag-geo'],
+  politics:    ['政治',     'tag-pol'],
+  business:    ['商业',     'tag-biz'],
+  tech:        ['科技',     'tag-tech'],
+  health:      ['健康',     'tag-hlth'],
+  science:     ['科学',     'tag-sci'],
+  climate:     ['气候',     'tag-cli']
+};
+
+const FEAT = {
+  cat: 'geopolitics',
+  hl: '美伊战争与<em>和谈钟摆</em>：战火下的谈判桌',
+  body: '美军在谈判桌未撤之际对伊朗目标发动空袭。特朗普政府对达成协议持谨慎态度，并呼吁中东更多国家在任何框架内承认以色列。霍尔木兹海峡封锁持续推高全球油价，伊朗战争引发的通胀压力已渗入美国消费端，消费者信心跌至历史新低。',
+  imp: 98,
+  src: 'NPR · Al Jazeera · CNBC · May 25–27, 2026',
+  impact: '影响全球能源与金融市场'
+};
+
+const CARDS = [
+  { cat:'business',    hl:'新美联储主席 <em>Kevin Warsh</em> 就职，首次会议6月开幕',      body:'Warsh于5月22日宣誓就职，接替执掌八年的Powell。参议院以54-45史上最分裂投票确认任命，首次FOMC会议定于6月16—17日，市场押注年内或加息。', imp:91, src:'CNBC · WaPo · May 22, 2026' },
+  { cat:'politics',    hl:'ICE经费案 <em>700亿美元</em> 遭党内阻挠',                      body:'价值约700亿美元ICE经费法案遭党内强硬派阻挠，其中10亿美元用于特朗普白宫宴会厅安保项目引发广泛批评，参议院推迟投票。',            imp:78, src:'NPR · May 6, 2026' },
+  { cat:'business',    hl:'普京-习近平会谈 <em>重启搁置天然气管道</em>',                  body:'伊朗战争扰动能源市场之际，俄中两国领导人会谈重启搁置管道项目，或进一步削弱西方对俄制裁效果。',                               imp:82, src:'CNBC · May 20, 2026' },
+  { cat:'tech',        hl:'宾大光子芯片突破：<em>混合光-物质粒子</em>或重塑AI算力',        body:'宾夕法尼亚大学研究人员创造混合光-物质粒子，可大幅提速AI计算并降低能耗，正值数据中心电力成本快速攀升之际。',                    imp:83, src:'ScienceDaily · May 18, 2026' },
+  { cat:'health',      hl:'重磅：<em>β受体阻滞剂</em> 对单纯心梗或无效且有害',             body:'大规模国际研究发现对无并发症心梗患者常规使用β受体阻滞剂不仅无益甚至可能有害，颠覆40年治疗范式，影响数百万患者。',              imp:87, src:'ScienceDaily · May 25, 2026' },
+  { cat:'health',      hl:'AI分析 <em>40万条帖子</em> 发现Ozempic隐性副作用',             body:'研究人员通过Reddit帖子发现GLP-1减重药用户频繁出现月经不规律、潮热等意外症状，提示AI或成上市后安全监测新工具。',              imp:76, src:'ScienceDaily · May 24, 2026' },
+  { cat:'science',     hl:'量子算法<em>数秒</em>破解传统超算无法求解的材料难题',            body:'全新量子启发算法成功模拟准晶体等极复杂量子材料，为新材料设计、催化剂研发与药物发现开辟全新路径。',                             imp:76, src:'ScienceDaily · May 13, 2026' },
+  { cat:'science',     hl:'NASA自主太空芯片通过测试，航天器将能 <em>独立思考</em>',        body:'NASA新一代处理器较现有飞行芯片提升数百倍，或使深空航天器在无地面指令下独立运行，大幅推进星际探索自主化进程。',               imp:72, src:'ScienceDaily · May 15, 2026' },
+  { cat:'climate',     hl:'海平面加速上升，科学家 <em>确认全部成因</em>',                  body:'最新研究证实海水变暖是最大驱动因素，冰川与极地冰盖融化日益加剧。科学家警告3—5年内地球将突破1.5°C临界点。',                  imp:90, src:'ScienceDaily · May 22, 2026' },
+  { cat:'climate',     hl:'UNESCO警告：<em>地中海海啸</em>威胁远超公众认知',              body:'历史记录与最新模型显示法国里维埃拉等地面临真实灾难风险，相关防灾基础设施严重不足，公众认知与实际威胁存在巨大落差。',           imp:74, src:'ScienceDaily · May 20, 2026' },
+  { cat:'health',      hl:'肝脏 <em>胆固醇主开关</em> 首次被发现',                        body:'德克萨斯大学西南医学中心发现能控制肝脏向血液输送有害胆固醇数量的全新"主开关"，或催生精准调控胆固醇新疗法。',                  imp:73, src:'ScienceDaily · May 24, 2026' },
+  { cat:'tech',        hl:'AI监管从辩论 <em>转向立法实施</em>',                           body:'多国政府将AI政策从抽象讨论转向具体立法干预，包括儿童使用聊天机器人限制及高级网络能力AI模型访问管控。',                       imp:79, src:'WaPo · Forbes · May 2026' },
+  { cat:'science',     hl:'格陵兰冰芯揭示：<em>7000年前曾完全融化</em>',                  body:'科学家在格陵兰冰层深处发现该岛冰盖7000年前彻底消融，当时全球气温与现在相近，对未来海平面上升构成严重警示。',                  imp:70, src:'ScienceDaily · Apr 18, 2026' },
+  { cat:'science',     hl:'超强 <em>NK细胞</em> 突破肿瘤免疫防御',                        body:'麦吉尔大学科学家找到暂时阻断两种蛋白的方法，显著增强自然杀伤细胞对抗侵袭性癌症的能力，突破肿瘤免疫逃逸机制。',                 imp:75, src:'ScienceDaily · May 24, 2026' },
+  { cat:'business',    hl:'AT&T豪赌 <em>2500亿美元</em> 押注AI经济分化',                 body:'AT&T宣布庞大资本投入，被分析师视为AI经济时代的战略豪赌，加速电信基础设施与AI算力的深度融合。',                             imp:71, src:'CNBC · May 19, 2026' }
+];
+
+// ── helpers ───────────────────────────────────────────
+function tagHTML(cat) {
+  const [label, cls] = TAG_MAP[cat] || ['新闻','tag-geo'];
+  return `<span class="tag ${cls}">${label}</span>`;
+}
+
+function impBar(v) {
+  return `<div class="imp-wrap">
+    <div class="imp-row">
+      <span class="imp-label">重要程度</span>
+      <div class="imp-track"><div class="imp-fill" style="width:${v}%"></div></div>
+      <span class="imp-score">${v}</span>
+    </div>
+  </div>`;
+}
+
+function featHTML(d) {
+  return `<div class="feature-card">
+    <div class="fc-body">
+      ${tagHTML(d.cat)}
+      <div class="hl-feat">${d.hl}</div>
+      <div class="body-txt">${d.body}</div>
+      ${impBar(d.imp)}
+      <div class="src-txt">${d.src}</div>
+    </div>
+    <div class="fc-side">
+      <div class="side-item">
+        <div class="side-label">影响评估</div>
+        <span class="impact-chip">${d.impact}</span>
+      </div>
+      <div class="side-item">
+        <div class="side-label">重要程度</div>
+        <div style="font-size:28px;font-weight:700;color:var(--accent);letter-spacing:-.5px;line-height:1;">${d.imp}<span style="font-size:14px;font-weight:400;color:var(--text-3);">/100</span></div>
+      </div>
+      <div class="side-item" style="margin-top:auto;">
+        <div class="side-label">来源</div>
+        <div class="side-val">${d.src}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function cardHTML(d) {
+  return `<div class="news-card">
+    ${tagHTML(d.cat)}
+    <div class="hl-card">${d.hl}</div>
+    <div class="body-sm">${d.body}</div>
+    ${impBar(d.imp)}
+    <div class="src-txt">${d.src}</div>
+  </div>`;
+}
+
+function statsHTML() {
+  return `<div class="stats-row">${STATS.map(s =>
+    `<div class="stat-card">
+      <div class="stat-n">${s.n}</div>
+      <div class="stat-d">${s.d.replace('\n','<br>')}</div>
+    </div>`).join('')}</div>`;
+}
+
+function secHead(t) {
+  return `<div class="section-head"><div class="section-line"></div><span class="section-title">${t}</span><div class="section-line"></div></div>`;
+}
+
+// ── render ────────────────────────────────────────────
+function render(cat) {
+  const cards = cat === 'all' ? CARDS : CARDS.filter(c => c.cat === cat);
+  const showFeat = cat === 'all' || cat === FEAT.cat;
+  let h = '';
+
+  if (showFeat) {
+    h += statsHTML();
+    h += secHead('今日头条 · Lead Story');
+    h += featHTML(FEAT);
+  }
+
+  if (cards.length) {
+    h += secHead('深度精选 · In Depth');
+    for (let i = 0; i < cards.length; i += 3) {
+      const chunk = cards.slice(i, i + 3);
+      const cls = chunk.length < 3 ? 'cards-grid-2' : 'cards-grid';
+      h += `<div class="${cls}">${chunk.map(cardHTML).join('')}</div>`;
+    }
+  } else if (!showFeat) {
+    h += `<div class="empty">暂无此分类新闻</div>`;
+  }
+
+  document.getElementById('grid').innerHTML = h;
+}
+
+// ── nav ───────────────────────────────────────────────
+let active = 'all';
+document.getElementById('nav').addEventListener('click', e => {
+  const b = e.target.closest('.cat-pill'); if (!b) return;
+  document.querySelectorAll('.cat-pill').forEach(x => x.classList.remove('on'));
+  b.classList.add('on'); active = b.dataset.c; render(active);
+});
+
+// ── ticker ────────────────────────────────────────────
+const all = TICKS.concat(TICKS);
+document.getElementById('tk').innerHTML = all.map(t => `<span class="tk-item">${t}</span>`).join('');
+
+// ── countdown 2h ─────────────────────────────────────
+const TOTAL = 7200; let elapsed = 0;
+setInterval(() => {
+  elapsed++;
+  document.getElementById('prog').style.width = (elapsed / TOTAL * 100) + '%';
+  const rem = TOTAL - elapsed;
+  const hh = Math.floor(rem / 3600), mm = Math.floor((rem % 3600) / 60), ss = rem % 60;
+  const txt = hh > 0 ? `${hh}时${pad(mm)}分后更新` : `${mm}分${pad(ss)}秒后更新`;
+  ['nxt','nxt-sm'].forEach(id => { const el=document.getElementById(id); if(el)el.textContent=txt; });
+  if (elapsed >= TOTAL) { elapsed = 0; render(active); }
+}, 1000);
+
+render('all');
+</script>
+</body>
+</html>
