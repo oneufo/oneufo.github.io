@@ -149,7 +149,7 @@ details{margin-top:16px}summary{cursor:pointer;font-size:13px;font-weight:600;co
 (function(){
   /* ===== Defaults: edit here once ===== */
   var CONFIG={
-    baseUrl:'https://www.oneack.com/ai/api', // your server proxy (keeps the API key off the page)
+    baseUrl:'https://api.oneufo.com/v1', // your server proxy (keeps the API key off the page)
     useProxy:true,                          // true = no key needed in the browser
     model:'k-exaone_v2.5',
     reasoningEffort:'low',                  // low = fastest, high = harder problems, max = most accurate (slowest)
@@ -164,9 +164,9 @@ details{margin-top:16px}summary{cursor:pointer;font-size:13px;font-weight:600;co
   var STAR='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5l1.9 6.6 5.9-3.5-3.5 5.9 6.6 1.9-6.6 1.9 3.5 5.9-5.9-3.5L12 22.5l-1.9-6.6-5.9 3.5 3.5-5.9L1.5 12l6.6-1.9-3.5-5.9 5.9 3.5z"/></svg>';
   var SUGG=['Draft a polished business email','Explain blockchain in plain words','Brainstorm five brand names','Make this paragraph sound sharper'];
 
-  function stored(){try{return JSON.parse(localStorage.getItem('oneack_ai_cfg3')||'{}')}catch(e){return {}}}
+  function stored(){try{return JSON.parse(localStorage.getItem('oneufo_ai_cfg3')||'{}')}catch(e){return {}}}
   function cfg(){var s=stored();return{key:s.key||'',base:(s.base||CONFIG.baseUrl).replace(/\/+$/,''),model:s.model||CONFIG.model,sys:s.sys||CONFIG.system}}
-  function saveCfg(){var s={},d={base:CONFIG.baseUrl,model:CONFIG.model,sys:CONFIG.system};FIELDS.forEach(function(f){var v=$(f).value.trim();s[f]=(v===d[f])?'':v});try{localStorage.setItem('oneack_ai_cfg3',JSON.stringify(s))}catch(e){}modelCache=null}
+  function saveCfg(){var s={},d={base:CONFIG.baseUrl,model:CONFIG.model,sys:CONFIG.system};FIELDS.forEach(function(f){var v=$(f).value.trim();s[f]=(v===d[f])?'':v});try{localStorage.setItem('oneufo_ai_cfg3',JSON.stringify(s))}catch(e){}modelCache=null}
   function fillCfg(){var c=cfg();$('key').value=c.key;$('base').value=c.base;$('model').value=c.model;$('sys').value=c.sys}
 
   function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
