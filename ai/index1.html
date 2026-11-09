@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>生命之舞</title>
+    <style>
+        body {
+            margin: 0;
+            background: #111;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+        }
+        canvas {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 30px rgba(0, 100, 255, 0.2);
+            image-rendering: pixelated;
+        }
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="lifeCanvas"></canvas>
+    <div class="controls">
+        点击画布创造生命 | 空格键暂停 | R键重置
+        
+        <br>这段代码不仅仅是一个程序，更是一个微型宇宙的模拟，它展示了秩序如何从混沌中产生，生命如何自我组织，以及复杂系统如何从简单规则中涌现。这种数学、哲学与艺术的完美融合，体现了编程的最高美学。</br>
+        
+
+
+
+
+
+
+    </div>
+
+    <script>
+        // 生命游戏 - 一个简单规则创造复杂宇宙的经典元胞自动机
+        
+        // 画布设置
+        const canvas = document.getElementById('lifeCanvas');
+        const ctx = canvas.getContext('2d');
+        const cellSize = 6;
+        let width, height, cols, rows;
+        let isRunning = true;
+        let universe = [];
+        let nextGen = [];
+        
+        // 初始化函数
+        function init() {
+            width = Math.floor(window.innerWidth * 0.95);
+            height = Math.floor(window.innerHeight * 0.85);
+            canvas.width = width;
+            canvas.height = height;
+            
+            cols = Math.floor(width / cellSize);
+            rows = Math.floor(height / cellSize);
+            
+            // 创建两个二维数组
+            universe = Array(cols).fill().map(() => Array(rows).fill(0));
+            nextGen = Array(cols).fill().map(() => Array(rows).fill(0));
+            
+            // 随机初始化(较低密度以形成有趣模式)
+            seedRandom(0.1);
+            
+            // 添加一些经典结构
+            addGlider(20, 20);
+            addGosperGun(40, 40);
+        }
+        
+        // 随机播种初始状态
+        function seedRandom(density) {
+            for (let i = 0; i < cols; i++) {
+                for (let j = 0; j < rows; j++) {
+                    universe[i][j] = Math.random() < density ? 1 : 0;
+                }
+            }
+        }
+        
+        // 添加滑翔机结构
+        function addGlider(x, y) {
+            const glider = [
+                [0, 1, 0],
+                [0, 0, 1],
+                [1, 1, 1]
+            ];
+            
+            for (let i = 0; i < glider.length; i++) {
+                for (let j = 0; j < glider[i].length; j++) {
+                    if (x+i < cols && y+j < rows) {
+                        universe[x+i][y+j] = glider[i][j];
+                    }
+                }
+            }
+        }
+        
+        // 添加高斯珀滑翔机枪
+        function addGosperGun(x, y) {
+            const gun = [
+                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
+                [0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
+                [1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                [1,1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            ];
+            
+            for (let i = 0; i < gun.length; i++) {
+                for (let j = 0; j < gun[i].length; j++) {
+                    if (x+i < cols && y+j < rows) {
+                        universe[x+i][y+j] = gun[i][j];
+                    }
+                }
+            }
+        }
+        
+        // 绘制当前世代
+        function draw() {
+            ctx.fillStyle = '#111';
+            ctx.fillRect(0, 0, width, height);
+            
+            for (let i = 0; i < cols; i++) {
+                for (let j = 0; j < rows; j++) {
+                    // 计算细胞存活时间的颜色变化
+                    if (universe[i][j] > 0) {
+                        // 年轻的细胞是亮蓝色，随着存活变为白色
+                        const cellAge = Math.min(universe[i][j], 50);
+                        const brightness = Math.floor(180 + cellAge);
+                        ctx.fillStyle = `rgb(${brightness-100}, ${brightness}, 255)`;
+                        ctx.fillRect(i * cellSize, j * cellSize, cellSize - 1, cellSize - 1);
+                    }
+                }
+            }
+        }
+        
+        // 计算下一世代
+        function evolve() {
+            // 应用生命游戏规则:
+            // 1. 任何活细胞周围有少于2个活细胞的死亡（孤独）
+            // 2. 任何活细胞周围有2或3个活细胞的继续存活
+            // 3. 任何活细胞周围有超过3个活细胞的死亡（拥挤）
+            // 4. 任何死细胞周围恰好有3个活细胞的复活（繁殖）
+            
+            for (let i = 0; i < cols; i++) {
+                for (let j = 0; j < rows; j++) {
+                    // 计算邻居数量（包括对角线）
+                    let neighbors = 0;
+                    for (let di = -1; di <= 1; di++) {
+                        for (let dj = -1; dj <= 1; dj++) {
+                            if (di === 0 && dj === 0) continue; // 跳过自身
+                            
+                            // 环绕边界
+                            const ni = (i + di + cols) % cols;
+                            const nj = (j + dj + rows) % rows;
+                            
+                            if (universe[ni][nj] > 0) neighbors++;
+                        }
+                    }
+                    
+                    // 应用规则
+                    if (universe[i][j] > 0) {
+                        // 活细胞
+                        if (neighbors < 2 || neighbors > 3) {
+                            nextGen[i][j] = 0; // 死亡
+                        } else {
+                            nextGen[i][j] = universe[i][j] + 1; // 存活并变老
+                        }
+                    } else {
+                        // 死细胞
+                        if (neighbors === 3) {
+                            nextGen[i][j] = 1; // 复活
+                        } else {
+                            nextGen[i][j] = 0; // 保持死亡
+                        }
+                    }
+                }
+            }
+            
+            // 交换网格
+            [universe, nextGen] = [nextGen, universe];
+        }
+        
+        // 动画循环
+        function animate() {
+            if (isRunning) {
+                evolve();
+            }
+            draw();
+            requestAnimationFrame(animate);
+        }
+        
+        // 初始化并开始
+        init();
+        animate();
+        
+        // 交互事件处理
+        canvas.addEventListener('click', (event) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = Math.floor((event.clientX - rect.left) / cellSize);
+            const y = Math.floor((event.clientY - rect.top) / cellSize);
+            
+            // 放置一个随机形状
+            const shapes = [addGlider, createPulsar, createRandomCluster];
+            const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+            randomShape(x, y);
+        });
+        
+        // 创建脉冲星结构
+        function createPulsar(x, y) {
+            const size = 3;
+            for (let i = x-1; i <= x+1; i++) {
+                for (let j = y-1; j <= y+1; j++) {
+                    if (i >= 0 && i < cols && j >= 0 && j < rows) {
+                        if (!(i === x && j === y)) { // 中心保持为空
+                            universe[i][j] = 1;
+                        }
+                    }
+                }
+            }
+        }
+        
+        // 创建随机细胞簇
+        function createRandomCluster(x, y) {
+            const size = 5;
+            for (let i = x-2; i <= x+2; i++) {
+                for (let j = y-2; j <= y+2; j++) {
+                    if (i >= 0 && i < cols && j >= 0 && j < rows) {
+                        universe[i][j] = Math.random() > 0.6 ? 1 : 0;
+                    }
+                }
+            }
+        }
+        
+        // 键盘控制
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'Space') {
+                isRunning = !isRunning;
+            } else if (event.code === 'KeyR') {
+                init();
+            }
+        });
+        
+        // 响应窗口调整大小
+        window.addEventListener('resize', () => {
+            init();
+        });
+    </script>
+</body>
+</html>
