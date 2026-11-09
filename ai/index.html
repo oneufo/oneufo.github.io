@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#faf9f5">
-<title>OneAck AI</title>
+<title>LG AI:K-EXAONE 2.5</title>
 <style>
 :root{
   --bg:#faf9f5;--text:#1f1e1d;--muted:#85827b;--line:rgba(31,30,29,.09);
@@ -38,7 +38,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 /* top bar */
 .top{position:fixed;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 12px);display:flex;justify-content:space-between;align-items:center;padding:0 16px;z-index:5;pointer-events:none}
 .top>*{pointer-events:auto}
-.brand{display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;font-weight:600;font-size:15px;letter-spacing:-.01em}
+.brand{max-width:calc(100vw - 120px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;font-weight:600;font-size:15px;letter-spacing:-.01em}
 .tools{display:flex;gap:8px}
 .ibtn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;transition:transform .2s cubic-bezier(.3,1.4,.5,1)}
 .ibtn:active{transform:scale(.92)}
@@ -107,7 +107,7 @@ details{margin-top:16px}summary{cursor:pointer;font-size:13px;font-weight:600;co
 
 <div class="top">
   <div class="brand glass">
-    OneAck AI
+    LG AI:K-EXAONE 2.5
   </div>
   <div class="tools">
     <button class="ibtn glass" id="clear" aria-label="New chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
@@ -119,7 +119,7 @@ details{margin-top:16px}summary{cursor:pointer;font-size:13px;font-weight:600;co
 
 <div class="dock">
   <form class="composer glass" id="form">
-    <textarea class="in" id="input" rows="1" placeholder="Message OneAck AI…"></textarea>
+    <textarea class="in" id="input" rows="1" placeholder="Message K-EXAONE 2.5…"></textarea>
     <button class="send" id="send" type="submit" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
     <button class="send" id="stop" type="button" aria-label="Stop" style="display:none"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="3"/></svg></button>
   </form>
@@ -149,7 +149,8 @@ details{margin-top:16px}summary{cursor:pointer;font-size:13px;font-weight:600;co
 (function(){
   /* ===== Defaults: edit here once ===== */
   var CONFIG={
-    baseUrl:'https://api.exaone.ai/v1',
+    baseUrl:'https://www.oneack.com/ai/api', // your server proxy (keeps the API key off the page)
+    useProxy:true,                          // true = no key needed in the browser
     model:'k-exaone_v2.5',
     reasoningEffort:'low',                  // low = fastest, high = harder problems, max = most accurate (slowest)
     system:'',
@@ -163,9 +164,9 @@ details{margin-top:16px}summary{cursor:pointer;font-size:13px;font-weight:600;co
   var STAR='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5l1.9 6.6 5.9-3.5-3.5 5.9 6.6 1.9-6.6 1.9 3.5 5.9-5.9-3.5L12 22.5l-1.9-6.6-5.9 3.5 3.5-5.9L1.5 12l6.6-1.9-3.5-5.9 5.9 3.5z"/></svg>';
   var SUGG=['Draft a polished business email','Explain blockchain in plain words','Brainstorm five brand names','Make this paragraph sound sharper'];
 
-  function stored(){try{return JSON.parse(localStorage.getItem('oneack_ai_cfg2')||'{}')}catch(e){return {}}}
+  function stored(){try{return JSON.parse(localStorage.getItem('oneack_ai_cfg3')||'{}')}catch(e){return {}}}
   function cfg(){var s=stored();return{key:s.key||'',base:(s.base||CONFIG.baseUrl).replace(/\/+$/,''),model:s.model||CONFIG.model,sys:s.sys||CONFIG.system}}
-  function saveCfg(){var s={};FIELDS.forEach(function(f){s[f]=$(f).value.trim()});try{localStorage.setItem('oneack_ai_cfg2',JSON.stringify(s))}catch(e){}modelCache=null}
+  function saveCfg(){var s={},d={base:CONFIG.baseUrl,model:CONFIG.model,sys:CONFIG.system};FIELDS.forEach(function(f){var v=$(f).value.trim();s[f]=(v===d[f])?'':v});try{localStorage.setItem('oneack_ai_cfg3',JSON.stringify(s))}catch(e){}modelCache=null}
   function fillCfg(){var c=cfg();$('key').value=c.key;$('base').value=c.base;$('model').value=c.model;$('sys').value=c.sys}
 
   function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
@@ -218,7 +219,7 @@ details{margin-top:16px}summary{cursor:pointer;font-size:13px;font-weight:600;co
 
   async function send(text){
     var c=cfg();
-    if(!c.key){openSettings(false);return}
+    if(!c.key&&!CONFIG.useProxy){openSettings(false);return}
     if(/example\.com/.test(c.base)){openSettings(true);return}
     addUser(text);history.push({role:'user',content:text});
     var node=addBot(),body=node.querySelector('.body'),acc='';
@@ -227,7 +228,7 @@ details{margin-top:16px}summary{cursor:pointer;font-size:13px;font-weight:600;co
       var model=await pickModel(c,ctrl.signal);
       var msgs=(c.sys?[{role:'system',content:c.sys}]:[]).concat(history);
       var res=await fetch(c.base+'/chat/completions',{method:'POST',signal:ctrl.signal,
-        headers:{'Content-Type':'application/json','Authorization':'Bearer '+c.key},
+        headers:c.key?{'Content-Type':'application/json','Authorization':'Bearer '+c.key}:{'Content-Type':'application/json'},
         body:JSON.stringify({model:model,messages:msgs,stream:true,temperature:CONFIG.temperature,top_p:CONFIG.topP,reasoning_effort:CONFIG.reasoningEffort})});
       if(!res.ok)throw new Error('HTTP '+res.status+' '+(await res.text()).slice(0,300));
       var rd=res.body.getReader(),dec=new TextDecoder(),buf='';
