@@ -79,6 +79,14 @@ details{margin-top:16px}summary{cursor:pointer;font-size:13px;font-weight:500;co
 .send,.web,.ibtn{position:relative;padding:0;line-height:0;display:block}
 .send svg,.web svg,.ibtn svg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:block;margin:0}
 .send svg{width:18px;height:18px}
+
+/* balanced composer: equal-size side buttons, vertically centered */
+.composer{--h:40px;align-items:flex-end}
+@media (max-width:600px){.composer{--h:42px}}
+.composer .send,.composer .web{width:var(--h);height:var(--h)}
+.composer .send svg,.composer .web svg{width:22px;height:22px}
+.composer #stop svg{width:24px;height:24px}
+.composer textarea.in{line-height:26px;min-height:var(--h);padding:calc((var(--h) - 26px)/2) 4px calc((var(--h) - 26px)/2) 2px}
 </style>
 </head>
 <body>
