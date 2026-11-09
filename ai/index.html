@@ -87,6 +87,22 @@ details{margin-top:16px}summary{cursor:pointer;font-size:13px;font-weight:500;co
 .composer .send svg,.composer .web svg{width:22px;height:22px}
 .composer #stop svg{width:24px;height:24px}
 .composer textarea.in{line-height:26px;min-height:var(--h);padding:calc((var(--h) - 26px)/2) 4px calc((var(--h) - 26px)/2) 2px}
+
+/* v: hide top-right tools, Claude-style send button, larger globe */
+.tools{display:none}
+.composer .send{background:var(--accent);color:#fff;border-radius:12px;transition:background .2s,opacity .2s,transform .15s}
+.composer .send:not(:disabled):hover{background:#c6613f}
+.composer .send:not(:disabled):active{transform:scale(.94)}
+.composer .send:disabled{background:var(--accent);opacity:.4}
+.composer .web{border-radius:12px}
+.composer .web svg{width:26px;height:26px}
+
+/* v: round buttons, globe and send identical size */
+.composer .send,.composer .web{width:var(--h);height:var(--h);border-radius:50%}
+.composer .web{background:var(--user);color:var(--muted)}
+.composer .web.on{background:rgba(217,119,87,.16);color:var(--accent)}
+.composer .send svg,.composer .web svg{width:22px;height:22px}
+.composer #stop svg{width:24px;height:24px}
 </style>
 </head>
 <body>
