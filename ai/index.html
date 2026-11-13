@@ -247,10 +247,20 @@ details{margin-top:16px}summary{cursor:pointer;font-size:13px;font-weight:500;co
         msgs=msgs.slice();
         msgs[msgs.length-1]={role:'user',content:'Today is '+new Date().toISOString().slice(0,10)+'. Use the web search results below to answer the question. Cite sources like [1], [2] where relevant. If the results do not contain the answer, say so.\n\nSearch results:\n'+ctx+'\n\nQuestion: '+text};
       }
-      var res=await fetch(c.base+'/chat/completions',{method:'POST',signal:ctrl.signal,
+      var reqInit={method:'POST',signal:ctrl.signal,
         headers:c.key?{'Content-Type':'application/json','Authorization':'Bearer '+c.key}:{'Content-Type':'application/json'},
-        body:JSON.stringify({model:model,messages:msgs,stream:true,temperature:CONFIG.temperature,top_p:CONFIG.topP,reasoning_effort:CONFIG.reasoningEffort})});
-      if(!res.ok)throw new Error('HTTP '+res.status+' '+(await res.text()).slice(0,300));
+        body:JSON.stringify({model:model,messages:msgs,stream:true,temperature:CONFIG.temperature,top_p:CONFIG.topP,reasoning_effort:CONFIG.reasoningEffort})};
+      var res,tries=0,waits=[2000,4000,8000,12000,16000];
+      while(true){
+        res=await fetch(c.base+'/chat/completions',reqInit);
+        if((res.status===429||res.status===503||res.status===502)&&tries<waits.length){
+          body.innerHTML='<span class="dots"><i></i><i></i><i></i></span><span style="margin-left:8px;color:var(--muted);font-size:14px">Service is busy, retrying ('+(tries+1)+'/'+waits.length+')…</span>';
+          await new Promise(function(ok,no){var t=setTimeout(ok,waits[tries]);ctrl.signal.addEventListener('abort',function(){clearTimeout(t);no(new DOMException('Aborted','AbortError'))})});
+          tries++;continue;
+        }
+        break;
+      }
+      if(!res.ok){var et=(await res.text()).slice(0,300);throw new Error(res.status===429?'The service is very busy right now. Please try again in a minute.':'HTTP '+res.status+' '+et)}
       var rd=res.body.getReader(),dec=new TextDecoder(),buf='';
       while(true){
         var r=await rd.read();if(r.done)break;
